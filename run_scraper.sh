@@ -12,7 +12,7 @@ echo "Running Airbnb Medium-Term Scraper..."
 echo "Airbnb Medium-Term Scraper finished. Running Long-Term Scraper..."
 echo "Running Airbnb Long-Term Scraper..."
 /home/other/dev/github/rental-scrapers/env/bin/python /home/other/dev/github/rental-scrapers/src/airbnb_scraper.py --url "https://www.airbnb.es/s/Segovia--Espa%C3%B1a--Segovia--Espa%C3%B1a/homes?refinement_paths%5B%5D=%2Fhomes&monthly_start_date=2024-10-01&monthly_length=12&monthly_end_date=2025-10-01" &&
-&& \echo "Airbnb Long-Term Scraper finished."
+echo "Airbnb Long-Term Scraper finished."
 
 # Now run Idealista scrapers
 echo "Running Idealista Segovia Sale Scraper..."

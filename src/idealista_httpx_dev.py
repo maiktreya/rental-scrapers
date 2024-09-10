@@ -199,8 +199,8 @@ async def run(base_url: str, delay: float):
         data = await scrape_properties(all_property_urls, session, delay)
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        json_filename = f"scrapping/out/idealista_properties_{timestamp}.json"
-        csv_filename = f"scrapping/out/idealista_properties_{timestamp}.csv"
+        json_filename = f"out/idealista_properties_{timestamp}.json"
+        csv_filename = f"out/idealista_properties_{timestamp}.csv"
 
         save_to_json(data, json_filename)
         save_to_csv(data, csv_filename)

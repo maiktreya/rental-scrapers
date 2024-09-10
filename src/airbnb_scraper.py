@@ -170,7 +170,7 @@ def scrape_airbnb(url):
         driver.quit()
 
     # Ensure output directory exists
-    output_dir = "scrapping/out"
+    output_dir =  "out"
     os.makedirs(output_dir, exist_ok=True)
 
     # Generate CSV filename with datetime
