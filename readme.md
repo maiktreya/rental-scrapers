@@ -61,7 +61,7 @@ You can run all scrapers using the provided Bash script:
 
 ### Output
 
-Scraped data will be saved in the `scrapping/out/` directory as both JSON and CSV files.
+Scraped data will be saved in the `out/` directory as both JSON and CSV files.
 
 You can create a cron job on Ubuntu to run your Python scraper daily at 2:00 AM with the following steps:
 
@@ -78,12 +78,12 @@ You can create a cron job on Ubuntu to run your Python scraper daily at 2:00 AM 
    In the editor that opens, add the following line:
 
    ```bash
-   0 2 * * * /home/other/dev/github/LocalWealthHousing/run_scraper.sh >> /home/other/dev/github/LocalWealthHousing/logs/scraper.log 2>&1
+   0 2 * * * /$HOME/dev/github/LocalWealthHousing/run_scraper.sh >> /$HOME/dev/github/rental-scrapers/out/scraper.log 2>&1
    ```
 
    - `0 2 * * *` sets the cron job to run daily at 2:00 AM.
    - `/usr/bin/python3` is the path to the Python 3 interpreter. If you're using a virtual environment, make sure to update this path.
-   - `>> /home/other/dev/github/LocalWealthHousing/logs/scraper.log 2>&1` ensures that output and any errors are logged.
+   - `>> /$HOME/dev/github/rental-scrapers/out/scraper.log 2>&1` ensures that output and any errors are logged.
 
 3. **Save and exit:**
 
