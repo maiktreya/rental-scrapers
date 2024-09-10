@@ -48,7 +48,7 @@ python scrapping/src/airbnb_scraper.py --url "AIRBNB_URL"
 To scrape Idealista listings:
 
 ```bash
-python scrapping/src/idealista_httpx_dev.py --url "IDEALISTA_URL" --delay 2
+python scrapping/src/idealista_scraper.py --url "IDEALISTA_URL" --delay 2
 ```
 
 ### Running All Scrapers
