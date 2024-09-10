@@ -1,7 +1,8 @@
+# python "SCRAPPING\src\idealista\idealista_httpx.py" --url "https://www.idealista.com/venta-viviendas/segovia-segovia/" --delay 1
+
 import argparse
 import asyncio
 import json
-import random
 import re
 from typing import Dict, List
 from urllib.parse import urljoin
@@ -15,26 +16,16 @@ import logging
 # Logging setup
 logging.basicConfig(level=logging.INFO)
 
-# List of user agents
-USER_AGENTS = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Safari/605.1.15",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36",
-    # More user agents can be added here
-]
-
 # Establish persistent HTTPX session with browser-like headers to avoid blocking
 BASE_HEADERS = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36",
     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
     "accept-language": "en-US;en;q=0.9",
     "accept-encoding": "gzip, deflate, br",
 }
 
-# Function to get a random user agent
-def get_random_user_agent():
-    return random.choice(USER_AGENTS)
 
-# Type hints for expected results
+# Type hints for expected results so we can visualize our scraper easier:
 class PropertyResult(TypedDict, total=False):
     url: str
     title: str
@@ -46,7 +37,9 @@ class PropertyResult(TypedDict, total=False):
     size_sqm: int
     features: Dict[str, List[str]]
 
+
 def parse_property(response: httpx.Response) -> PropertyResult:
+    """Parse Idealista.com property page"""
     selector = Selector(text=response.text)
     css = lambda x: selector.css(x).get("").strip()
     css_all = lambda x: selector.css(x).getall()
@@ -96,44 +89,56 @@ def parse_property(response: httpx.Response) -> PropertyResult:
 
     return data
 
+
 async def extract_property_urls(
     area_url: str, session: httpx.AsyncClient, delay: float
 ) -> List[str]:
-    headers = BASE_HEADERS.copy()
-    headers["user-agent"] = get_random_user_agent()  # Rotate user-agent for each request
-    response = await session.get(area_url, headers=headers)
-    selector = Selector(text=response.text)
-    property_links = selector.css("article.item a.item-link::attr(href)").getall()
-    full_urls = [urljoin(area_url, link) for link in property_links]
-    await asyncio.sleep(delay)
-    return full_urls
+    """Extract property URLs from an area page with a delay"""
+    try:
+        response = await session.get(area_url)
+        selector = Selector(text=response.text)
+        property_links = selector.css("article.item a.item-link::attr(href)").getall()
+        full_urls = [urljoin(area_url, link) for link in property_links]
+        await asyncio.sleep(delay)  # Add delay after the request
+        return full_urls
+    except (httpx.ReadTimeout, httpx.RequestError) as e:
+        logging.error(f"Failed to retrieve area URL: {area_url}, Error: {str(e)}")
+        return []
+
 
 async def get_next_page_url(
     current_url: str, session: httpx.AsyncClient, delay: float
 ) -> str:
-    response = await session.get(current_url)
-    selector = Selector(text=response.text)
-    next_page_link = selector.css("a.icon-arrow-right-after::attr(href)").get()
-    await asyncio.sleep(delay)
-    return urljoin(current_url, next_page_link) if next_page_link else None
+    """Get the URL of the next page with a delay"""
+    try:
+        response = await session.get(current_url)
+        selector = Selector(text=response.text)
+        next_page_link = selector.css("a.icon-arrow-right-after::attr(href)").get()
+        await asyncio.sleep(delay)  # Add delay after the request
+        return urljoin(current_url, next_page_link) if next_page_link else None
+    except (httpx.ReadTimeout, httpx.RequestError) as e:
+        logging.error(
+            f"Failed to retrieve next page URL for: {current_url}, Error: {str(e)}"
+        )
+        return None
+
 
 async def scrape_properties(
     urls: List[str], session: httpx.AsyncClient, delay: float
 ) -> List[PropertyResult]:
+    """Scrape Idealista.com properties with a delay"""
     properties = []
     for url in urls:
         for attempt in range(3):
             try:
-                headers = BASE_HEADERS.copy()
-                headers["user-agent"] = get_random_user_agent()  # Rotate user-agent for each request
-                response = await session.get(url, headers=headers)
+                response = await session.get(url)
                 if response.status_code == 200:
                     properties.append(parse_property(response))
                 else:
                     logging.error(
                         f"Failed to scrape property: {response.url} with status code {response.status_code}"
                     )
-                await asyncio.sleep(delay)
+                await asyncio.sleep(delay)  # Add delay after each request
                 break
             except (httpx.ReadTimeout, httpx.RequestError) as e:
                 logging.error(
@@ -143,11 +148,15 @@ async def scrape_properties(
                     logging.error(f"Failed to retrieve URL: {url} after 3 attempts")
     return properties
 
+
 def save_to_json(data: List[PropertyResult], filename: str) -> None:
+    """Save data to a JSON file"""
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
+
 def save_to_csv(data: List[PropertyResult], filename: str) -> None:
+    """Save data to a CSV file"""
     with open(filename, "w", newline="", encoding="utf-8") as csvfile:
         fieldnames = [
             "url",
@@ -155,10 +164,11 @@ def save_to_csv(data: List[PropertyResult], filename: str) -> None:
             "location",
             "price",
             "currency",
-            "rooms",
-            "size_sqm",
+            "rooms",  # Include rooms in CSV
+            "size_sqm",  # Include size in CSV
         ]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
         writer.writeheader()
         for property in data:
             writer.writerow(
@@ -168,10 +178,11 @@ def save_to_csv(data: List[PropertyResult], filename: str) -> None:
                     "location": property.get("location", ""),
                     "price": property.get("price", ""),
                     "currency": property.get("currency", ""),
-                    "rooms": property.get("rooms", ""),
-                    "size_sqm": property.get("size_sqm", ""),
+                    "rooms": property.get("rooms", ""),  # Output rooms
+                    "size_sqm": property.get("size_sqm", ""),  # Output size
                 }
             )
+
 
 async def run(base_url: str, delay: float):
     all_property_urls = []
@@ -199,13 +210,14 @@ async def run(base_url: str, delay: float):
         data = await scrape_properties(all_property_urls, session, delay)
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        json_filename = f"out/idealista_properties_{timestamp}.json"
-        csv_filename = f"out/idealista_properties_{timestamp}.csv"
+        json_filename = f"scrapping/out/idealista_properties_{timestamp}.json"
+        csv_filename = f"scrapping/out/idealista_properties_{timestamp}.csv"
 
         save_to_json(data, json_filename)
         save_to_csv(data, csv_filename)
 
         logging.info(f"Data saved to {json_filename} and {csv_filename}")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

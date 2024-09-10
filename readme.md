@@ -24,35 +24,80 @@ The goal of this project is to empower individuals impacted by rising housing co
 ## 🚀 Usage
 
 ### Prerequisites
+
 - Python 3.7+
 - ChromeDriver for Airbnb scraping (via Selenium)
 - Virtual environment with required packages (`httpx`, `selenium`, `parsel`, `argparse`, `pandas`, `beautifulsoup4`)
 
 Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### Run the Airbnb Scraper
+
 To scrape Airbnb listings:
+
 ```bash
 python scrapping/src/airbnb_scraper.py --url "AIRBNB_URL"
 ```
 
 ### Run the Idealista Scraper
+
 To scrape Idealista listings:
+
 ```bash
 python scrapping/src/idealista_httpx_dev.py --url "IDEALISTA_URL" --delay 2
 ```
 
 ### Running All Scrapers
+
 You can run all scrapers using the provided Bash script:
+
 ```bash
 ./run_scraper.sh
 ```
 
 ### Output
+
 Scraped data will be saved in the `scrapping/out/` directory as both JSON and CSV files.
+
+You can create a cron job on Ubuntu to run your Python scraper daily at 2:00 AM with the following steps:
+
+1. **Open the crontab file for editing:**
+
+   Open the terminal and type:
+
+   ```bash
+   crontab -e
+   ```
+
+2. **Add the cron job:**
+
+   In the editor that opens, add the following line:
+
+   ```bash
+   0 2 * * * /home/other/dev/github/LocalWealthHousing/run_scraper.sh >> /home/other/dev/github/LocalWealthHousing/logs/scraper.log 2>&1
+   ```
+
+   - `0 2 * * *` sets the cron job to run daily at 2:00 AM.
+   - `/usr/bin/python3` is the path to the Python 3 interpreter. If you're using a virtual environment, make sure to update this path.
+   - `>> /home/other/dev/github/LocalWealthHousing/logs/scraper.log 2>&1` ensures that output and any errors are logged.
+
+3. **Save and exit:**
+
+   After adding the line, save the file and exit the editor. Your cron job will now run daily at 2:00 AM.
+
+Make sure your script is executable and that all required permissions are correctly set.
+
+---
+
+### 📢 Shout-out
+
+Thanks to all contributors and like-minded souls contributing to tenant empowerment and transparency in housing! This project is dedicated to small-scale users who believe in the right to information. Let’s continue making housing fairer, one scraped property at a time! ✊
+
+---
 
 ## 💼 Legal Disclaimer
 

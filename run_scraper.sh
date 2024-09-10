@@ -16,7 +16,7 @@ echo "Airbnb Long-Term Scraper finished."
 
 # Now run Idealista scrapers
 echo "Running Idealista Segovia Sale Scraper..."
-/home/other/dev/github/rental-scrapers/env/bin/python /home/other/dev/github/rental-scrapers/src/idealista_httpx_dev.py --url "https://www.idealista.com/venta-viviendas/segovia-segovia/" --delay 5
+/home/other/dev/github/rental-scrapers/env/bin/python /home/other/dev/github/rental-scrapers/src/idealista_scraper.py --url "https://www.idealista.com/venta-viviendas/segovia-segovia/" --delay 5
 echo "Finished scraping Segovia Sale. Waiting 5 minutes..."
 
 # Sleep for 5 minutes (300 seconds)
@@ -24,5 +24,5 @@ sleep 300
 
 # Run scraper for the second URL
 echo "Running Idealista Segovia Rent Scraper..."
-/home/other/dev/github/rental-scrapers/env/bin/python /home/other/dev/github/rental-scrapers/src/idealista_httpx_dev.py --url "https://www.idealista.com/alquiler-viviendas/segovia-segovia/" --delay 5
+/home/other/dev/github/rental-scrapers/env/bin/python /home/other/dev/github/rental-scrapers/src/idealista_scraper.py --url "https://www.idealista.com/alquiler-viviendas/segovia-segovia/" --delay 5
 echo "Finished scraping Segovia Rent."
