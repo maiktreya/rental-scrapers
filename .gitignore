@@ -1,2 +1,4 @@
 env
-out/*
+out
+!out/test.csv
+!out/test.json
