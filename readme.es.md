@@ -75,7 +75,7 @@ python scrapping/src/idealista_scraper.py --url "IDEALISTA_URL" --delay 2
 Puedes ejecutar todos los scrapers usando el script Bash proporcionado:
 
 ```bash
-./run_scraper.sh
+./src/run_scraper.sh
 ```
 
 ### Resultados
@@ -97,7 +97,7 @@ Puedes crear un cron job en Ubuntu para ejecutar tu scraper de Python diariament
    En el editor que se abre, añade la siguiente línea:
 
    ```bash
-   0 2 * * * /$HOME/dev/github/LocalWealthHousing/run_scraper.sh >> /$HOME/dev/github/rental-scrapers/out/scraper.log 2>&1
+   0 2 * * * /$HOME/dev/github/LocalWealthHousing/src/run_scraper.sh >> /$HOME/dev/github/rental-scrapers/out/scraper.log 2>&1
    ```
 
    - `0 2 * * *` establece el cron job para que se ejecute diariamente a las 2:00 AM.
