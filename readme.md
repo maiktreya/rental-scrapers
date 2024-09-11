@@ -62,7 +62,7 @@ The goal of this project is to empower individuals impacted by rising housing co
 To scrape Airbnb listings:
 
 ```bash
-python scrapping/src/airbnb_scraper.py --url "AIRBNB_URL"
+python src/airbnb_scraper.py --url "AIRBNB_URL"
 ```
 
 ### Run the Idealista Scraper
@@ -70,7 +70,7 @@ python scrapping/src/airbnb_scraper.py --url "AIRBNB_URL"
 To scrape Idealista listings:
 
 ```bash
-python scrapping/src/idealista_scraper.py --url "IDEALISTA_URL" --delay 2
+python src/idealista_scraper.py --url "IDEALISTA_URL" --delay 2
 ```
 
 ### Running All Scrapers

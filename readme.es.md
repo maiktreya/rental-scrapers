@@ -59,7 +59,7 @@ El objetivo de este proyecto es empoderar a las personas afectadas por el aument
 Para scrapear listados de Airbnb:
 
 ```bash
-python scrapping/src/airbnb_scraper.py --url "AIRBNB_URL"
+python src/airbnb_scraper.py --url "AIRBNB_URL"
 ```
 
 ### Ejecutar el Scraper de Idealista
@@ -67,7 +67,7 @@ python scrapping/src/airbnb_scraper.py --url "AIRBNB_URL"
 Para scrapear listados de Idealista:
 
 ```bash
-python scrapping/src/idealista_scraper.py --url "IDEALISTA_URL" --delay 2
+python src/idealista_scraper.py --url "IDEALISTA_URL" --delay 2
 ```
 
 ### Ejecutar Todos los Scrapers
