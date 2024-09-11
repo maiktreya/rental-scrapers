@@ -9,3 +9,4 @@ parsel
 typing-extensions
 bs4
 selenium
+pandas
