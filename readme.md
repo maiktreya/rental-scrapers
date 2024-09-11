@@ -1,13 +1,41 @@
 
+
+
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/maiktreya/rental-scrapers/blob/main/readme.md)
+[![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/maiktreya/rental-scrapers/blob/main/readme.es.md)
+
 ---
 
 # 🏠 Rental Scrapers for Tenant Empowerment
 
-**Contributors:** Maiktreya & Regex Wizard
-
-This project is designed to empower tenants and small-scale users by providing accessible scrapers for property listings on Airbnb and Idealista. With rising housing prices and unfair rental practices, access to data is crucial. This tool allows individuals to gather data on available properties without being subject to opaque an advert based practices.
+This project is designed to empower tenants and small-scale users by providing accessible scrapers for property listings on Airbnb and Idealista. With rising housing prices and unfair rental practices, access to data is crucial. This tool allows individuals to gather data on available properties without being subject to opaque and ad-based practices.
 
 **Note:** This is not intended for corporate-scale use or to exploit property data on a large scale. The scrapers are built for **personal use**, focusing on the right to information for tenants.
+
+## ⚙️ Installation
+
+For non-experts, here's a simple way to get started with a Python virtual environment:
+
+1. **Install Python:** Ensure you have [Python 3.7+](https://www.python.org/downloads/) installed on your machine.
+
+2. **Create a virtual environment:**
+
+   In your project root directory (where the README file is located), run the following commands to create and activate a virtual environment called `env`:
+
+   ```bash
+   python -m venv env
+   source env/bin/activate  # On Windows use: .\env\Scripts\activate
+   ```
+
+3. **Install the required dependencies:**
+
+   Once the virtual environment is activated, install the necessary packages by running:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+Now your environment is ready to run the scrapers!
 
 ## 🎯 Project Aim
 
@@ -27,13 +55,7 @@ The goal of this project is to empower individuals impacted by rising housing co
 
 - Python 3.7+
 - ChromeDriver for Airbnb scraping (via Selenium)
-- Virtual environment with required packages (`httpx`, `selenium`, `parsel`, `argparse`, `pandas`, `beautifulsoup4`)
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
+- Virtual environment with required packages (`httpx`, `selenium`, `parsel`, `argparse`, `pandas`, `beautifulsoup4`)s
 
 ### Run the Airbnb Scraper
 
@@ -93,18 +115,12 @@ Make sure your script is executable and that all required permissions are correc
 
 ---
 
-### 📢 Shout-out
-
-Thanks to all contributors and like-minded souls contributing to tenant empowerment and transparency in housing! This project is dedicated to small-scale users who believe in the right to information. Let’s continue making housing fairer, one scraped property at a time! ✊
-
----
-
 ## 💼 Legal Disclaimer
 
 This tool is provided solely for personal use and informational purposes. It is intended to give small-scale users fair access to housing data. The developers are not responsible for any misuse of this tool or for legal consequences that may arise from large-scale scraping or commercial use. Users should ensure they comply with the terms of service of the websites they scrape.
 
 ## 🔒 License
 
-This project is licensed under the MIT License. See the full license [here](LICENSE).
+This project is licensed under the The GNU General Public License (GPL-3). See the full license [here](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
 ---
