@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# for headless and server use: install xvdf
+export DISPLAY=:99  # Make sure to use the same display where Xvfb is running
+
 # Function to calculate next weekend after the next one (roughly 15 days from today)
 get_short_term_dates() {
     current_date=$(date +%Y-%m-%d)

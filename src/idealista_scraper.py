@@ -44,6 +44,7 @@ def parse_property(response: httpx.Response) -> PropertyResult:
     css = lambda x: selector.css(x).get("").strip()
     css_all = lambda x: selector.css(x).getall()
 
+    # grab main features
     data: PropertyResult = {}
     data["url"] = str(response.url)
     data["title"] = css("h1 .main-info__title-main::text")
@@ -64,6 +65,7 @@ def parse_property(response: httpx.Response) -> PropertyResult:
         .split(" on ")[-1]
     )
 
+    # grab nested features
     data["features"] = {}
     for feature_block in selector.css(".details-property-h2"):
         label = feature_block.xpath("text()").get()
