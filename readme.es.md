@@ -97,12 +97,12 @@ Puedes crear un cron job en Ubuntu para ejecutar tu scraper de Python diariament
    En el editor que se abre, añade la siguiente línea (donde path es la ruta al directorio rental-scrapers):
 
    ```bash
-   0 2 * * * /$PATH/rental-scrapers/src/run_scraper.sh >> /$PATH/rental-scrapers/out/scraper.log 2>&1
+   0 2 * * * $PATH/rental-scrapers/src/run_scraper.sh >> $PATH/rental-scrapers/out/scraper.log 2>&1
    ```
 
    - `0 2 * * *` establece el cron job para que se ejecute diariamente a las 2:00 AM.
    - `/usr/bin/python3` es la ruta al intérprete de Python 3. Si estás usando un entorno virtual, asegúrate de actualizar esta ruta.
-   - `>> /$PATH/rental-scrapers/out/scraper.log 2>&1` asegura que tanto la salida como cualquier error se registren en un archivo log.
+   - `>> $PATH/rental-scrapers/out/scraper.log 2>&1` asegura que tanto la salida como cualquier error se registren en un archivo log.
 
 3. **Guardar y salir:**
 
