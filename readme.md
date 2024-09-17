@@ -100,7 +100,7 @@ You can create a cron job on Ubuntu to run your Python scraper daily at 2:00 AM 
    In the editor that opens, add the following line:
 
    ```bash
-   0 2 * * * /$HOME/dev/github/LocalWealthHousing/src/run_scraper.sh >> /$HOME/dev/github/rental-scrapers/out/scraper.log 2>&1
+   0 2 * * * /$HOME/dev/github/rental-scrapers/src/run_scraper.sh >> /$HOME/dev/github/rental-scrapers/out/scraper.log 2>&1
    ```
 
    - `0 2 * * *` sets the cron job to run daily at 2:00 AM.
