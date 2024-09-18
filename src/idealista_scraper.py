@@ -1,5 +1,6 @@
 import argparse
 import asyncio
+import json
 import re
 from typing import Dict, List
 from urllib.parse import urljoin
@@ -21,7 +22,6 @@ BASE_HEADERS = {
     "accept-encoding": "gzip, deflate, br",
 }
 
-
 # Type hints for expected results so we can visualize our scraper easier:
 class PropertyResult(TypedDict, total=False):
     url: str
@@ -33,7 +33,6 @@ class PropertyResult(TypedDict, total=False):
     rooms: int
     size_sqm: int
     features: Dict[str, List[str]]
-
 
 def parse_property(response: httpx.Response) -> PropertyResult:
     """Parse Idealista.com property page"""
@@ -88,7 +87,6 @@ def parse_property(response: httpx.Response) -> PropertyResult:
 
     return data
 
-
 async def extract_property_urls(
     area_url: str, session: httpx.AsyncClient, delay: float
 ) -> List[str]:
@@ -103,7 +101,6 @@ async def extract_property_urls(
     except (httpx.ReadTimeout, httpx.RequestError) as e:
         logging.error(f"Failed to retrieve area URL: {area_url}, Error: {str(e)}")
         return []
-
 
 async def get_next_page_url(
     current_url: str, session: httpx.AsyncClient, delay: float
@@ -120,7 +117,6 @@ async def get_next_page_url(
             f"Failed to retrieve next page URL for: {current_url}, Error: {str(e)}"
         )
         return None
-
 
 async def scrape_properties(
     urls: List[str], session: httpx.AsyncClient, delay: float
@@ -147,6 +143,10 @@ async def scrape_properties(
                     logging.error(f"Failed to retrieve URL: {url} after 3 attempts")
     return properties
 
+def save_to_json(data: List[PropertyResult], filename: str) -> None:
+    """Save data to a JSON file"""
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
 def save_to_csv(data: List[PropertyResult], filename: str) -> None:
     """Save data to a CSV file"""
@@ -176,7 +176,6 @@ def save_to_csv(data: List[PropertyResult], filename: str) -> None:
                 }
             )
 
-
 async def run(base_url: str, delay: float):
     all_property_urls = []
     page_count = 1
@@ -203,12 +202,13 @@ async def run(base_url: str, delay: float):
         data = await scrape_properties(all_property_urls, session, delay)
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        json_filename = f"out/idealista_properties_{timestamp}.json"
         csv_filename = f"out/idealista_properties_{timestamp}.csv"
 
+        save_to_json(data, json_filename)
         save_to_csv(data, csv_filename)
 
-        logging.info(f"Data saved to {csv_filename}")
-
+        logging.info(f"Data saved to {json_filename} and {csv_filename}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
