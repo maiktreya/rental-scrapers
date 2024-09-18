@@ -34,9 +34,9 @@ sudo bash lib/installChromeDriver.sh
 
    Una vez activado el entorno virtual, instala los paquetes necesarios ejecutando:
 
-   ```bash
-   pip install -r lib/requirements.txt
-   ```
+```bash
+pip install -r lib/requirements.txt
+```
 
 ¡Ahora tu entorno está listo para ejecutar los scrapers!
 
