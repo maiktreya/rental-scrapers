@@ -59,35 +59,38 @@ monthly_end_date=$long_term_end"
 # Activate virtual environment
 source "$BASE_PATH/env/bin/activate"
 
-# Run Airbnb scrapers
-echo "Running Airbnb Short-Term Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py"\
-    --url "$airbnb_short_url" --format "$format" &&
-    echo "Airbnb Short-Term Scraper finished."
+run_scraper() {
+    local format=$1
+    echo "Running Airbnb Short-Term Scraper for format: $format"
+    "$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py"\
+        --url "$airbnb_short_url" --format "$format" &&
+        echo "Airbnb Short-Term Scraper finished."
 
-echo "Running Airbnb Medium-Term Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py"\
-    --url "$airbnb_mid_url" --format "$format" &&
-    echo "Airbnb Medium-Term Scraper finished."
+    echo "Running Airbnb Medium-Term Scraper for format: $format"
+    "$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py"\
+        --url "$airbnb_mid_url" --format "$format" &&
+        echo "Airbnb Medium-Term Scraper finished."
 
-echo "Running Airbnb Long-Term Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py"\
-    --url "$airbnb_long_url" --format "$format" &&
-    echo "Airbnb Long-Term Scraper finished."
+    echo "Running Airbnb Long-Term Scraper for format: $format"
+    "$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py"\
+        --url "$airbnb_long_url" --format "$format" &&
+        echo "Airbnb Long-Term Scraper finished."
 
-# Now run Idealista scrapers
-echo "Running Idealista Segovia Sale Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_httpx.py"\
-    --url "https://www.idealista.com/venta-viviendas/segovia-segovia/"\
-    --delay 5 --format "$format"
-echo "Finished scraping Segovia Sale. Waiting 5 minutes..."
+    echo "Running Idealista Segovia Sale Scraper for format: $format"
+    "$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_httpx.py"\
+        --url "https://www.idealista.com/venta-viviendas/segovia-segovia/"\
+        --delay 5 --format "$format"
+    echo "Finished scraping Segovia Sale. Waiting 5 minutes..."
 
-# Sleep for 5 minutes (300 seconds)
-sleep 300
+    # Sleep for 5 minutes (300 seconds)
+    sleep 300
 
-# Run scraper for the second URL
-echo "Running Idealista Segovia Rent Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_httpx.py"\
-    --url "https://www.idealista.com/alquiler-viviendas/segovia-segovia/"\
-    --delay 5 --format "$format"
-echo "Finished scraping Segovia Rent."
+    echo "Running Idealista Segovia Rent Scraper for format: $format"
+    "$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_httpx.py"\
+        --url "https://www.idealista.com/alquiler-viviendas/segovia-segovia/"\
+        --delay 5 --format "$format"
+    echo "Finished scraping Segovia Rent."
+}
+
+# Check format option and run accordingly
+run_scraper "$format"
