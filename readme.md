@@ -29,7 +29,7 @@ For non-experts, here's a simple way to get started with a Python virtual enviro
    Once the virtual environment is activated, install the necessary packages by running:
 
    ```bash
-   pip install -r requirements.txt
+   pip install -r lib/requirements.txt
    ```
 
 Now your environment is ready to run the scrapers!
@@ -51,8 +51,8 @@ The goal of this project is to empower individuals impacted by rising housing co
 ### Prerequisites
 
 - Python 3.7+
-- ChromeDriver for Airbnb scraping (via Selenium)
-- Virtual environment with required packages (`httpx`, `selenium`, `parsel`, `argparse`, `pandas`, `beautifulsoup4`)s
+- ChromeDriver for Airbnb scraping (via Selenium, use `lib/installChromeDriver.sh` for an automated installation)
+- Virtual environment with required packages (`httpx`, `selenium`, `parsel`, `argparse`, `pandas`, `beautifulsoup4`)
 
 ### Run the Airbnb Scraper
 
