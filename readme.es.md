@@ -29,7 +29,7 @@ Para los no expertos, aquí tienes una forma sencilla de comenzar con un entorno
  Debes instalar Chrome junto a su webdriver y dependencias necesarias:
 
    ```bash
-   pip install -r lib/install chrome driver.sh
+   sudo bash lib/installChromeDriver.sh
    ```
 
    Una vez activado el entorno virtual, instala los paquetes necesarios ejecutando:
