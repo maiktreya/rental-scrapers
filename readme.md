@@ -20,8 +20,8 @@ For non-experts, here's a simple way to get started with a Python virtual enviro
    In your project root directory (where the README file is located), run the following commands to create and activate a virtual environment called `env`:
 
 ```bash
-   python -m venv env
-   source env/bin/activate  # On Windows use: .\env\Scripts\activate
+python -m venv env
+source env/bin/activate  # On Windows use: .\env\Scripts\activate
 ```
 
 3. **Install the required dependencies:**
