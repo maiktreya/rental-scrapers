@@ -58,15 +58,18 @@ source "$BASE_PATH/env/bin/activate"
 
 # Run Airbnb scrapers (exporting to CSV by default)
 echo "Running Airbnb Short-Term Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py" --url "$airbnb_short_url" --format csv &&
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py"\
+    --url "$airbnb_short_url" --format csv &&
     echo "Airbnb Short-Term Scraper finished."
 
 echo "Running Airbnb Medium-Term Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py" --url "$airbnb_mid_url" --format csv &&
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py"\
+    --url "$airbnb_mid_url" --format csv &&
     echo "Airbnb Medium-Term Scraper finished."
 
 echo "Running Airbnb Long-Term Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py" --url "$airbnb_long_url" --format csv &&
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py"\
+    --url "$airbnb_long_url" --format csv &&
     echo "Airbnb Long-Term Scraper finished."
 
 # Now run Idealista scrapers (exporting to CSV by default)
