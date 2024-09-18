@@ -5,7 +5,7 @@
 
 # 🏠 Rental Scrapers for Tenant Empowerment
 
-This project is designed to empower tenants and small-scale users by providing accessible scrapers for property listings on Airbnb and Idealista. With rising housing prices and unfair rental practices, access to data is crucial. This tool allows individuals to gather data on available properties without being subject to opaque and ad-based practices.
+This project is designed to empower tenants and small-scale users by providing accessible scrapers for property listings on Airbnb and Idealista. With rising housing prices and unfair rental practices, access to data is crucial. This tool allows individuals to gather data on available properties without being subject to opaque and ad-based multipage lists.
 
 **Note:** This is not intended for corporate-scale use or to exploit property data on a large scale. The scrapers are built for **personal use**, focusing on the right to information for tenants.
 
@@ -36,7 +36,7 @@ Now your environment is ready to run the scrapers!
 
 ## 🎯 Project Aim
 
-The goal of this project is to empower individuals impacted by rising housing costs, by offering them an easy way to access public property listings and make the rental market more transparent. It simplifies scraping without the corporate complexities (like parallel requests or proxies), staying focused on personal, small-scale uses.
+The goal of this project is to empower individuals impacted by rising housing costs, by offering them an easy way to access public property listings and make the rental market more transparent. It simplifies scraping without the corporate complexities (like parallel requests or proxies), staying focused on personal, small-scale uses. Always check up-to-date terms of usage of affected platforms before scraping
 
 ## 🛠️ Key Features
 
