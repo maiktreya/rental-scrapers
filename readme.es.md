@@ -42,7 +42,7 @@ El objetivo de este proyecto es empoderar a las personas afectadas por el aument
 
 - Scrapea listados de Airbnb (corto, medio y largo plazo).
 - Scrapea listados de propiedades de Idealista tanto de venta como de alquiler.
-- Maneja la paginación y guarda los datos en formato CSV.
+- Maneja la paginación y guarda los datos en formato CSV o JSON.
 - Soporta retrasos personalizables para evitar bloqueos.
 - Enfoque simple y minimalista adaptado a usuarios personales.
 
