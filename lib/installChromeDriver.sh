@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 # script shortened from an original taken from:  https://gist.github.com/gffcoutinho/51e74d356a43dd1427a407762d8edc72
-# https://developers.supportbee.com/blog/setting-up-cucumber-to-run-with-Chrome-on-Linux/
-# http://stackoverflow.com/questions/26133486/how-to-specify-binary-path-for-remote-chromedriver-in-codeception
-# http://stackoverflow.com/questions/40262682/how-to-run-selenium-3-x-with-chrome-driver-through-terminal
 
 # Versions
 CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
