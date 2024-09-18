@@ -36,7 +36,7 @@ Now your environment is ready to run the scrapers!
 
 ## 🎯 Project Aim
 
-The goal of this project is to empower individuals impacted by rising housing costs, by offering them an easy way to access public property listings and make the rental market more transparent. It simplifies scraping without the corporate complexities (like parallel requests or proxies), staying focused on personal, small-scale uses. Always check up-to-date terms of usage of affected platforms before scraping
+The goal of this project is to empower individuals impacted by rising housing costs, by offering them an easy way to access public property listings and make the rental market more transparent. It simplifies scraping without the corporate complexities (like parallel requests or proxies), staying focused on personal, small-scale uses.
 
 ## 🛠️ Key Features
 

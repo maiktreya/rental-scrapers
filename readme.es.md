@@ -5,7 +5,7 @@
 
 # 🏠 Scrapers de Alquiler para el Empoderamiento de Inquilinas
 
-Este proyecto está diseñado para empoderar a los inquilinos y usuarios a pequeña escala proporcionando scrapers accesibles para listados de propiedades en Airbnb e Idealista. Con el aumento de los precios de la vivienda y prácticas de alquiler injustas, el acceso a los datos es crucial. Esta herramienta permite a los individuos recopilar datos sobre propiedades disponibles sin estar sujetos a listados multi-página opacos plagados de anuncios.
+Este proyecto está diseñado para empoderar a los inquilinos y usuarios a pequeña escala proporcionando scrapers accesibles para listados de propiedades en Airbnb e Idealista. Con el aumento de los precios de la vivienda y prácticas de alquiler injustas, el acceso a los datos es crucial. Esta herramienta permite a los individuos recopilar datos sobre propiedades disponibles sin estar sujetos a los habituales listados multi-página opacos plagados de anuncios.
 
 **Nota:** No está destinado para su uso a escala corporativa ni para explotar los datos de propiedades a gran escala. Los scrapers están diseñados para **uso personal**, centrándose en el derecho a la información para las inquilinas.
 
@@ -36,7 +36,7 @@ Para los no expertos, aquí tienes una forma sencilla de comenzar con un entorno
 
 ## 🎯 Objetivo del Proyecto
 
-El objetivo de este proyecto es empoderar a las personas afectadas por el aumento de los costos de vivienda, ofreciéndoles una forma fácil de acceder a listados públicos de propiedades y hacer el mercado de alquiler más transparente. Simplifica el scraping sin las complejidades corporativas (como las solicitudes paralelas o proxies), manteniéndose enfocado en usos personales y a pequeña escala. Consulta siempre las condiciones de uso más recientes de las plataformas afectadas antes de realizar el scraping.
+El objetivo de este proyecto es empoderar a las personas afectadas por el aumento de los costos de vivienda, ofreciéndoles una forma fácil de acceder a listados públicos de propiedades y hacer el mercado de alquiler más transparente. Simplifica el scraping sin las complejidades corporativas (como las solicitudes paralelas o proxies), manteniéndose enfocado en usos personales y a pequeña escala.
 
 ## 🛠️ Funcionalidades Clave
 
