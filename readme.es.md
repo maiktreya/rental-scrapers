@@ -29,7 +29,7 @@ Para los no expertos, aquí tienes una forma sencilla de comenzar con un entorno
    Una vez activado el entorno virtual, instala los paquetes necesarios ejecutando:
 
    ```bash
-   pip install -r requirements.txt
+   pip install -r lib/requirements.txt
    ```
 
 ¡Ahora tu entorno está listo para ejecutar los scrapers!
@@ -51,7 +51,7 @@ El objetivo de este proyecto es empoderar a las personas afectadas por el aument
 ### Requisitos Previos
 
 - Python 3.7+
-- ChromeDriver para scraping de Airbnb (a través de Selenium)
+- ChromeDriver para scraping de Airbnb (a través de Selenium, el script `lib/installChromeDriver.sh` automatiza la instalación)
 - Entorno virtual con los paquetes requeridos (`httpx`, `selenium`, `parsel`, `argparse`, `pandas`, `beautifulsoup4`)
 
 ### Ejecutar el Scraper de Airbnb
