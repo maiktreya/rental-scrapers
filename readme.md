@@ -110,7 +110,7 @@ You can create a cron job on Ubuntu to run your Python scraper daily at 2:00 AM 
 
    After adding the line, save the file and exit the editor. Your cron job will now run daily at 2:00 AM.
 
-Make sure your script is executable and that all required permissions are correctly set. Remember to modify the $BASE_PATH variable in the run_scraper.sh script to the appropriate local path.
+Make sure your script is executable and that all required permissions are correctly set. Remember to modify the `$BASE_PATH` variable in the run_scraper.sh script to the appropriate local path.
 
 ---
 
