@@ -76,8 +76,8 @@ You can run all scrapers using the provided Bash script:
 
 ```bash
 bash src/run_scraper.sh # empty for default CSV
-bash src/run_scraper.sh json # get JSON files instead 
-bash src/run_scrsper.sh both # get both file types as output files 
+bash src/run_scraper.sh json # get JSON files instead
+bash src/run_scrsper.sh both # get both file types as output files
 ```
 
 ### Output
@@ -103,7 +103,7 @@ You can create a cron job on Ubuntu to run your Python scraper daily at 2:00 AM 
    ```
 
    - `0 2 * * *` sets the cron job to run daily at 2:00 AM.
-   - `/usr/bin/python3` is the path to the Python 3 interpreter. If you're using a virtual environment, make sure to update this path.
+   - `$PATH/rental-scrapers/src/run_scraper.sh` Entry point (script path)
    - `>> $PATH/rental-scrapers/out/scraper.log 2>&1` ensures that output and any errors are logged.
 
 3. **Save and exit:**
