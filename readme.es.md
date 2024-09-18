@@ -20,8 +20,8 @@ Para los no expertos, aquí tienes una forma sencilla de comenzar con un entorno
    En el directorio raíz del proyecto (donde se encuentra este archivo README), ejecuta los siguientes comandos para crear y activar un entorno virtual llamado `env`:
 
 ```bash
-   python -m venv env
-   source env/bin/activate  # En Windows usar: .\env\Scripts\activate
+python -m venv env
+source env/bin/activate  # En Windows usar: .\env\Scripts\activate
 ```
 
 3. **Instalar las dependencias requeridas:**
@@ -29,7 +29,7 @@ Para los no expertos, aquí tienes una forma sencilla de comenzar con un entorno
  Debes instalar Chrome junto a su webdriver y dependencias necesarias:
 
 ```bash
-   sudo bash lib/installChromeDriver.sh
+sudo bash lib/installChromeDriver.sh
 ```
 
    Una vez activado el entorno virtual, instala los paquetes necesarios ejecutando:
