@@ -62,7 +62,7 @@ The goal of this project is to empower individuals impacted by rising housing co
 To scrape Airbnb listings:
 
 ```bash
-python src/airbnb_scraper.py --url "AIRBNB_URL --format csv"
+python src/airbnb_scraper.py --url "AIRBNB_URL" --format csv
 ```
 
 ### Run the Idealista Scraper
