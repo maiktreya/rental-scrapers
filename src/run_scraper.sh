@@ -6,6 +6,9 @@ export DISPLAY=:99 # Make sure to use the same display where Xvfb is running
 # Define the path variable
 BASE_PATH="/home/other/dev/github/rental-scrapers"
 
+# Get the format parameter from the user, default to "csv" if not provided
+format=${1:-csv}
+
 # Function to calculate next weekend after the next one (roughly 15 days from today)
 get_short_term_dates() {
     current_date=$(date +%Y-%m-%d)
@@ -56,27 +59,27 @@ monthly_end_date=$long_term_end"
 # Activate virtual environment
 source "$BASE_PATH/env/bin/activate"
 
-# Run Airbnb scrapers (exporting to CSV by default)
+# Run Airbnb scrapers
 echo "Running Airbnb Short-Term Scraper..."
 "$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py"\
-    --url "$airbnb_short_url" --format csv &&
+    --url "$airbnb_short_url" --format "$format" &&
     echo "Airbnb Short-Term Scraper finished."
 
 echo "Running Airbnb Medium-Term Scraper..."
 "$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py"\
-    --url "$airbnb_mid_url" --format csv &&
+    --url "$airbnb_mid_url" --format "$format" &&
     echo "Airbnb Medium-Term Scraper finished."
 
 echo "Running Airbnb Long-Term Scraper..."
 "$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py"\
-    --url "$airbnb_long_url" --format csv &&
+    --url "$airbnb_long_url" --format "$format" &&
     echo "Airbnb Long-Term Scraper finished."
 
-# Now run Idealista scrapers (exporting to CSV by default)
+# Now run Idealista scrapers
 echo "Running Idealista Segovia Sale Scraper..."
 "$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_httpx.py"\
     --url "https://www.idealista.com/venta-viviendas/segovia-segovia/"\
-    --delay 5 --format csv
+    --delay 5 --format "$format"
 echo "Finished scraping Segovia Sale. Waiting 5 minutes..."
 
 # Sleep for 5 minutes (300 seconds)
@@ -86,5 +89,5 @@ sleep 300
 echo "Running Idealista Segovia Rent Scraper..."
 "$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_httpx.py"\
     --url "https://www.idealista.com/alquiler-viviendas/segovia-segovia/"\
-    --delay 5 --format csv
+    --delay 5 --format "$format"
 echo "Finished scraping Segovia Rent."
