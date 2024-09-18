@@ -78,12 +78,12 @@ python src/idealista_scraper.py --url "IDEALISTA_URL" --delay 2
 You can run all scrapers using the provided Bash script:
 
 ```bash
-./src/run_scraper.sh
+bash src/run_scraper.sh
 ```
 
 ### Output
 
-Scraped data will be saved in the `out/` directory as both JSON and CSV files.
+Scraped data will be saved in the `out/` directory as CSV files.
 
 You can create a cron job on Ubuntu to run your Python scraper daily at 2:00 AM with the following steps:
 
