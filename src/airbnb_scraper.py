@@ -24,8 +24,11 @@ def parse_arguments():
         "--url", type=str, required=True, help="URL to scrape Airbnb listings from"
     )
     parser.add_argument(
-        "--format", type=str, choices=['csv', 'json', 'both'], default='csv',
-        help="Choose the export format: 'csv', 'json', or 'both'"
+        "--format",
+        type=str,
+        choices=["csv", "json", "both"],
+        default="csv",
+        help="Choose the export format: 'csv', 'json', or 'both'",
     )
     return parser.parse_args()
 
@@ -132,7 +135,7 @@ def save_data(listings_data, format):
     # Generate filename with datetime
     datetime_str = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    if format in ['csv', 'both']:
+    if format in ["csv", "both"]:
         output_file_csv = os.path.join(output_dir, f"airbnb_{datetime_str}.csv")
         try:
             df = pd.DataFrame(listings_data)
@@ -141,10 +144,10 @@ def save_data(listings_data, format):
         except Exception as e:
             logger.error(f"Error saving to CSV: {str(e)}")
 
-    if format in ['json', 'both']:
+    if format in ["json", "both"]:
         output_file_json = os.path.join(output_dir, f"airbnb_{datetime_str}.json")
         try:
-            with open(output_file_json, 'w', encoding='utf-8') as json_file:
+            with open(output_file_json, "w", encoding="utf-8") as json_file:
                 json.dump(listings_data, json_file, ensure_ascii=False, indent=4)
             logger.info(f"Data saved to JSON: {output_file_json}")
         except Exception as e:
