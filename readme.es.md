@@ -42,7 +42,7 @@ El objetivo de este proyecto es empoderar a las personas afectadas por el aument
 
 - Scrapea listados de Airbnb (corto, medio y largo plazo).
 - Scrapea listados de propiedades de Idealista tanto de venta como de alquiler.
-- Maneja la paginación y guarda los datos en formatos JSON y CSV.
+- Maneja la paginación y guarda los datos en formato CSV.
 - Soporta retrasos personalizables para evitar bloqueos.
 - Enfoque simple y minimalista adaptado a usuarios personales.
 
@@ -75,7 +75,7 @@ python src/idealista_scraper.py --url "IDEALISTA_URL" --delay 2
 Puedes ejecutar todos los scrapers usando el script Bash proporcionado:
 
 ```bash
-./src/run_scraper.sh
+bash src/run_scraper.sh
 ```
 
 ### Resultados
