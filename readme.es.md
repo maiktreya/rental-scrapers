@@ -67,7 +67,7 @@ python src/airbnb_scraper.py --url "AIRBNB_URL" --format csv
 Para scrapear listados de Idealista:
 
 ```bash
-python src/idealista_scraper.py --url "IDEALISTA_URL" --delay 2 --format csb
+python src/idealista_scraper.py --url "IDEALISTA_URL" --delay 2 --format csv
 ```
 
 ### Ejecutar Todos los Scrapers
