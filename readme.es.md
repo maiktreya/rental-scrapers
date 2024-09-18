@@ -11,7 +11,7 @@ Este proyecto está diseñado para empoderar a los inquilinos y usuarios a peque
 
 ## ⚙️ Instalación
 
-Para los no expertos, aquí tienes una forma sencilla de comenzar con un entorno virtual de Python:
+Para los no expertos, aquí tienes una forma sencilla de comenzar con un entorno virtual de Python con Ubuntu o usando WSL con Windows:
 
 1. **Instalar Python:** Asegúrate de tener [Python 3.7+](https://www.python.org/downloads/) instalado en tu equipo.
 
@@ -21,7 +21,7 @@ Para los no expertos, aquí tienes una forma sencilla de comenzar con un entorno
 
    ```bash
    python -m venv env
-   source env/bin/activate  # En Windows usar: .\env\Scripts\activate
+   source env/bin/activate
    ```
 
 3. **Instalar las dependencias requeridas:**
