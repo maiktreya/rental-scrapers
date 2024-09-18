@@ -19,10 +19,10 @@ Para los no expertos, aquí tienes una forma sencilla de comenzar con un entorno
 
    En el directorio raíz del proyecto (donde se encuentra este archivo README), ejecuta los siguientes comandos para crear y activar un entorno virtual llamado `env`:
 
-```bash
-python -m venv env
-source env/bin/activate  # En Windows usar: .\env\Scripts\activate
-```
+   ```bash
+   python -m venv env
+   source env/bin/activate  # En Windows usar: .\env\Scripts\activate
+   ```
 
 3. **Instalar las dependencias requeridas:**
 
@@ -38,7 +38,7 @@ source env/bin/activate  # En Windows usar: .\env\Scripts\activate
    pip install -r lib/requirements.txt
    ```
 
-¡Ahora tu entorno está listo para ejecutar los scrapers!
+   ¡Ahora tu entorno está listo para ejecutar los scrapers!
 
 ## 🎯 Objetivo del Proyecto
 
