@@ -29,14 +29,14 @@ source env/bin/activate  # On Windows use: .\env\Scripts\activate
  You would need to install chrome and its webdriver along their dependencies:
 
 ```bash
-   sudo bash lib/installChromeDriver.sh
+sudo bash lib/installChromeDriver.sh
 ```
 
    Once the virtual environment is activated, install the necessary packages by running:
 
-   ```bash
-   pip install -r lib/requirements.txt
-   ```
+```bash
+pip install -r lib/requirements.txt
+```
 
 Now your environment is ready to run the scrapers!
 
