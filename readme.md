@@ -11,7 +11,7 @@ This project is designed to empower tenants and small-scale users by providing a
 
 ## ⚙️ Installation
 
-For non-experts, here's a simple way to get started with a Python virtual environment:
+For non-experts, here's a simple way to get started with a Python virtual environment using Ubuntu or WSL on Windows:
 
 1. **Install Python:** Ensure you have [Python 3.7+](https://www.python.org/downloads/) installed on your machine.
 
@@ -21,7 +21,7 @@ For non-experts, here's a simple way to get started with a Python virtual enviro
 
    ```bash
    python -m venv env
-   source env/bin/activate  # On Windows use: .\env\Scripts\activate
+   source env/bin/activate
    ```
 
 3. **Install the required dependencies:**
