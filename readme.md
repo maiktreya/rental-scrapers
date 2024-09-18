@@ -84,9 +84,10 @@ bash src/run_scrsper.sh both # get both file types as output files
 
 Scraped data will be saved in the `out/` directory as CSV or JSON files.
 
-You can create a cron job on Ubuntu to run your Python scraper daily at 2:00 AM with the following steps:
 
-### Schedule an automated cronjob  
+### Schedule an automated cron job 
+
+You can create a cron job on Ubuntu to run your Python scraper daily at 2:00 AM with the following steps:
 
 1. **Open the crontab file for editing:**
 
