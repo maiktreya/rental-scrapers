@@ -26,17 +26,17 @@ source env/bin/activate  # En Windows usar: .\env\Scripts\activate
 
 3. **Instalar las dependencias requeridas:**
 
- Debes instalar Chrome junto a su webdriver y dependencias necesarias:
+   Debes instalar Chrome junto a su webdriver y dependencias necesarias:
 
-```bash
-sudo bash lib/installChromeDriver.sh
-```
+   ```bash
+   sudo bash lib/installChromeDriver.sh
+   ```
 
    Una vez activado el entorno virtual, instala los paquetes necesarios ejecutando:
 
-```bash
+   ```bash
 pip install -r lib/requirements.txt
-```
+   ```
 
 ¡Ahora tu entorno está listo para ejecutar los scrapers!
 
