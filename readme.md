@@ -19,18 +19,18 @@ For non-experts, here's a simple way to get started with a Python virtual enviro
 
    In your project root directory (where the README file is located), run the following commands to create and activate a virtual environment called `env`:
 
-   ```bash
+```bash
    python -m venv env
    source env/bin/activate  # On Windows use: .\env\Scripts\activate
-   ```
+```
 
 3. **Install the required dependencies:**
 
  You would need to install chrome and its webdriver along their dependencies:
 
-     ```bash
+```bash
    sudo bash lib/installChromeDriver.sh
-   ```
+```
 
    Once the virtual environment is activated, install the necessary packages by running:
 
