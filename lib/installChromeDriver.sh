@@ -5,7 +5,7 @@
 # http://stackoverflow.com/questions/40262682/how-to-run-selenium-3-x-with-chrome-driver-through-terminal
 
 # Versions
-CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`
+CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
 
 # Remove existing downloads and binaries so we can start from scratch.
 sudo apt-get remove google-chrome-stable
@@ -18,7 +18,7 @@ sudo apt-get install -y unzip openjdk-8-jre-headless xvfb libxi6 libgconf-2-4
 
 # Install Chrome.
 sudo curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add
-sudo echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
+sudo echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >>/etc/apt/sources.list.d/google-chrome.list
 sudo apt-get -y update
 sudo apt-get -y install google-chrome-stable
 
