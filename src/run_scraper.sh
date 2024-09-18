@@ -74,7 +74,7 @@ echo "Running Airbnb Long-Term Scraper..."
 
 # Now run Idealista scrapers (exporting to CSV by default)
 echo "Running Idealista Segovia Sale Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_httpx.py" \
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_httpx.py"\
     --url "https://www.idealista.com/venta-viviendas/segovia-segovia/" --delay 5 --format csv
 echo "Finished scraping Segovia Sale. Waiting 5 minutes..."
 
@@ -83,6 +83,6 @@ sleep 300
 
 # Run scraper for the second URL
 echo "Running Idealista Segovia Rent Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_httpx.py" \
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_httpx.py"\
     --url "https://www.idealista.com/alquiler-viviendas/segovia-segovia/" --delay 5 --format csv
 echo "Finished scraping Segovia Rent."
