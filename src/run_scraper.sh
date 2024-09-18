@@ -1,7 +1,10 @@
 #!/bin/bash
 
 # for headless and server use: install xvdf
-export DISPLAY=:99  # Make sure to use the same display where Xvfb is running
+export DISPLAY=:99 # Make sure to use the same display where Xvfb is running
+
+# Define the path variable
+BASE_PATH="/home/other/dev/github/rental-scrapers"
 
 # Function to calculate next weekend after the next one (roughly 15 days from today)
 get_short_term_dates() {
@@ -51,27 +54,24 @@ refinement_paths%5B%5D=%2Fhomes&monthly_start_date=$long_term_start&monthly_leng
 monthly_end_date=$long_term_end"
 
 # Activate virtual environment
-source /home/other/dev/github/rental-scrapers/env/bin/activate
+source "$BASE_PATH/env/bin/activate"
 
 # Run Airbnb scrapers
 echo "Running Airbnb Short-Term Scraper..."
-/home/other/dev/github/rental-scrapers/env/bin/python /home/other/dev/github/rental-scrapers/src/airbnb_scraper.py \
-    --url "$airbnb_short_url" &&
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py" --url "$airbnb_short_url" &&
     echo "Airbnb Short-Term Scraper finished."
 
 echo "Running Airbnb Medium-Term Scraper..."
-/home/other/dev/github/rental-scrapers/env/bin/python /home/other/dev/github/rental-scrapers/src/airbnb_scraper.py \
-    --url "$airbnb_mid_url" &&
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py" --url "$airbnb_mid_url" &&
     echo "Airbnb Medium-Term Scraper finished."
 
 echo "Running Airbnb Long-Term Scraper..."
-/home/other/dev/github/rental-scrapers/env/bin/python /home/other/dev/github/rental-scrapers/src/airbnb_scraper.py \
-    --url "$airbnb_long_url" &&
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py" --url "$airbnb_long_url" &&
     echo "Airbnb Long-Term Scraper finished."
 
 # Now run Idealista scrapers
 echo "Running Idealista Segovia Sale Scraper..."
-/home/other/dev/github/rental-scrapers/env/bin/python /home/other/dev/github/rental-scrapers/src/idealista_scraper.py \
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_scraper.py" \
     --url "https://www.idealista.com/venta-viviendas/segovia-segovia/" --delay 5
 echo "Finished scraping Segovia Sale. Waiting 5 minutes..."
 
@@ -80,6 +80,6 @@ sleep 300
 
 # Run scraper for the second URL
 echo "Running Idealista Segovia Rent Scraper..."
-/home/other/dev/github/rental-scrapers/env/bin/python /home/other/dev/github/rental-scrapers/src/idealista_scraper.py \
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_scraper.py" \
     --url "https://www.idealista.com/alquiler-viviendas/segovia-segovia/" --delay 5
 echo "Finished scraping Segovia Rent."
