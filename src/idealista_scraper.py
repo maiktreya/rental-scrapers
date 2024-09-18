@@ -1,8 +1,5 @@
-# python "SCRAPPING\src\idealista\idealista_httpx.py" --url "https://www.idealista.com/venta-viviendas/segovia-segovia/" --delay 1
-
 import argparse
 import asyncio
-import json
 import re
 from typing import Dict, List
 from urllib.parse import urljoin
@@ -151,12 +148,6 @@ async def scrape_properties(
     return properties
 
 
-def save_to_json(data: List[PropertyResult], filename: str) -> None:
-    """Save data to a JSON file"""
-    with open(filename, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-
-
 def save_to_csv(data: List[PropertyResult], filename: str) -> None:
     """Save data to a CSV file"""
     with open(filename, "w", newline="", encoding="utf-8") as csvfile:
@@ -212,13 +203,11 @@ async def run(base_url: str, delay: float):
         data = await scrape_properties(all_property_urls, session, delay)
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        json_filename = f"out/idealista_properties_{timestamp}.json"
         csv_filename = f"out/idealista_properties_{timestamp}.csv"
 
-        save_to_json(data, json_filename)
         save_to_csv(data, csv_filename)
 
-        logging.info(f"Data saved to {json_filename} and {csv_filename}")
+        logging.info(f"Data saved to {csv_filename}")
 
 
 if __name__ == "__main__":
