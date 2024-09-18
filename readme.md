@@ -78,7 +78,9 @@ python src/idealista_scraper.py --url "IDEALISTA_URL" --delay 2 --format csv
 You can run all scrapers using the provided Bash script:
 
 ```bash
-bash src/run_scraper.sh
+bash src/run_scraper.sh # empty for default CSV
+bash src/run_scraper.sh json # get JSON files instead 
+bash src/run_scrsper.sh both # get both file types as output files 
 ```
 
 ### Output
