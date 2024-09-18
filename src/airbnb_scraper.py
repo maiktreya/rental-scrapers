@@ -1,5 +1,3 @@
-# python scrapping/src/airbnb/airbnb_scraper.py --url "https://www.airbnb.es/s/Segovia--Espa%C3%B1a--Segovia--Espa%C3%B1a/homes?refinement_paths%5B%5D=%2Fhomes&property_type_id%5B%5D=1&place_id=ChIJpTALIQA_QQ0RwPB3-yycavA&checkin=2024-09-20&checkout=2024-09-22&adults=1&tab_id=home_tab"
-
 import argparse
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -11,6 +9,7 @@ from selenium.common.exceptions import TimeoutException
 import pandas as pd
 import logging
 import os
+import json
 from datetime import datetime
 
 # Set up logging
@@ -23,6 +22,10 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="Airbnb Scraper")
     parser.add_argument(
         "--url", type=str, required=True, help="URL to scrape Airbnb listings from"
+    )
+    parser.add_argument(
+        "--format", type=str, choices=['csv', 'json', 'both'], default='csv',
+        help="Choose the export format: 'csv', 'json', or 'both'"
     )
     return parser.parse_args()
 
@@ -120,8 +123,36 @@ def handle_popups(driver):
         logger.info("No popup found or couldn't close popup")
 
 
+# Function to save data to CSV or JSON
+def save_data(listings_data, format):
+    # Ensure output directory exists
+    output_dir = "out"
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Generate filename with datetime
+    datetime_str = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    if format in ['csv', 'both']:
+        output_file_csv = os.path.join(output_dir, f"airbnb_{datetime_str}.csv")
+        try:
+            df = pd.DataFrame(listings_data)
+            df.to_csv(output_file_csv, index=False, encoding="utf-8")
+            logger.info(f"Data saved to CSV: {output_file_csv}")
+        except Exception as e:
+            logger.error(f"Error saving to CSV: {str(e)}")
+
+    if format in ['json', 'both']:
+        output_file_json = os.path.join(output_dir, f"airbnb_{datetime_str}.json")
+        try:
+            with open(output_file_json, 'w', encoding='utf-8') as json_file:
+                json.dump(listings_data, json_file, ensure_ascii=False, indent=4)
+            logger.info(f"Data saved to JSON: {output_file_json}")
+        except Exception as e:
+            logger.error(f"Error saving to JSON: {str(e)}")
+
+
 # Main scraper function
-def scrape_airbnb(url):
+def scrape_airbnb(url, format):
     # ChromeDriver path for Ubuntu
     CHROMEDRIVER_PATH = "/usr/bin/chromedriver"
     service = Service(executable_path=CHROMEDRIVER_PATH)
@@ -169,26 +200,11 @@ def scrape_airbnb(url):
     finally:
         driver.quit()
 
-    # Ensure output directory exists
-    output_dir = "out"
-    os.makedirs(output_dir, exist_ok=True)
-
-    # Generate CSV filename with datetime
-    datetime_str = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_file = os.path.join(output_dir, f"airbnb_{datetime_str}.csv")
-
-    # Save data to CSV
-    try:
-        df = pd.DataFrame(listings_data)
-        df.to_csv(output_file, index=False, encoding="utf-8")
-        logger.info(
-            f"Scraped {len(listings_data)} listings. Data saved to {output_file}"
-        )
-    except Exception as e:
-        logger.error(f"Error saving to CSV: {str(e)}")
+    # Save the scraped data
+    save_data(listings_data, format)
 
 
 # Entry point for the script
 if __name__ == "__main__":
     args = parse_arguments()
-    scrape_airbnb(args.url)
+    scrape_airbnb(args.url, args.format)
