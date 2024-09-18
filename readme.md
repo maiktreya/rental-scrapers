@@ -26,7 +26,7 @@ For non-experts, here's a simple way to get started with a Python virtual enviro
 
 3. **Install the required dependencies:**
 
- You would need to install chrome and its webdriver along their dependencies:
+   You would need to install chrome and its webdriver along their dependencies:
 
    ```bash
    sudo bash lib/installChromeDriver.sh
