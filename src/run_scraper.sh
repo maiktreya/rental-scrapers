@@ -56,22 +56,22 @@ monthly_end_date=$long_term_end"
 # Activate virtual environment
 source "$BASE_PATH/env/bin/activate"
 
-# Run Airbnb scrapers
+# Run Airbnb scrapers (exporting to CSV by default)
 echo "Running Airbnb Short-Term Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py" --url "$airbnb_short_url" &&
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py" --url "$airbnb_short_url" --format csv &&
     echo "Airbnb Short-Term Scraper finished."
 
 echo "Running Airbnb Medium-Term Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py" --url "$airbnb_mid_url" &&
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py" --url "$airbnb_mid_url" --format csv &&
     echo "Airbnb Medium-Term Scraper finished."
 
 echo "Running Airbnb Long-Term Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py" --url "$airbnb_long_url" &&
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/airbnb_scraper.py" --url "$airbnb_long_url" --format csv &&
     echo "Airbnb Long-Term Scraper finished."
 
-# Now run Idealista scrapers
+# Now run Idealista scrapers (exporting to CSV by default)
 echo "Running Idealista Segovia Sale Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_scraper.py" \
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_httpx.py" \
     --url "https://www.idealista.com/venta-viviendas/segovia-segovia/" --delay 5
 echo "Finished scraping Segovia Sale. Waiting 5 minutes..."
 
@@ -80,6 +80,6 @@ sleep 300
 
 # Run scraper for the second URL
 echo "Running Idealista Segovia Rent Scraper..."
-"$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_scraper.py" \
+"$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_httpx.py" \
     --url "https://www.idealista.com/alquiler-viviendas/segovia-segovia/" --delay 5
 echo "Finished scraping Segovia Rent."
