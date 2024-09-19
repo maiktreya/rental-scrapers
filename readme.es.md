@@ -88,7 +88,7 @@ bash src/run_scrsper.sh both # get both file types as output files
 
 ### Resultados
 
-Los datos scrapeados se guardarán en el directorio `out/` en formatos JSON y CSV.
+Los datos scrapeados se guardarán en el directorio `out/` en formatos JSON o CSV.
 
 ### Programar un trabajo cron automatizado
 
