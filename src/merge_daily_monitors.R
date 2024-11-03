@@ -6,8 +6,9 @@ library(data.table)
 library(openxlsx)
 
 # Example usage
-data_path <- "AEAT/data/scrap/out"
-stacked_data <- stack_housing_data(data_path)
+source("lib/etl_function.R") # import needed piping logic
+data_path <- "out" # define path to data folder storing daily monitors
+stacked_data <- stack_housing_data(data_path) # extract data from base files
 
 # Create a new workbook
 wb <- createWorkbook()
