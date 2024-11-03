@@ -10,6 +10,9 @@ source("src/etl_function.R") # import needed piping logic
 data_path <- "out" # define path to data folder storing daily monitors
 stacked_data <- stack_housing_data(data_path) # extract data from base files
 
+# coerce to numeric Airbnb price column
+for (i in 1:2) stacked_data[[i]][, price_with_tax := as.numeric(gsub("[^0-9.]", "", price_with_tax))]
+
 # Create a new workbook
 wb <- createWorkbook()
 
