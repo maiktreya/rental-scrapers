@@ -6,7 +6,7 @@ library(data.table)
 library(openxlsx)
 
 # Example usage
-source("lib/etl_function.R") # import needed piping logic
+source("src/etl_function.R") # import needed piping logic
 data_path <- "out" # define path to data folder storing daily monitors
 stacked_data <- stack_housing_data(data_path) # extract data from base files
 
