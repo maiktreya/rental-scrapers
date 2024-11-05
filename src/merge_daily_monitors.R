@@ -10,7 +10,7 @@ source("src/etl_function.R") # import needed piping logic
 data_path <- "out" # define path to data folder storing daily monitors
 stacked_data <- stack_housing_data(data_path) # extract data from base files
 
-# coerce to numeric Airbnb price columns
+# coerce to numeric Airbnb price columns & drop properties outside target city
 for (i in 1:3) {
     stacked_data[[i]][, price := as.numeric(gsub("[^0-9.]", "", price_with_tax))][, price_with_tax := NULL]
     stacked_data[[i]] <- stacked_data[[i]][property_title %like% "Segovia", ]
