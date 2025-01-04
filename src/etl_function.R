@@ -20,7 +20,7 @@ stack_housing_data <- function(data_path) {
         date <- as.Date(timestamp, format = "%Y%m%d")
 
         # Load the data
-        dt <- fread((file, encoding = "UTF-8")
+        dt <- fread(file, encoding = "UTF-8")
 
         # Identify the monitor type based on file order and add the date column
         dt[, date := date]
