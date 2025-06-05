@@ -13,7 +13,7 @@ import json
 from datetime import datetime
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 
@@ -50,6 +50,18 @@ def extract_data(driver):
     for item in all_listings:
         listing = {}
 
+        # Extract Listing URL
+        try:
+            link_element = item.find("a", href=True)
+            if link_element:
+                relative_url = link_element['href']
+                listing['url'] = f"https://www.airbnb.com{relative_url}"
+            else:
+                listing['url'] = None
+        except (AttributeError, TypeError) as e:
+            logger.warning(f"Error extracting URL: {str(e)}")
+            listing['url'] = None
+
         # Extract Property Title
         try:
             title_element = item.find("div", {"data-testid": "listing-card-title"})
@@ -62,14 +74,10 @@ def extract_data(driver):
 
         # Extract Price
         try:
-            price_element = item.find("span", string=lambda text: text and "€" in text)
+            price_element = item.find("span", string=lambda text: text and ("€" in text or "$" in text))
             if price_element:
-                price_text = price_element.text.strip()
-                listing["price_with_tax"] = (
-                    price_text.split(" total")[0]
-                    if "total" in price_text
-                    else price_text
-                )
+                price_text = price_element.get_text(strip=True)
+                listing["price_with_tax"] = price_text
             else:
                 listing["price_with_tax"] = None
         except AttributeError as e:
@@ -78,14 +86,7 @@ def extract_data(driver):
 
         # Extract Property Type
         try:
-            property_type_element = item.find(
-                "span",
-                string=lambda text: text
-                and any(
-                    word in text.lower()
-                    for word in ["apartamento", "casa", "habitación"]
-                ),
-            )
+            property_type_element = item.select_one('[data-testid="listing-card-title"] + div > div')
             listing["property_type"] = (
                 property_type_element.text.strip() if property_type_element else None
             )
@@ -95,15 +96,9 @@ def extract_data(driver):
 
         # Extract Beds and Rooms
         try:
-            beds_rooms_element = item.find(
-                "span",
-                string=lambda text: text
-                and any(
-                    word in text.lower() for word in ["dormitorio", "cama", "baño"]
-                ),
-            )
+            beds_rooms_elements = item.select('[data-testid="listing-card-title"] + div + div span')
             listing["beds_rooms"] = (
-                beds_rooms_element.text.strip() if beds_rooms_element else None
+                ' · '.join(span.text for span in beds_rooms_elements if span.text) if beds_rooms_elements else None
             )
         except AttributeError as e:
             logger.warning(f"Error extracting beds/rooms: {str(e)}")
@@ -117,23 +112,24 @@ def extract_data(driver):
 # Function to handle popups
 def handle_popups(driver):
     try:
-        close_button = WebDriverWait(driver, 5).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@aria-label='Close']"))
+        close_button = WebDriverWait(driver, 3).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[contains(@aria-label, 'close') or contains(@aria-label, 'Close')]"))
         )
         close_button.click()
         logger.info("Popup closed")
     except TimeoutException:
-        logger.info("No popup found or couldn't close popup")
+        logger.info("No popup found within the time limit.")
 
 
 # Function to save data to CSV or JSON
 def save_data(listings_data, format):
-    # Ensure output directory exists
     output_dir = "out"
     os.makedirs(output_dir, exist_ok=True)
-
-    # Generate filename with datetime
     datetime_str = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    if not listings_data:
+        logger.warning("No data was scraped. Nothing to save.")
+        return
 
     if format in ["csv", "both"]:
         output_file_csv = os.path.join(output_dir, f"airbnb_{datetime_str}.csv")
@@ -156,7 +152,6 @@ def save_data(listings_data, format):
 
 # Main scraper function
 def scrape_airbnb(url, format):
-    # ChromeDriver path for Ubuntu
     CHROMEDRIVER_PATH = "/usr/bin/chromedriver"
     service = Service(executable_path=CHROMEDRIVER_PATH)
     options = webdriver.ChromeOptions()
@@ -164,50 +159,73 @@ def scrape_airbnb(url, format):
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
+    options.add_argument("user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36")
 
     driver = webdriver.Chrome(service=service, options=options)
+    driver.set_page_load_timeout(30)
 
     listings_data = []
     page_limit = 20
     current_page = 1
 
     try:
+        logger.info(f"Navigating to URL: {url}")
         driver.get(url)
         wait_for_element(driver, By.CSS_SELECTOR, "[data-testid='card-container']")
+        handle_popups(driver)
 
         while current_page <= page_limit:
             logger.info(f"Scraping page {current_page}")
-            handle_popups(driver)
+
+            # Get a reference to the current set of listings before clicking next
+            page_listings = driver.find_elements(By.CSS_SELECTOR, "[data-testid='card-container']")
+            if not page_listings:
+                logger.warning("No listing cards found on the page.")
+                break
+
             listings_data.extend(extract_data(driver))
 
             try:
+                # Find the 'Next' button
                 next_button = WebDriverWait(driver, 10).until(
                     EC.element_to_be_clickable(
-                        (By.CSS_SELECTOR, "a[aria-label='Siguiente']")
+                        (By.CSS_SELECTOR, "a[aria-label='Next'], a[aria-label='Siguiente']")
                     )
                 )
+
+                # This is the robust way to click and wait for page change
+                # 1. Click the button
                 next_button.click()
-                logger.info("Clicked 'Next' button")
-                wait_for_element(
-                    driver, By.CSS_SELECTOR, "[data-testid='card-container']"
-                )
+                logger.info("Clicked 'Next' button, waiting for page to update...")
+
+                # 2. Wait for the old content to disappear (become stale)
+                WebDriverWait(driver, 15).until(EC.staleness_of(page_listings[0]))
+
+                # 3. (Optional but good practice) Wait for new content to appear
+                wait_for_element(driver, By.CSS_SELECTOR, "[data-testid='card-container']")
+                logger.info(f"Page {current_page + 1} loaded successfully.")
                 current_page += 1
+
             except TimeoutException:
-                logger.info("No 'Next' button found or not clickable. Ending scraping.")
+                logger.info("No more 'Next' buttons found. Ending scraping.")
                 break
             except Exception as e:
-                logger.error(f"Error while navigating to next page: {str(e)}")
+                logger.error(f"Error during page navigation: {str(e)}")
                 break
     except Exception as e:
-        logger.error(f"An error occurred: {str(e)}")
+        logger.error(f"A critical error occurred: {str(e)}")
     finally:
-        driver.quit()
+        # Save any data that was collected before an error
+        save_data(listings_data, format)
+        logger.info("Attempting to close the browser.")
+        try:
+            driver.quit()
+        except PermissionError:
+            logger.warning("Permission denied when trying to terminate the chromedriver process. This can happen in some environments but the script has finished.")
+        except Exception as e:
+            logger.error(f"An error occurred during driver quit: {str(e)}")
 
-    # Save the scraped data
-    save_data(listings_data, format)
 
-
-# Entry point for the script
 if __name__ == "__main__":
     args = parse_arguments()
     scrape_airbnb(args.url, args.format)
