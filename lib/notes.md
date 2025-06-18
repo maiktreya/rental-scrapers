@@ -9,9 +9,15 @@ curl_ff117 \
   -L "https://www.idealista.com/inmueble/108387485/"
 ```
 
-## Adapted headers
+```bash
+## get full headers
+curl_ff117 -s -D - https://www.idealista.com > headers.txt
+```
+
+## Adapted headers working 18 06 2025
 
 ```python
+# Establish persistent HTTPX session with browser-like headers to avoid blocking
 BASE_HEADERS = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36",
     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",

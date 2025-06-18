@@ -1,0 +1,17 @@
+HTTP/2 403 
+content-type: text/html;charset=utf-8
+server: DataDome
+x-datadome: protected
+accept-ch: Sec-CH-UA,Sec-CH-UA-Mobile,Sec-CH-UA-Platform,Sec-CH-UA-Arch,Sec-CH-UA-Full-Version-List,Sec-CH-UA-Model,Sec-CH-Device-Memory
+charset: utf-8
+cache-control: max-age=0, private, no-cache, no-store, must-revalidate
+pragma: no-cache
+x-datadome-cid: AHrlqAAAAAMAcyM2-kZNA94AWl7geA==
+x-dd-b: 3
+set-cookie: datadome=lJ6RCxEUFz6_6gt9VFgjnJK2477MtbXBsd59Ow91yhj7sEWfCzT~Z9dWxEfvfLu1pyB_PozqPXfuZ2ATtpXVgktpXmjm0v0gWUg3U5Q1zJaitfpEhr753Kbr2UwThGD7; Max-Age=31536000; Domain=.idealista.com; Path=/; Secure; SameSite=Lax
+accept-ranges: bytes
+date: Wed, 18 Jun 2025 23:11:46 GMT
+x-cache: MISS
+strict-transport-security: max-age=86401; includeSubDomains
+content-length: 744
+

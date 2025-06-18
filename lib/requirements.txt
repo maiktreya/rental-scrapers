@@ -6,12 +6,4 @@ parsel
 typing-extensions
 argparse
 asyncio
-playwright
-# The following are standard library modules, but included for clarity:
-# csv
-# argparse
-# asyncio
-# json
-# re
-# datetime
-# logging
+curl-cffi

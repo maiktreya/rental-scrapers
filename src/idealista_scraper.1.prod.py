@@ -15,25 +15,14 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # Establish persistent HTTPX session with browser-like headers to avoid blocking
-
-# THE FIX: Use the User-Agent that matches the cookie
-
-# Read the cookie from the file
-with open('cookie.txt', 'r') as f:
-    datadome_cookie = f.read().strip()
-
-# Read the MATCHING user agent from the file
-with open('user_agent.txt', 'r') as f:
-    dynamic_user_agent = f.read().strip()
-
-# Build headers with a CONSISTENT identity
 BASE_HEADERS = {
-    "user-agent": dynamic_user_agent, # Use the user-agent from the file
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36",
     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
     "accept-language": "en-US;en;q=0.9",
     "accept-encoding": "gzip, deflate, br",
-    "cookie": datadome_cookie
+    "cookie": "datadome=1pojXT~HDeACj12~n1naRzaYLrYc_O4icVzt2M6v_tqGQrNozhNTzn9df68HGFjSDP6A~Kq2ZUx3ckB~miYL2ZYwifj9SP7KKTll2O72gRNYaRUii5DJVCewrZt4F2zj"
 }
+# Note: The cookie value is an example and may need to be updated periodically.
 
 class PropertyResult(TypedDict, total=False):
     url: str
