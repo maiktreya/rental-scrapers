@@ -129,7 +129,7 @@ async def get_next_page_url(current_url: str, page: Page, delay: float) -> str |
 
         # Try to locate the next page arrow link.
         # Using a direct attribute selector for robustness.
-        next_page_link_element = await page.locator("a.icon-arrow-right-after")
+        next_page_link_element = page.locator("a.icon-arrow-right-after")
 
         # Check if the element exists and is visible
         if await next_page_link_element.is_visible():
