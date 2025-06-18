@@ -18,7 +18,7 @@ run_scraper() {
     echo "Running Idealista Segovia Sale Scraper for format: $format"
     "$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_scraper.py" \
         --url "https://www.idealista.com/venta-viviendas/segovia-segovia/" \
-        --delay 5 --format "$format"
+        --delay 3.5 --format "$format"
     echo "Finished scraping Segovia Sale. Waiting 5 minutes..."
 
     # Sleep for 5 minutes (300 seconds)
