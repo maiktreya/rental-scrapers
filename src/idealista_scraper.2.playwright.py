@@ -3,20 +3,17 @@ import asyncio
 import json
 import re
 from typing import Dict, List
-from urllib.parse import urljoin
+from playwright.async_api import async_playwright, Page, Locator, TimeoutError as PlaywrightTimeoutError
+from typing_extensions import TypedDict
 import csv
 from datetime import datetime
 import logging
 
-# Import Playwright
-from playwright.async_api import async_playwright, Page, BrowserContext
-
 # Logging setup
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# Type definition for property results
-from typing_extensions import TypedDict
 class PropertyResult(TypedDict, total=False):
+    """A dictionary to hold the scraped property data."""
     url: str
     title: str
     location: str
@@ -26,283 +23,174 @@ class PropertyResult(TypedDict, total=False):
     rooms: int
     size_sqm: int
     features: Dict[str, List[str]]
-    description: str # Added description as it's parsed
+    description: str
 
-def parse_property(html_content: str, url: str) -> PropertyResult:
-    """
-    Parse Idealista.com property page from its HTML content.
-    This function remains largely the same as it operates on the rendered HTML.
-    """
-    from parsel import Selector # Import Selector here, as it's not needed globally for Playwright operations
-    selector = Selector(text=html_content)
-    css = lambda x: selector.css(x).get("").strip()
-    css_all = lambda x: selector.css(x).getall()
-
+async def parse_property(page: Page) -> PropertyResult:
+    """Parse an Idealista.com property page using Playwright locators."""
     data: PropertyResult = {}
-    data["url"] = url # Use the URL passed to the function
-    data["title"] = css("h1 .main-info__title-main::text")
-    data["location"] = css(".main-info__title-minor::text")
-    data["currency"] = css(".info-data-price::text")
+    data["url"] = page.url
+    data["title"] = await page.locator("h1 .main-info__title-main").text_content()
+    data["location"] = await page.locator(".main-info__title-minor").text_content()
 
-    price_str = css(".info-data-price span::text")
-    if price_str:
-        price_str = price_str.replace(".", "").replace(",", "")
-        data["price"] = int(price_str)
+    price_text = await page.locator(".info-data-price span").first.text_content()
+    data["currency"] = await page.locator(".info-data-price").first.text_content()
+
+    if price_text:
+        price_cleaned = re.sub(r'[.,€]', '', price_text).strip()
+        data["price"] = int(price_cleaned) if price_cleaned.isdigit() else None
     else:
         data["price"] = None
 
-    data["description"] = "\n".join(css_all("div.comment ::text")).strip()
-    data["updated"] = (
-        selector.xpath("//p[@class='stats-text'][contains(text(),'updated on')]/text()")
-        .get("")
-        .split(" on ")[-1]
-    )
+    data["description"] = await page.locator("div.comment").inner_text()
 
+    # Extract updated date
+    try:
+        updated_text = await page.locator("p.stats-text:has-text('updated on')").text_content()
+        data["updated"] = updated_text.split(" on ")[-1]
+    except (PlaywrightTimeoutError, IndexError):
+        data["updated"] = None
+        logging.warning(f"Could not find updated date for {page.url}")
+
+    # Extract features
     data["features"] = {}
-    for feature_block in selector.css(".details-property-h2"):
-        label = feature_block.xpath("text()").get()
-        features = feature_block.xpath("following-sibling::div[1]//li")
-        # Ensure label is not None before using it as a key
-        if label:
-            data["features"][label] = [
-                "".join(feat.xpath(".//text()").getall()).strip() for feat in features
-            ]
+    feature_blocks = await page.locator(".details-property-h2").all()
+    for feature_block in feature_blocks:
+        label = await feature_block.text_content()
+        # Find the following sibling div (container for list items)
+        list_container = feature_block.locator("xpath=./following-sibling::div[1]")
+        list_items = await list_container.locator("li").all()
+        data["features"][label] = [await item.text_content() for item in list_items]
 
-    basic_features = data["features"].get("Características básicas", [])
+    # Extract key details like rooms and size from features
+    basic_features = data["features"].get("Basic features", [])
     data["rooms"] = None
     data["size_sqm"] = None
 
     for feature in basic_features:
-        if "habitaciones" in feature:
-            rooms_match = re.search(r"(\d+)\s*habitaciones?", feature)
+        if "rooms" in feature or "bed" in feature:
+            rooms_match = re.search(r'(\d+)', feature)
             if rooms_match:
                 data["rooms"] = int(rooms_match.group(1))
 
-        if "m²" in feature:
-            size_match = re.search(r"(\d+)\s*m²", feature)
+        if "m²" in feature or "sqm" in feature:
+            size_match = re.search(r'(\d+)', feature)
             if size_match:
                 data["size_sqm"] = int(size_match.group(1))
 
     return data
 
-
-async def extract_property_urls(area_url: str, page: Page, delay: float) -> List[str]:
-    """
-    Extract property URLs from an area page using Playwright.
-    Navigates to the page and waits for content to render.
-    """
-    try:
-        # Navigate to the URL and wait until the DOM is loaded.
-        # Increased timeout to allow for potential JS loading.
-        logging.info(f"Navigating to area page: {area_url}")
-        await page.goto(area_url, wait_until="domcontentloaded", timeout=60000)
-
-        # You might want to add a more specific wait if content loads dynamically
-        # For example, wait for an article to appear:
-        await page.wait_for_selector("article.item a.item-link", timeout=30000) # Wait for property links to appear
-
-        # Get all href attributes from the property links
-        property_links_elements = await page.locator("article.item a.item-link").all()
-        property_links = [
-            await element.get_attribute("href") for element in property_links_elements
-        ]
-        full_urls = [urljoin(area_url, link) for link in property_links if link]
-
-        logging.info(f"Found {len(full_urls)} property URLs on {area_url}")
-        await asyncio.sleep(delay) # Respect the delay
-        return full_urls
-    except Exception as e:
-        logging.error(f"Failed to extract property URLs from {area_url}. Error: {e}")
-        # If navigation fails, the page object might be in a bad state or the URL is unreachable.
-        # Returning an empty list allows the scraper to continue with other pages.
-        return []
-
-
-async def get_next_page_url(current_url: str, page: Page, delay: float) -> str | None:
-    """
-    Get the URL of the next page using Playwright.
-    Navigates to the current page to find the next page link.
-    """
-    try:
-        logging.info(f"Checking for next page from: {current_url}")
-        await page.goto(current_url, wait_until="domcontentloaded", timeout=60000)
-
-        # Try to locate the next page arrow link.
-        # Using a direct attribute selector for robustness.
-        next_page_link_element = page.locator("a.icon-arrow-right-after")
-
-        # Check if the element exists and is visible
-        if await next_page_link_element.is_visible():
-            next_page_link = await next_page_link_element.get_attribute("href")
-            full_next_url = urljoin(current_url, next_page_link) if next_page_link else None
-            logging.info(f"Next page found: {full_next_url}")
-            await asyncio.sleep(delay) # Respect the delay
-            return full_next_url
-        else:
-            logging.info("No next page link found.")
-            await asyncio.sleep(delay) # Still respect the delay before stopping
-            return None
-    except Exception as e:
-        logging.error(f"Failed to get next page URL for {current_url}. Error: {e}")
-        return None
-
-
-async def scrape_properties(urls: List[str], page: Page, delay: float) -> List[PropertyResult]:
-    """
-    Scrape Idealista.com properties using Playwright.
-    Navigates to each property URL and extracts data after rendering.
-    """
-    properties = []
-    for i, url in enumerate(urls):
-        logging.info(f"Scraping property {i+1}/{len(urls)}: {url}")
-        for attempt in range(3):
-            try:
-                await page.goto(url, wait_until="domcontentloaded", timeout=60000)
-                # You might need to wait for specific content on the property page to load, e.g., the price
-                await page.wait_for_selector(".info-data-price", timeout=30000)
-
-                # Get the final URL after any redirects
-                final_url = page.url
-                # Get the full HTML content of the rendered page
-                html_content = await page.content()
-
-                if html_content:
-                    properties.append(parse_property(html_content, final_url))
-                    logging.info(f"Successfully scraped: {final_url}")
-                    break # Success, break out of retry loop
-                else:
-                    logging.warning(f"Failed to get HTML content for {url} on attempt {attempt + 1}")
-
-            except Exception as e:
-                logging.error(f"Attempt {attempt + 1} failed for URL: {url}. Error: {e}")
-                if attempt == 2:
-                    logging.error(f"Failed to retrieve URL: {url} after 3 attempts.")
-            finally:
-                await asyncio.sleep(delay) # Always wait for the delay, even on error
-    return properties
-
-
 def save_to_json(data: List[PropertyResult], filename: str) -> None:
-    """Save data to a JSON file"""
-    try:
-        with open(filename, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-        logging.info(f"Data saved to {filename}")
-    except IOError as e:
-        logging.error(f"Error saving to JSON file {filename}: {e}")
+    """Save data to a JSON file."""
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
 
 def save_to_csv(data: List[PropertyResult], filename: str) -> None:
-    """Save data to a CSV file"""
-    try:
-        with open(filename, "w", newline="", encoding="utf-8") as csvfile:
-            fieldnames = [
-                "url",
-                "title",
-                "location",
-                "price",
-                "currency",
-                "rooms",
-                "size_sqm",
-                "description", # Include description in CSV if desired
-            ]
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    """Save data to a CSV file."""
+    if not data:
+        logging.warning("No data to save to CSV.")
+        return
 
-            writer.writeheader()
-            for property_item in data: # Renamed 'property' to 'property_item' to avoid conflict with built-in
-                writer.writerow(
-                    {
-                        "url": property_item.get("url", ""),
-                        "title": property_item.get("title", ""),
-                        "location": property_item.get("location", ""),
-                        "price": property_item.get("price", ""),
-                        "currency": property_item.get("currency", ""),
-                        "rooms": property_item.get("rooms", ""),
-                        "size_sqm": property_item.get("size_sqm", ""),
-                        "description": property_item.get("description", ""),
-                    }
-                )
-        logging.info(f"Data saved to {filename}")
-    except IOError as e:
-        logging.error(f"Error saving to CSV file {filename}: {e}")
+    with open(filename, "w", newline="", encoding="utf-8") as csvfile:
+        # Use a flexible set of fieldnames based on the first item
+        fieldnames = list(data[0].keys())
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, extrasaction='ignore')
+        writer.writeheader()
+        writer.writerows(data)
 
 
-async def run(base_url: str, delay: float, output_format: List[str]):
-    all_property_urls = []
+async def run(base_url: str, delay: float, output_format: List[str], max_pages: int):
+    """Main function to orchestrate the scraping process with Playwright."""
+    all_property_urls = set() # Use a set to avoid duplicate URLs
     page_count = 1
-    max_pages = 40 # Limit pages to avoid extremely long runs
 
-    # Initialize Playwright
+    logging.info("Starting Playwright browser...")
     async with async_playwright() as p:
-        # Launch a headless Chromium browser
-        # set headless=False to see the browser UI during scraping for debugging
-        browser = await p.chromium.launch(headless=True) # Change to False for debugging
-
-        # Create a new browser context. This is crucial for isolating sessions
-        # and setting specific browser properties like user-agent and viewport.
-        context: BrowserContext = await browser.new_context(
-            user_agent="Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36",
-            viewport={"width": 390, "height": 844, "deviceScaleFactor": 3}, # Simulate a common mobile viewport (e.g., iPhone 12/13 Pro Max)
-            # You can add more options like extra_http_headers if needed for specific anti-bot measures
+        browser = await p.chromium.launch(headless=True)
+        context = await browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
         )
-        page: Page = await context.new_page() # Create a new page within the context
+        page = await context.new_page()
 
         current_url = base_url
 
+        # --- 1. Scrape listing URLs from all pages ---
         while current_url and page_count <= max_pages:
-            logging.info(f"Starting scraping for page {page_count}: {current_url}")
-            property_urls = await extract_property_urls(current_url, page, delay)
-            all_property_urls.extend(property_urls)
+            logging.info(f"Scraping property URLs from page {page_count}: {current_url}")
+            try:
+                await page.goto(current_url, timeout=30000)
+                await page.wait_for_selector("article.item a.item-link", timeout=15000)
 
-            if not property_urls and page_count > 1: # If no properties are found on a subsequent page, stop
-                logging.info("No more property URLs found, stopping pagination.")
+                # Extract URLs from the current page
+                property_links = await page.locator("article.item a.item-link").all()
+                for link in property_links:
+                    href = await link.get_attribute("href")
+                    if href:
+                        # Construct absolute URL
+                        full_url = f"https://www.idealista.com{href}"
+                        all_property_urls.add(full_url)
+
+                # Check for and click the "Next" button
+                next_button = page.locator("a.icon-arrow-right-after").first
+                if await next_button.is_visible():
+                    await next_button.click()
+                    await page.wait_for_load_state('domcontentloaded')
+                    current_url = page.url
+                    page_count += 1
+                    await asyncio.sleep(delay) # Wait before scraping the next page
+                else:
+                    logging.info("No 'Next' page button found. Reached the last page.")
+                    break
+
+            except PlaywrightTimeoutError:
+                logging.warning(f"Timeout while loading or finding links on page: {current_url}. Stopping pagination.")
+                break
+            except Exception as e:
+                logging.error(f"An error occurred during URL extraction on page {page_count}: {e}")
                 break
 
-            current_url = await get_next_page_url(current_url, page, delay)
-            page_count += 1
-            if not current_url: # If get_next_page_url returns None, stop
-                logging.info("No next page URL found. Ending pagination.")
-                break
+        # --- 2. Scrape detailed data for each property URL ---
+        scraped_properties = []
+        logging.info(f"Found {len(all_property_urls)} unique property URLs. Starting detailed scrape...")
 
+        for i, url in enumerate(all_property_urls):
+            logging.info(f"Scraping property {i+1}/{len(all_property_urls)}: {url}")
+            try:
+                await page.goto(url, timeout=30000)
+                property_data = await parse_property(page)
+                scraped_properties.append(property_data)
+                await asyncio.sleep(delay) # Be polite to the server
+            except PlaywrightTimeoutError:
+                logging.error(f"Timeout error scraping details for: {url}")
+            except Exception as e:
+                logging.error(f"Failed to scrape property details for {url}: {e}")
 
-        logging.info(f"Finished collecting all property URLs. Total found: {len(all_property_urls)}")
-        # Remove duplicate URLs if any were collected across pages (important for large scrapes)
-        all_property_urls = list(dict.fromkeys(all_property_urls))
-        logging.info(f"Total unique property URLs: {len(all_property_urls)}")
-
-        if all_property_urls:
-            data = await scrape_properties(all_property_urls, page, delay)
-        else:
-            logging.warning("No property URLs collected. Skipping detailed scraping.")
-            data = []
-
-        # Ensure browser and context are closed
-        await context.close()
         await browser.close()
 
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_dir = "out"
-        import os
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
+        # --- 3. Save the results ---
+        if not scraped_properties:
+            logging.warning("Scraping finished, but no data was collected.")
+            return
 
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         if "json" in output_format:
-            json_filename = os.path.join(output_dir, f"idealista_properties_{timestamp}.json")
-            save_to_json(data, json_filename)
+            json_filename = f"out/idealista_properties_{timestamp}.json"
+            save_to_json(scraped_properties, json_filename)
+            logging.info(f"Data saved to {json_filename}")
 
         if "csv" in output_format:
-            csv_filename = os.path.join(output_dir, f"idealista_properties_{timestamp}.csv")
-            save_to_csv(data, csv_filename)
-
+            csv_filename = f"out/idealista_properties_{timestamp}.csv"
+            save_to_csv(scraped_properties, csv_filename)
+            logging.info(f"Data saved to {csv_filename}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Scrape property listings from Idealista using Playwright"
+        description="Scrape property listings from Idealista using Playwright."
     )
     parser.add_argument(
         "--url",
         type=str,
-        default="https://www.idealista.com/venta-viviendas/segovia-segovia/",
-        help="Base URL for scraping properties (default is Segovia)",
+        default="https://www.idealista.com/en/venta-viviendas/segovia-segovia/",
+        help="Base URL for scraping properties (default is Segovia, Spain)",
     )
     parser.add_argument(
         "--delay",
@@ -317,7 +205,20 @@ if __name__ == "__main__":
         default="both",
         help="Choose the output format: 'csv', 'json', or 'both'",
     )
+    parser.add_argument(
+        "--max_pages",
+        type=int,
+        default=40,
+        help="Maximum number of pages to scrape (default is 40)",
+    )
+
+    # Ensure the 'out' directory exists
+    import os
+    if not os.path.exists("out"):
+        os.makedirs("out")
 
     args = parser.parse_args()
     output_formats = ["csv", "json"] if args.format == "both" else [args.format]
-    asyncio.run(run(args.url, args.delay, output_formats))
+
+    # Run the main async function
+    asyncio.run(run(args.url, args.delay, output_formats, args.max_pages))

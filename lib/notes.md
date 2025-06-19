@@ -7,6 +7,11 @@ curl_ff117 \
   -H "User-Agent: Mozilla/5.0 ..." \
   -H "Cookie: datadome=1pojXT~HDeACj12~n1naRzaYLrYc_O4icVzt2M6v_tqGQrNozhNTzn9df68HGFjSDP6A~Kq2ZUx3ckB~miYL2ZYwifj9SP7KKTll2O72gRNYaRUii5DJVCewrZt4F2zj" \
   -L "https://www.idealista.com/inmueble/108387485/"
+
+  curl_ff117 \
+  -H "User-Agent: Mozilla/5.0 ..." \
+  -H "Cookie: datadome=1pojXT~HDeACj12~n1naRzaYLrYc_O4icVzt2M6v_tqGQrNozhNTzn9df68HGFjSDP6A~Kq2ZUx3ckB~miYL2ZYwifj9SP7KKTll2O72gRNYaRUii5DJVCewrZt4F2zj" \
+  -L "https://www.idealista.com/inmueble/108387485/"
 ```
 
 ```bash

@@ -28,7 +28,6 @@ with open('user_agent.txt', 'r') as f:
 
 # Build headers with a CONSISTENT identity
 BASE_HEADERS = {
-
     "user-agent": dynamic_user_agent, # Use the user-agent from the file
     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
     "accept-language": "en-US;en;q=0.9",
