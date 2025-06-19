@@ -21,7 +21,7 @@ BASE_HEADERS = {
     "accept-language": "en-US;en;q=0.9",
     "accept-encoding": "gzip, deflate, br",
     "cookie": "datadome=1pojXT~HDeACj12~n1naRzaYLrYc_O4icVzt2M6v_tqGQrNozhNTzn9df68HGFjSDP6A~Kq2ZUx3ckB~miYL2ZYwifj9SP7KKTll2O72gRNYaRUii5DJVCewrZt4F2zj"
-}
+} # alt cookie: iM7LWHUNRcvJhpUBgGzyE9Vnjh5FI~WGwxnwkarb7opvAxgqprEGZXg1mxa4KHLD_wJ0ncOELMIGTJs23TYWlGq~iKveTOH7Cccloel~ItWhO1~eKOAnBu1xm46RUd~U
 # Note: The cookie value is an example and may need to be updated periodically.
 
 class PropertyResult(TypedDict, total=False):

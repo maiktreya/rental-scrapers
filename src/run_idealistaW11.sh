@@ -16,7 +16,7 @@ run_scraper() {
     local format=$1
 
     echo "Running Idealista Segovia Sale Scraper for format: $format"
-    "$BASE_PATH/.venv/Scripts/python.exe" "$BASE_PATH/src/idealista_scraper.v2.py" \
+    "$BASE_PATH/.venv/Scripts/python.exe" "$BASE_PATH/src/idealista_scraper.py" \
         --url "https://www.idealista.com/venta-viviendas/segovia-segovia/" \
         --delay 5 --format "$format"
     echo "Finished scraping Segovia Sale. Waiting 5 minutes..."
@@ -25,7 +25,7 @@ run_scraper() {
     sleep 300
 
     echo "Running Idealista Segovia Rent Scraper for format: $format"
-    "$BASE_PATH/.venv/Scripts/python.exe" "$BASE_PATH/src/idealista_scrape.v2.py" \
+    "$BASE_PATH/.venv/Scripts/python.exe" "$BASE_PATH/src/idealista_scraper.py" \
         --url "https://www.idealista.com/alquiler-viviendas/segovia-segovia/" \
         --delay 5 --format "$format"
     echo "Finished scraping Segovia Rent."
