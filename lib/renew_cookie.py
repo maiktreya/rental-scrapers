@@ -7,7 +7,7 @@ def get_cookies_with_playwright():
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
         )
         page = context.new_page()
-        page.goto("https://www.idealista.com/inmueble/108387485/")
+        page.goto("https://www.idealista.com")
         page.wait_for_timeout(5000)  # Wait for JavaScript to execute
 
         # Get all cookies
