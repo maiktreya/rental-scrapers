@@ -20,7 +20,7 @@ run_scraper() {
     local format=$1
 
     echo "Running Idealista Segovia Sale Scraper for format: $format"
-    "$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_scraper.py" \
+    "$BASE_PATH/env/bin/python" "$BASE_PATH/src/idealista_scraper.1.prod.py" \
         --url "https://www.idealista.com/venta-viviendas/segovia-segovia/" \
         --delay 5 --format "$format"
     echo "Finished scraping Segovia Sale. Waiting 5 minutes..."
