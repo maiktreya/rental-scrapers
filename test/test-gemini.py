@@ -12,7 +12,8 @@ TARGET_URL = "https://www.idealista.com"
 OUTPUT_FILE = "cookie1.txt"
 # This User-Agent corresponds to a recent version of Chrome on Linux (X11),
 # which is consistent with our Ubuntu Server + Xvfb environment.
-USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+# USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
 VIEWPORT_WIDTH = 1920
 VIEWPORT_HEIGHT = 1080
 LOAD_TIMEOUT = 30000  # 30 seconds
