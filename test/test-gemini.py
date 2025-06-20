@@ -9,7 +9,7 @@ from xvfbwrapper import Xvfb
 # Modifying these values allows for easy adaptation to different targets or requirements.
 # For more details on each parameter, refer to the configuration table in the report.
 TARGET_URL = "https://www.idealista.com"
-OUTPUT_FILE = "cookie.txt"
+OUTPUT_FILE = "cookie1.txt"
 # This User-Agent corresponds to a recent version of Chrome on Linux (X11),
 # which is consistent with our Ubuntu Server + Xvfb environment.
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
