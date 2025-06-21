@@ -1,109 +1,66 @@
-import nodriver as uc
-import asyncio
-import json
-import time
+import os
+from rebrowser_playwright.sync_api import sync_playwright, Playwright
 
-async def extract_datadome_cookie(url, output_file="datadome_cookie.txt"):
+def get_datadome_cookie():
     """
-    Extract DataDome access cookie from a website and save to text file
-
-    Args:
-        url (str): Target website URL
-        output_file (str): Output filename for the cookie
+    Launches a browser using the rebrowser-playwright patched engine,
+    navigates to Idealista, extracts the DataDome cookie, and saves it to a file.
     """
-    browser = None
-    try:
-        # Launch browser with nodriver
-        browser = await uc.start(headless=False)  # Set to True for headless mode
+    with sync_playwright() as p:
+        print("Launching patched browser...")
+        # The 'rebrowser-playwright' installation patches the standard Playwright launch.
+        # No code changes are needed here to get the benefit of the patched browser.
+        browser = p.chromium.launch(headless=True)
 
-        # Create a new page
-        page = await browser.get(url)
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
+        )
+        page = context.new_page()
 
-        # Wait for page to load and potential DataDome challenge
-        await asyncio.sleep(5)
+        try:
+            print("Navigating to https://www.idealista.com...")
+            # Increased timeout to allow for bot detection checks to complete.
+            page.goto("https://www.idealista.com", timeout=60000)
 
-        # Wait for DataDome cookie to be set (adjust timeout as needed)
-        print("Waiting for DataDome cookie...")
-        cookie_found = False
-        max_attempts = 30  # 30 seconds timeout
-
-        for attempt in range(max_attempts):
-            # Get all cookies
-            cookies = await page.send(uc.cdp.network.get_cookies())
-
-            # Look for DataDome cookie
-            for cookie in cookies.cookies:
-                if 'datadome' in cookie.name.lower():
-                    print(f"Found DataDome cookie: {cookie.name}")
-
-                    # Format cookie data
-                    cookie_data = {
-                        'name': cookie.name,
-                        'value': cookie.value,
-                        'domain': cookie.domain,
-                        'path': cookie.path,
-                        'expires': cookie.expires if hasattr(cookie, 'expires') else None,
-                        'httpOnly': cookie.http_only if hasattr(cookie, 'http_only') else None,
-                        'secure': cookie.secure if hasattr(cookie, 'secure') else None
-                    }
-
-                    # Save to file
-                    with open(output_file, 'w') as f:
-                        f.write(f"Cookie Name: {cookie_data['name']}\n")
-                        f.write(f"Cookie Value: {cookie_data['value']}\n")
-                        f.write(f"Domain: {cookie_data['domain']}\n")
-                        f.write(f"Path: {cookie_data['path']}\n")
-                        f.write(f"Expires: {cookie_data['expires']}\n")
-                        f.write(f"HTTP Only: {cookie_data['httpOnly']}\n")
-                        f.write(f"Secure: {cookie_data['secure']}\n\n")
-
-                        # Also save as JSON for easier parsing
-                        f.write("JSON Format:\n")
-                        f.write(json.dumps(cookie_data, indent=2))
-
-                    print(f"DataDome cookie saved to {output_file}")
-                    cookie_found = True
+            print("Waiting for the DataDome cookie to be set...")
+            # A more reliable way to wait is to check for the cookie's presence.
+            # We will loop and check for the cookie with a timeout.
+            datadome_cookie = None
+            for _ in range(10): # Try for 10 seconds
+                cookies = context.cookies()
+                datadome_cookie = next((cookie for cookie in cookies if cookie['name'] == 'datadome'), None)
+                if datadome_cookie:
                     break
+                page.wait_for_timeout(1000)
 
-            if cookie_found:
-                break
+            if not datadome_cookie:
+                print("Could not find the DataDome cookie after waiting.")
+                browser.close()
+                return None
 
-            print(f"Attempt {attempt + 1}/{max_attempts} - Cookie not found yet...")
-            await asyncio.sleep(1)
+            cookie_value = datadome_cookie['value']
+            print(f"Successfully extracted DataDome cookie.")
 
-        if not cookie_found:
-            print("DataDome cookie not found within timeout period")
-            # Save all cookies for debugging
-            with open("all_cookies_debug.txt", 'w') as f:
-                f.write("All cookies found:\n")
-                for cookie in cookies.cookies:
-                    f.write(f"Name: {cookie.name}, Value: {cookie.value}\n")
-            print("All cookies saved to all_cookies_debug.txt for debugging")
+            # Save the cookie to a file in the same root folder
+            file_path = 'datadome_cookie.txt'
+            with open(file_path, 'w') as f:
+                f.write(cookie_value)
 
-    except Exception as e:
-        print(f"Error occurred: {str(e)}")
+            print(f"DataDome cookie saved to {os.path.abspath(file_path)}")
+            return cookie_value
 
-    finally:
-        # Clean up
-        if browser:
-            try:
-                await browser.stop()
-            except:
-                pass
-
-async def main():
-    # Example usage
-    target_url = input("Enter the target URL: ").strip()
-    if not target_url:
-        target_url = "https://idealista.com"  # Default URL
-
-    output_filename = input("Enter output filename (default: datadome_cookie.txt): ").strip()
-    if not output_filename:
-        output_filename = "datadome_cookie.txt"
-
-    print(f"Extracting DataDome cookie from: {target_url}")
-    await extract_datadome_cookie(target_url, output_filename)
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            # Save a screenshot for debugging purposes if something goes wrong
+            page.screenshot(path='error_screenshot.png')
+            print("Saved an error screenshot to 'error_screenshot.png'")
+            return None
+        finally:
+            print("Closing browser.")
+            browser.close()
 
 if __name__ == "__main__":
-    # Run the async function
-    asyncio.run(main())
+    extracted_cookie = get_datadome_cookie()
+    if extracted_cookie:
+        # You can now use this cookie value in other requests
+        pass

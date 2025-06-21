@@ -50,9 +50,9 @@ async def main():
         print("Wait complete. Attempting to retrieve cookies.")
 
         # 4. Retrieve all cookies from the browser session.
-        # page.get_cookies() returns a list of dictionaries, where each
+        # page.cookies() returns a list of dictionaries, where each
         # dictionary contains the details of a single cookie.
-        all_cookies = await page.get_cookies()
+        all_cookies = await page.cookies()
 
         if not all_cookies:
             print("No cookies were found. The site may not have set any, or the request was blocked.")
@@ -102,7 +102,7 @@ async def main():
         # 7. Ensure the browser is closed to clean up temporary files.
         if browser:
             print("Closing the browser.")
-            await browser.close()
+            await browser.stop()
 
         print("--- Script Finished ---")
 

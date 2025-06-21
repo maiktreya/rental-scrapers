@@ -20,7 +20,7 @@ def get_cookies_with_playwright():
         # Convert cookies to a string
         cookie_str = "; ".join([f"{cookie['name']}={cookie['value']}" for cookie in cookies])
 
-        with open('cookie.txt', 'w') as f:
+        with open('cookie2b.txt', 'w') as f:
             f.write(cookie_str)
 
         print("Cookies saved to cookie.txt")
