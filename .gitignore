@@ -3,3 +3,4 @@ out/*
 !out/test.csv
 !out/test.json
 .lintr
+datadome-bp/*

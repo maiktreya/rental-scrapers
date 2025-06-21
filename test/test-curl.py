@@ -4,7 +4,7 @@ import os
 
 def load_cookie_and_headers():
     """Load cookie and create Firefox 117 headers"""
-    COOKIE_FILE = 'cookie.txt'
+    COOKIE_FILE = 'datadome_cookie.txt'
 
     try:
         with open(COOKIE_FILE, 'r') as f:
@@ -35,7 +35,7 @@ def scrape_with_fresh_cookie():
         return None
 
     try:
-        with httpx.Client(headers=headers, timeout=30.0) as client:
+        with httpx.Client(headers=headers, timeout=30.0, http2=True) as client:
             response = client.get('https://www.idealista.com/inmueble/108387485/')
 
             print(f"Status code: {response.status_code}")
