@@ -1,10 +1,10 @@
 {
   "cookie": {
     "name": "datadome",
-    "value": "fhLlpg68ormOGVjGoJHUygzGovPIPFpi9BAW3loKrlzjHChyDsnspzB3ZmHHturtGoRkRjUFyxOlDfX6pjhRaZznyPjeNbrdgKU4l2eYI5cT8JQpnPzR1t6t9rhz0beV",
+    "value": "g~uN9jOTPpDWDkOPRSJaM5Y95oGAT3~J9eFkeZW4kB5kD0KN1PP_zQkcpT68Ab_0y4iby8FBJXMTgu15jsg045ybpZHec972SoQ8_T8OJBqQL9HK3LJGY9gA9eKUgyhv",
     "domain": ".idealista.com",
     "path": "/",
-    "expires": 1782058343.515284,
+    "expires": 1782059439.48252,
     "httpOnly": false,
     "secure": true,
     "sameSite": "Lax"
@@ -38,7 +38,7 @@
   },
   "metadata": {
     "extracted_from": "https://www.idealista.com/venta-viviendas/madrid-madrid/",
-    "extraction_timestamp": 1750522344286,
+    "extraction_timestamp": 1750523440253,
     "success": true
   }
 }

@@ -14,7 +14,7 @@ headers = {
     'Sec-Fetch-Site': 'none',
     'Sec-Fetch-User': '?1',
     'Cache-Control': 'max-age=0',
-    'Cookie': 'datadome=fhLlpg68ormOGVjGoJHUygzGovPIPFpi9BAW3loKrlzjHChyDsnspzB3ZmHHturtGoRkRjUFyxOlDfX6pjhRaZznyPjeNbrdgKU4l2eYI5cT8JQpnPzR1t6t9rhz0beV'
+    'Cookie': 'datadome=g~uN9jOTPpDWDkOPRSJaM5Y95oGAT3~J9eFkeZW4kB5kD0KN1PP_zQkcpT68Ab_0y4iby8FBJXMTgu15jsg045ybpZHec972SoQ8_T8OJBqQL9HK3LJGY9gA9eKUgyhv'
 }
 
 # Usage example:
