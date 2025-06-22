@@ -1,0 +1,36 @@
+{
+  "datadome_cookies": [
+    {
+      "domain": ".idealista.com",
+      "expiry": 1782150528,
+      "httpOnly": false,
+      "name": "datadome",
+      "path": "/",
+      "sameSite": "Lax",
+      "secure": true,
+      "value": "_C7kUOK9vUSs7yZC7bhP57qBF0JcWT6aPpYul0_T9wkUQNmRYBAPHQq4gNWHuiJF3suT2F_M4jKNBD0zMJLFEZh1cJ7Ly8YDWCtgPfwVq9W5H2yfaSHyVZ8ylWnqhpBH"
+    }
+  ],
+  "all_cookies": [
+    {
+      "domain": ".idealista.com",
+      "expiry": 1782150528,
+      "httpOnly": false,
+      "name": "datadome",
+      "path": "/",
+      "sameSite": "Lax",
+      "secure": true,
+      "value": "_C7kUOK9vUSs7yZC7bhP57qBF0JcWT6aPpYul0_T9wkUQNmRYBAPHQq4gNWHuiJF3suT2F_M4jKNBD0zMJLFEZh1cJ7Ly8YDWCtgPfwVq9W5H2yfaSHyVZ8ylWnqhpBH"
+    }
+  ],
+  "formats": {
+    "requests": {
+      "datadome": "_C7kUOK9vUSs7yZC7bhP57qBF0JcWT6aPpYul0_T9wkUQNmRYBAPHQq4gNWHuiJF3suT2F_M4jKNBD0zMJLFEZh1cJ7Ly8YDWCtgPfwVq9W5H2yfaSHyVZ8ylWnqhpBH"
+    },
+    "curl": "datadome=_C7kUOK9vUSs7yZC7bhP57qBF0JcWT6aPpYul0_T9wkUQNmRYBAPHQq4gNWHuiJF3suT2F_M4jKNBD0zMJLFEZh1cJ7Ly8YDWCtgPfwVq9W5H2yfaSHyVZ8ylWnqhpBH",
+    "header": {
+      "Cookie": "datadome=_C7kUOK9vUSs7yZC7bhP57qBF0JcWT6aPpYul0_T9wkUQNmRYBAPHQq4gNWHuiJF3suT2F_M4jKNBD0zMJLFEZh1cJ7Ly8YDWCtgPfwVq9W5H2yfaSHyVZ8ylWnqhpBH"
+    }
+  },
+  "datadome_info": {}
+}
