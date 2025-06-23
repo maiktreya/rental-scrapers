@@ -5,3 +5,4 @@ out/*
 .lintr
 datadome-bp/*
 USER_DATA_DIR
+chrome_session

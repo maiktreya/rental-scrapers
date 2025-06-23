@@ -12,7 +12,7 @@ def run(playwright: Playwright):
     # Replace "USER_DATA_DIR" with a path to a directory where you want to store browser data.
     context = playwright.chromium.launch_persistent_context(
         "USER_DATA_DIR",  # This creates a persistent session
-        headless=False,
+        headless=False, # Better to avoid detectability, run in headful mode
         channel="chrome",  # Use the installed Chrome browser
         args=[
             '--no-first-run',
