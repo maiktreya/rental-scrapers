@@ -20,7 +20,7 @@ BASE_HEADERS = {
     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
     "accept-language": "en-US;en;q=0.9",
     "accept-encoding": "gzip, deflate, br",
-    "cookie": "datadome=1E2N_1oGxbNCuZFeSueGJfnqGqi8s5z4FHcIj~51QgF5fwWN3ZI~TTNxKaOO3Dhbc5t~jzRH0bP0tWUur1shjilHzUlVGJvNjUUMB8I1CtRVK7e4drjK~VdvnPRPZMLM"
+    "cookie": "datadome=2ilmOWcIRFc0ukqUrrlGbIBLBkBJhvRGDH8y55mRtms5dIQqTSDKQNpPi66ow39WX9wBzt8BaNhTEaZppEzaqjmqEV7qb1AK2RVHWFe0HXw3hgRzze1nsYjA~9C_Y33v"
 } # alt cookie: iM7LWHUNRcvJhpUBgGzyE9Vnjh5FI~WGwxnwkarb7opvAxgqprEGZXg1mxa4KHLD_wJ0ncOELMIGTJs23TYWlGq~iKveTOH7Cccloel~ItWhO1~eKOAnBu1xm46RUd~U
 # Note: The cookie value is an example and may need to be updated periodically.
 
