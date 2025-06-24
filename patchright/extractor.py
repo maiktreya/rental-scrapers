@@ -72,9 +72,6 @@ def run(playwright: Playwright):
             captured_headers["cookie"] = "; ".join(
                 [f"{c['name']}={c['value']}" for c in all_cookies]
             )
-            captured_headers["cookies_as_object"] = {
-                c["name"]: c["value"] for c in all_cookies
-            }
 
             headers_to_remove = ["host", "connection", "content-length"]
             for h in headers_to_remove:
