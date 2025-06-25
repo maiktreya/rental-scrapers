@@ -67,6 +67,7 @@ def get_sample_headers():
         "cookie": "datadome=A_VALID_DATADOME_COOKIE_WOULD_GO_HERE",  # Placeholder
     }
     print("✅ Headers loaded.")
+    headers = BASE_HEADERS
     return headers
 
 
