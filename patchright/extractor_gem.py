@@ -1,6 +1,7 @@
 import time
 from patchright.sync_api import sync_playwright, Playwright
 
+
 def run(playwright: Playwright):
     """
     Launches a browser, navigates to Idealista, and extracts the Datadome cookie
@@ -12,15 +13,15 @@ def run(playwright: Playwright):
     # Replace "USER_DATA_DIR" with a path to a directory where you want to store browser data.
     context = playwright.chromium.launch_persistent_context(
         "USER_DATA_DIR",  # This creates a persistent session
-        headless=False, # Better to avoid detectability, run in headful mode
+        headless=False,  # Better to avoid detectability, run in headful mode
         channel="chrome",  # Use the installed Chrome browser
         args=[
-            '--no-first-run',
-            '--no-service-autorun',
-            '--password-store=basic',
-            '--disable-features=IsolateOrigins,site-per-process' # Disabling site isolation might help in some cases
+            "--no-first-run",
+            "--no-service-autorun",
+            "--password-store=basic",
+            "--disable-features=IsolateOrigins,site-per-process",  # Disabling site isolation might help in some cases
         ],
-        no_viewport=True, # Use the browser's default viewport
+        no_viewport=True,  # Use the browser's default viewport
     )
 
     page = context.new_page()
@@ -29,10 +30,14 @@ def run(playwright: Playwright):
 
     try:
         # Go to the website. Datadome will likely intercept this request.
-        page.goto("https://www.idealista.com/inmueble/94726991/", timeout=60000)
+        page.goto(
+            "https://www.idealista.com/alquiler-viviendas/madrid-madrid/", timeout=60000
+        )
 
         print("\n--- ACTION REQUIRED ---")
-        print("The browser has opened. Please solve the Datadome challenge (e.g., click and hold the button).")
+        print(
+            "The browser has opened. Please solve the Datadome challenge (e.g., click and hold the button)."
+        )
         print("The script will wait for you to complete it...")
 
         # We will wait until the datadome cookie is present.
@@ -42,7 +47,7 @@ def run(playwright: Playwright):
         for _ in range(120):
             cookies = context.cookies()
             for cookie in cookies:
-                if cookie['name'] == 'datadome':
+                if cookie["name"] == "datadome":
                     datadome_cookie = cookie
                     break
             if datadome_cookie:
@@ -54,7 +59,9 @@ def run(playwright: Playwright):
             print("Datadome Cookie Found:")
             print(f"   Value: {datadome_cookie['value']}")
         else:
-            print("\n❌ Timed out waiting for the Datadome cookie. Please try running the script again.")
+            print(
+                "\n❌ Timed out waiting for the Datadome cookie. Please try running the script again."
+            )
 
     except Exception as e:
         print(f"An error occurred: {e}")
