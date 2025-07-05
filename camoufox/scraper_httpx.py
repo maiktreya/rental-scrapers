@@ -39,12 +39,12 @@ logger = logging.getLogger(__name__)
 class ScraperConfig:
     """Configuration for the scraper."""
 
-    delay: float = 2.0
-    header_refresh_requests: int = 100
+    delay: float = 5.0
+    header_refresh_requests: int = 30
     max_retries: int = 3
     timeout: int = 30
-    max_pages: int = 5  # Maximum pages to scrape per search
-    max_listings: int = 150  # Maximum listings to scrape
+    max_pages: int = 50  # Maximum pages to scrape per search
+    max_listings: int = 1500  # Maximum listings to scrape
     extract_listings: bool = True  # Whether to extract individual listings
     user_agents: List[str] = field(
         default_factory=lambda: [
@@ -421,12 +421,12 @@ class RentalScraper:
 async def main():
     """Main function to run the scraper."""
     parser = argparse.ArgumentParser(description="Rental property scraper with Camoufox")
-    parser.add_argument("--delay", type=float, default=2.0, help="Delay between requests (seconds)")
+    parser.add_argument("--delay", type=float, default=5.0, help="Delay between requests (seconds)")
     parser.add_argument("--header-refresh-requests", type=int, default=100, help="Refresh headers after N requests")
     parser.add_argument("--max-retries", type=int, default=3, help="Maximum retry attempts")
     parser.add_argument("--timeout", type=int, default=30, help="Request timeout (seconds)")
-    parser.add_argument("--max-pages", type=int, default=5, help="Maximum pages to scrape per URL")
-    parser.add_argument("--max-listings", type=int, default=150, help="Maximum listings to extract")
+    parser.add_argument("--max-pages", type=int, default=50, help="Maximum pages to scrape per URL")
+    parser.add_argument("--max-listings", type=int, default=1500, help="Maximum listings to extract")
     parser.add_argument("--no-extract-listings", action="store_true", help="Disable listing extraction")
     parser.add_argument("--urls", nargs="+", help="URLs to scrape")
     parser.add_argument("--output", type=str, help="Output JSON file for page data")
