@@ -1,248 +1,366 @@
-import argparse
+#!/usr/bin/env python3
+"""
+Rental property scraper with Camoufox for realistic browser headers.
+Fixed version with proper AsyncCamoufox usage.
+
+To use geoip features, install with: pip install camoufox[geoip]
+"""
+
 import asyncio
-import json
-import re
-from typing import Dict, List
-from urllib.parse import urljoin
-import httpx
-from parsel import Selector
-from typing_extensions import TypedDict
-import csv
-from datetime import datetime
 import logging
+import argparse
+import time
+import random
+from typing import Dict, Optional, List, Any
+from dataclasses import dataclass, field
+from datetime import datetime, timedelta
+import json
+import aiohttp
+import sys
 import os
-import camoufox
-from patchright.async_api import BrowserContext
 
-# --- Logging and Output Setup ---
+# Fixed import for AsyncCamoufox
+from camoufox.async_api import AsyncCamoufox
+
+# Configure logging
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('rental_scraper.log'),
+        logging.StreamHandler()
+    ]
 )
-os.makedirs("out", exist_ok=True)
+logger = logging.getLogger(__name__)
 
+@dataclass
+class ScraperConfig:
+    """Configuration for the scraper."""
+    delay: float = 2.0
+    header_refresh_requests: int = 100
+    max_retries: int = 3
+    timeout: int = 30
+    user_agents: List[str] = field(default_factory=lambda: [
+        'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0',
+        'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/116.0',
+        'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0'
+    ])
 
-# --- Camoufox Integration for Dynamic Headers ---
-async def get_camoufox_headers(url: str) -> Dict[str, str]:
-    """
-    Launches a headless Camoufox instance to solve challenges and extract valid
-    session headers and cookies for use with HTTPX.
-    """
-    logging.info("🚀 Launching Camoufox to generate session headers...")
-    context: BrowserContext = None
-    headers = {}
-    try:
-        context = await camoufox.async_launch(
-            headless="virtual"  # Use "virtual" for headless on servers
-        )
-        page = await context.new_page()
+class HeaderManager:
+    """Manages browser headers using Camoufox."""
 
-        # We need to capture the headers from the first successful navigation
-        def capture_request_headers(request):
-            if request.is_navigation_request() and request.resource_type == "document":
-                headers.update(request.headers)
+    def __init__(self, config: ScraperConfig):
+        self.config = config
+        self.headers: Optional[Dict[str, str]] = None
+        self.request_count = 0
+        self.last_refresh = 0
+        self.refresh_interval = 3600  # 1 hour in seconds
 
-        page.on("request", capture_request_headers)
-
-        await page.goto(url, timeout=120000, wait_until="domcontentloaded")
-        await page.remove_listener("request", capture_request_headers)
-
-        if not headers:
-            raise RuntimeError("Camoufox failed to capture initial headers.")
-
-        all_cookies = await context.cookies()
-        headers["cookie"] = "; ".join(
-            [f"{cookie['name']}={cookie['value']}" for cookie in all_cookies]
-        )
-        logging.info("✅ Successfully generated dynamic headers and cookies.")
-        return headers
-
-    except Exception as e:
-        logging.error(f"❌ Camoufox header generation failed: {e}")
-        return None
-    finally:
-        if context:
-            await context.close()
-
-
-# --- Data Structures and Parsing (No changes needed here) ---
-class PropertyResult(TypedDict, total=False):
-    url: str
-    title: str
-    location: str
-    price: int
-    currency: str
-    description: str
-    updated: str
-    rooms: int
-    size_sqm: int
-    features: Dict[str, List[str]]
-
-
-def parse_property(response: httpx.Response) -> PropertyResult:
-    """Parse Idealista.com property page"""
-    selector = Selector(text=response.text)
-    css = lambda x: selector.css(x).get("").strip()
-    css_all = lambda x: selector.css(x).getall()
-
-    data: PropertyResult = {}
-    data["url"] = str(response.url)
-    data["title"] = css("h1 .main-info__title-main::text")
-    data["location"] = css(".main-info__title-minor::text")
-    data["currency"] = css(".info-data-price::text")
-
-    price_str = css(".info-data-price span::text")
-    data["price"] = (
-        int(price_str.replace(".", "").replace(",", "")) if price_str else None
-    )
-
-    data["description"] = "\n".join(css_all("div.comment ::text")).strip()
-    updated_text = selector.xpath(
-        "//p[@class='stats-text'][contains(text(),'updated on')]/text()"
-    ).get("")
-    if " on " in updated_text:
-        data["updated"] = updated_text.split(" on ")[-1]
-
-    data["features"] = {}
-    for feature_block in selector.css(".details-property-h2"):
-        label = feature_block.xpath("text()").get()
-        if label:
-            features = feature_block.xpath("following-sibling::div[1]//li")
-            data["features"][label] = [
-                "".join(feat.xpath(".//text()").getall()).strip() for feat in features
-            ]
-
-    basic_features = data["features"].get("Características básicas", [])
-    for feature in basic_features:
-        if "habitaci" in feature:
-            if rooms_match := re.search(r"(\d+)", feature):
-                data["rooms"] = int(rooms_match.group(1))
-        if "m²" in feature:
-            if size_match := re.search(r"(\d+)", feature):
-                data["size_sqm"] = int(size_match.group(1))
-
-    return data
-
-
-# --- Scraping Logic (Adapted to use dynamic headers) ---
-async def fetch_with_retry(url: str, session: httpx.AsyncClient, delay: float):
-    """Fetches a URL with a retry mechanism and delay."""
-    for attempt in range(3):
+    async def generate_session_headers(self) -> Dict[str, str]:
+        """Generate fresh session headers using Camoufox."""
         try:
-            # Add a small delay before each request to be polite
-            await asyncio.sleep(delay)
-            response = await session.get(url)
-            response.raise_for_status()  # Will raise an exception for 4xx/5xx status
-            return response
-        except (httpx.ReadTimeout, httpx.RequestError, httpx.HTTPStatusError) as e:
-            logging.warning(f"Attempt {attempt + 1} failed for {url}: {e}")
-            if attempt == 2:
-                logging.error(f"Failed to retrieve URL after 3 attempts: {url}")
+            logger.info("🚀 Launching Camoufox to generate session headers...")
+
+            # Use AsyncCamoufox with proper configuration
+            # Remove geoip=True if geoip extra is not installed
+            async with AsyncCamoufox(
+                headless=True,
+                humanize=True,
+                os="linux",
+                block_images=True,
+                enable_cache=False,
+                window=(1920, 1080)
+            ) as browser:
+                page = await browser.new_page()
+
+                # Navigate to a test page to generate realistic headers
+                await page.goto("https://httpbin.org/headers", wait_until="domcontentloaded")
+                await page.wait_for_timeout(2000)  # Wait 2 seconds for full load
+
+                # Get the generated headers from the browser
+                headers = await page.evaluate("""
+                    () => {
+                        const headers = {};
+                        const userAgent = navigator.userAgent;
+                        const languages = navigator.languages ? navigator.languages.join(',') : 'en-US,en;q=0.9';
+
+                        return {
+                            'User-Agent': userAgent,
+                            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                            'Accept-Language': languages,
+                            'Accept-Encoding': 'gzip, deflate, br',
+                            'Connection': 'keep-alive',
+                            'Upgrade-Insecure-Requests': '1',
+                            'Sec-Fetch-Dest': 'document',
+                            'Sec-Fetch-Mode': 'navigate',
+                            'Sec-Fetch-Site': 'none',
+                            'DNT': '1',
+                            'Cache-Control': 'max-age=0'
+                        };
+                    }
+                """)
+
+                await page.close()
+                logger.info("✅ Successfully generated session headers")
+                logger.info(f"📋 Generated User-Agent: {headers.get('User-Agent', 'N/A')}")
+                return headers
+
+        except Exception as e:
+            logger.error(f"❌ Camoufox header generation failed: {e}")
+            # Fallback to default headers
+            return self.get_fallback_headers()
+
+    def get_fallback_headers(self) -> Dict[str, str]:
+        """Get fallback headers if Camoufox fails."""
+        logger.warning("🔄 Using fallback headers")
+        return {
+            'User-Agent': random.choice(self.config.user_agents),
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': '1',
+            'DNT': '1'
+        }
+
+    async def should_refresh_headers(self) -> bool:
+        """Check if headers should be refreshed."""
+        current_time = time.time()
+        time_since_refresh = current_time - self.last_refresh
+
+        return (
+            self.headers is None or
+            self.request_count >= self.config.header_refresh_requests or
+            time_since_refresh >= self.refresh_interval
+        )
+
+    async def get_headers(self) -> Dict[str, str]:
+        """Get current headers, refreshing if necessary."""
+        if await self.should_refresh_headers():
+            await self.refresh_headers()
+
+        return self.headers.copy()
+
+    async def refresh_headers(self):
+        """Refresh the session headers."""
+        logger.info(f"🔄 Refreshing headers (requests: {self.request_count}, time since last: {time.time() - self.last_refresh:.0f}s)")
+
+        try:
+            self.headers = await self.generate_session_headers()
+            self.request_count = 0
+            self.last_refresh = time.time()
+            logger.info("✅ Headers refreshed successfully")
+        except Exception as e:
+            logger.error(f"❌ Failed to refresh headers: {e}")
+            if self.headers is None:
+                self.headers = self.get_fallback_headers()
+
+    def increment_request_count(self):
+        """Increment the request counter."""
+        self.request_count += 1
+
+class RentalScraper:
+    """Main scraper class for rental properties."""
+
+    def __init__(self, config: ScraperConfig):
+        self.config = config
+        self.header_manager = HeaderManager(config)
+        self.session: Optional[aiohttp.ClientSession] = None
+
+    async def __aenter__(self):
+        """Async context manager entry."""
+        # Initialize headers
+        await self.header_manager.refresh_headers()
+
+        # Create aiohttp session
+        timeout = aiohttp.ClientTimeout(total=self.config.timeout)
+        self.session = aiohttp.ClientSession(
+            timeout=timeout,
+            connector=aiohttp.TCPConnector(limit=10, limit_per_host=5)
+        )
+
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        """Async context manager exit."""
+        if self.session and not self.session.closed:
+            await self.session.close()
+            # Give a small delay to ensure cleanup
+            await asyncio.sleep(0.1)
+
+    async def make_request(self, url: str, method: str = 'GET', **kwargs) -> Optional[Dict[str, Any]]:
+        """Make an HTTP request with proper headers and retry logic."""
+        headers = await self.header_manager.get_headers()
+
+        # Update headers with any additional ones
+        if 'headers' in kwargs:
+            headers.update(kwargs['headers'])
+        kwargs['headers'] = headers
+
+        for attempt in range(self.config.max_retries):
+            try:
+                logger.info(f"🌐 Making {method} request to {url} (attempt {attempt + 1})")
+
+                async with self.session.request(method, url, **kwargs) as response:
+                    self.header_manager.increment_request_count()
+
+                    if response.status == 200:
+                        logger.info(f"✅ Request successful: {response.status}")
+                        # Read content while connection is still open
+                        content = await response.text()
+                        return {
+                            'content': content,
+                            'status_code': response.status,
+                            'headers': dict(response.headers),
+                            'url': str(response.url)
+                        }
+                    elif response.status == 429:
+                        logger.warning(f"🚫 Rate limited: {response.status}")
+                        await asyncio.sleep(self.config.delay * (2 ** attempt))
+                    else:
+                        logger.warning(f"⚠️ Request failed with status: {response.status}")
+
+            except asyncio.TimeoutError:
+                logger.error(f"⏱️ Request timeout (attempt {attempt + 1})")
+            except Exception as e:
+                logger.error(f"❌ Request failed: {e} (attempt {attempt + 1})")
+
+            if attempt < self.config.max_retries - 1:
+                wait_time = self.config.delay * (2 ** attempt) + random.uniform(0, 1)
+                logger.info(f"⏳ Waiting {wait_time:.1f}s before retry...")
+                await asyncio.sleep(wait_time)
+
+        logger.error(f"❌ All {self.config.max_retries} attempts failed for {url}")
+        return None
+
+    async def scrape_url(self, url: str) -> Optional[Dict[str, Any]]:
+        """Scrape a single URL and return extracted data."""
+        try:
+            response_data = await self.make_request(url)
+            if not response_data:
                 return None
 
+            content = response_data['content']
 
-async def run(base_url: str, delay: float, output_formats: List[str]):
-    """Main scraping orchestrator."""
-    # Step 1: Get dynamic headers from Camoufox
-    headers = await get_camoufox_headers(base_url)
-    if not headers:
-        logging.critical("Could not obtain session headers. Exiting.")
-        return
+            # Basic extraction - you can enhance this based on your needs
+            data = {
+                'url': url,
+                'status_code': response_data['status_code'],
+                'content_length': len(content),
+                'response_headers': response_data['headers'],
+                'scraped_at': datetime.now().isoformat(),
+                'title': self.extract_title(content),
+                'content_preview': content[:500] + '...' if len(content) > 500 else content
+            }
 
-    # Step 2: Use headers with a fast HTTPX client
-    all_property_urls = []
-    page_count = 1
-    max_pages = 40
+            logger.info(f"📄 Scraped {url}: {data['content_length']} chars")
+            return data
 
-    async with httpx.AsyncClient(
-        headers=headers, follow_redirects=True, timeout=20.0
-    ) as session:
-        current_url = base_url
+        except Exception as e:
+            logger.error(f"❌ Error scraping {url}: {e}")
+            return None
 
-        while current_url and page_count <= max_pages:
-            logging.info(f"Scraping page {page_count}: {current_url}")
-            response = await fetch_with_retry(current_url, session, delay)
-            if not response:
-                break  # Stop if a page fails to load
+    def extract_title(self, content: str) -> Optional[str]:
+        """Extract title from HTML content."""
+        try:
+            import re
+            match = re.search(r'<title[^>]*>(.*?)</title>', content, re.IGNORECASE | re.DOTALL)
+            if match:
+                return match.group(1).strip()
+        except Exception as e:
+            logger.error(f"Error extracting title: {e}")
+        return None
 
-            selector = Selector(text=response.text)
+    async def scrape_multiple_urls(self, urls: List[str]) -> List[Dict[str, Any]]:
+        """Scrape multiple URLs with delays and header rotation."""
+        results = []
 
-            # Extract property URLs from the current page
-            property_links = selector.css(
-                "article.item a.item-link::attr(href)"
-            ).getall()
-            all_property_urls.extend(
-                [urljoin(base_url, link) for link in property_links]
-            )
+        for i, url in enumerate(urls):
+            logger.info(f"📊 Processing URL {i + 1}/{len(urls)}: {url}")
 
-            # Find the next page URL
-            next_page_link = selector.css("a.icon-arrow-right-after::attr(href)").get()
-            current_url = urljoin(base_url, next_page_link) if next_page_link else None
-            page_count += 1
+            # Scrape the URL
+            result = await self.scrape_url(url)
+            if result:
+                results.append(result)
 
-        logging.info(f"Found {len(all_property_urls)} total properties to scrape.")
+            # Add delay between requests
+            if i < len(urls) - 1:  # Don't delay after the last URL
+                delay = self.config.delay + random.uniform(0, 1)
+                logger.info(f"⏳ Waiting {delay:.1f}s before next request...")
+                await asyncio.sleep(delay)
 
-        # Step 3: Scrape individual property pages
-        tasks = [fetch_with_retry(url, session, delay) for url in all_property_urls]
-        responses = await asyncio.gather(*tasks)
+        return results
 
-        data = [parse_property(res) for res in responses if res]
-
-        # Step 4: Save the data
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        if not data:
-            logging.warning("No data was scraped. Nothing to save.")
-            return
-
-        if "json" in output_formats:
-            json_filename = f"out/idealista_properties_{timestamp}.json"
-            with open(json_filename, "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
-            logging.info(f"Data saved to {json_filename}")
-
-        if "csv" in output_formats:
-            csv_filename = f"out/idealista_properties_{timestamp}.csv"
-            fieldnames = [
-                "url",
-                "title",
-                "location",
-                "price",
-                "currency",
-                "rooms",
-                "size_sqm",
-            ]
-            with open(csv_filename, "w", newline="", encoding="utf-8") as f:
-                writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
-                writer.writeheader()
-                writer.writerows(data)
-            logging.info(f"Data saved to {csv_filename}")
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Scrape property listings from Idealista using Camoufox and HTTPX."
-    )
-    parser.add_argument(
-        "--url",
-        type=str,
-        default="https://www.idealista.com/venta-viviendas/madrid-madrid/",
-        help="Base URL for scraping properties.",
-    )
-    parser.add_argument(
-        "--delay",
-        type=float,
-        default=1.0,
-        help="Base delay between requests in seconds.",
-    )
-    parser.add_argument(
-        "--format",
-        type=str,
-        choices=["csv", "json", "both"],
-        default="both",
-        help="Output format.",
-    )
+async def main():
+    """Main function to run the scraper."""
+    parser = argparse.ArgumentParser(description='Rental property scraper with Camoufox')
+    parser.add_argument('--delay', type=float, default=2.0, help='Delay between requests (seconds)')
+    parser.add_argument('--header-refresh-requests', type=int, default=100, help='Refresh headers after N requests')
+    parser.add_argument('--max-retries', type=int, default=3, help='Maximum retry attempts')
+    parser.add_argument('--timeout', type=int, default=30, help='Request timeout (seconds)')
+    parser.add_argument('--urls', nargs='+', help='URLs to scrape')
+    parser.add_argument('--output', type=str, help='Output JSON file')
 
     args = parser.parse_args()
-    output_formats = ["csv", "json"] if args.format == "both" else [args.format]
 
-    # Ensure you have run 'playwright install' once in your terminal
-    asyncio.run(run(args.url, args.delay, output_formats))
+    # Create configuration
+    config = ScraperConfig(
+        delay=args.delay,
+        header_refresh_requests=args.header_refresh_requests,
+        max_retries=args.max_retries,
+        timeout=args.timeout
+    )
+
+    # Default test URLs if none provided
+    test_urls = args.urls or [
+        "https://httpbin.org/headers",
+        "https://httpbin.org/user-agent",
+        "https://httpbin.org/ip"
+    ]
+
+    logger.info(f"🚀 Starting scraper with {len(test_urls)} URLs")
+    logger.info(f"⚙️ Config: delay={config.delay}s, refresh_after={config.header_refresh_requests} requests")
+
+    try:
+        # Run the scraper
+        async with RentalScraper(config) as scraper:
+            results = await scraper.scrape_multiple_urls(test_urls)
+
+            logger.info(f"✅ Scraping completed! Processed {len(results)} URLs successfully")
+
+            # Output results
+            if args.output:
+                with open(args.output, 'w', encoding='utf-8') as f:
+                    json.dump(results, f, indent=2, ensure_ascii=False)
+                logger.info(f"💾 Results saved to {args.output}")
+            else:
+                # Print summary
+                print("\n" + "="*50)
+                print("SCRAPING RESULTS SUMMARY")
+                print("="*50)
+                for i, result in enumerate(results, 1):
+                    print(f"{i}. {result['url']}")
+                    print(f"   Status: {result['status_code']}")
+                    print(f"   Length: {result['content_length']} chars")
+                    print(f"   Title: {result.get('title', 'N/A')}")
+                    print()
+
+    except KeyboardInterrupt:
+        logger.info("🛑 Scraper interrupted by user")
+    except Exception as e:
+        logger.error(f"❌ Critical error: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    # Check if we need to initialize headers first
+    if len(sys.argv) == 1:
+        print("🔧 Running with default test URLs...")
+        print("Use --help for more options")
+
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("\n🛑 Interrupted by user")
+    except Exception as e:
+        print(f"❌ Fatal error: {e}")
+        sys.exit(1)
