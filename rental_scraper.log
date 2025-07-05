@@ -1,0 +1,22 @@
+2025-07-05 04:00:35,883 - INFO - 🚀 Starting scraper with 3 URLs
+2025-07-05 04:00:35,883 - INFO - ⚙️ Config: delay=5.0s, refresh_after=50 requests
+2025-07-05 04:00:35,883 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751680836s)
+2025-07-05 04:00:35,883 - INFO - 🚀 Launching Camoufox to generate session headers...
+2025-07-05 04:00:36,124 - ERROR - ❌ Camoufox header generation failed: Please install the geoip extra to use this feature: pip install camoufox[geoip]
+2025-07-05 04:00:36,124 - WARNING - 🔄 Using fallback headers
+2025-07-05 04:00:36,124 - INFO - ✅ Headers refreshed successfully
+2025-07-05 04:00:36,124 - INFO - 📊 Processing URL 1/3: https://httpbin.org/headers
+2025-07-05 04:00:36,124 - INFO - 🌐 Making GET request to https://httpbin.org/headers (attempt 1)
+2025-07-05 04:00:37,495 - INFO - ✅ Request successful: 200
+2025-07-05 04:00:37,495 - ERROR - ❌ Error scraping https://httpbin.org/headers: Connection closed
+2025-07-05 04:00:37,495 - INFO - ⏳ Waiting 5.2s before next request...
+2025-07-05 04:00:42,743 - INFO - 📊 Processing URL 2/3: https://httpbin.org/user-agent
+2025-07-05 04:00:42,743 - INFO - 🌐 Making GET request to https://httpbin.org/user-agent (attempt 1)
+2025-07-05 04:00:43,265 - INFO - ✅ Request successful: 200
+2025-07-05 04:00:43,265 - ERROR - ❌ Error scraping https://httpbin.org/user-agent: Connection closed
+2025-07-05 04:00:43,265 - INFO - ⏳ Waiting 5.5s before next request...
+2025-07-05 04:00:48,769 - INFO - 📊 Processing URL 3/3: https://httpbin.org/ip
+2025-07-05 04:00:48,769 - INFO - 🌐 Making GET request to https://httpbin.org/ip (attempt 1)
+2025-07-05 04:00:48,965 - INFO - ✅ Request successful: 200
+2025-07-05 04:00:48,965 - ERROR - ❌ Error scraping https://httpbin.org/ip: Connection closed
+2025-07-05 04:00:48,965 - INFO - ✅ Scraping completed! Processed 0 URLs successfully
