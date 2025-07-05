@@ -185,3 +185,53 @@
 2025-07-05 08:11:41,852 - INFO - ✅ Scraping completed! Processed 1 pages, extracted 30 listings
 2025-07-05 08:11:41,853 - INFO - 💾 Results saved to full_results.json
 2025-07-05 08:11:41,853 - INFO - 🏠 Listings saved to listings.json
+2025-07-05 08:30:02,367 - INFO - 🚀 Starting scraper with 1 URLs
+2025-07-05 08:30:02,367 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
+2025-07-05 08:30:02,367 - INFO - 📄 Pagination: max_pages=5, max_listings=150
+2025-07-05 08:30:02,367 - INFO - 🔍 Extract listings: True
+2025-07-05 08:30:02,367 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751697002s)
+2025-07-05 08:30:02,367 - INFO - 🚀 Launching Camoufox to generate session headers...
+2025-07-05 08:30:06,416 - INFO - ✅ Successfully generated session headers
+2025-07-05 08:30:06,416 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0
+2025-07-05 08:30:06,789 - INFO - ✅ Headers refreshed successfully
+2025-07-05 08:30:06,789 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
+2025-07-05 08:30:06,789 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-viviendas/segovia-segovia/
+2025-07-05 08:30:06,789 - INFO - 📄 Scraping page 1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
+2025-07-05 08:30:06,789 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/ (attempt 1)
+2025-07-05 08:30:07,343 - INFO - ✅ Request successful: 200
+2025-07-05 08:30:07,434 - INFO - 📋 Extracted 30 listings from page
+2025-07-05 08:30:07,434 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/: 335105 chars, 30 listings
+2025-07-05 08:30:07,434 - INFO - 🏁 No more pages found or reached duplicate URL
+2025-07-05 08:30:07,434 - INFO - ✅ Pagination complete: 1 pages, 30 total listings
+2025-07-05 08:30:07,434 - INFO - ✅ Scraping completed! Processed 1 pages, extracted 30 listings
+2025-07-05 08:30:07,435 - INFO - 💾 Results saved to full_results.json
+2025-07-05 08:30:07,435 - INFO - 🏠 Listings saved to listings.json
+2025-07-05 08:32:30,343 - INFO - 🚀 Starting scraper with 1 URLs
+2025-07-05 08:32:30,344 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
+2025-07-05 08:32:30,344 - INFO - 📄 Pagination: max_pages=5, max_listings=150
+2025-07-05 08:32:30,344 - INFO - 🔍 Extract listings: True
+2025-07-05 08:32:30,344 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751697150s)
+2025-07-05 08:32:30,344 - INFO - 🚀 Launching Camoufox to generate session headers...
+2025-07-05 08:32:34,577 - INFO - ✅ Successfully generated session headers
+2025-07-05 08:32:34,577 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0
+2025-07-05 08:32:34,962 - INFO - ✅ Headers refreshed successfully
+2025-07-05 08:32:34,962 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
+2025-07-05 08:32:34,962 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-viviendas/segovia-segovia/
+2025-07-05 08:32:34,962 - INFO - 📄 Scraping page 1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
+2025-07-05 08:32:34,962 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/ (attempt 1)
+2025-07-05 08:32:35,447 - INFO - ✅ Request successful: 200
+2025-07-05 08:32:35,507 - INFO - 📋 Extracted 30 listings from page
+2025-07-05 08:32:35,507 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/: 335158 chars, 30 listings
+2025-07-05 08:32:35,508 - INFO - ⏳ Waiting 6.4s before next page...
+2025-07-05 08:32:41,882 - INFO - 📄 Scraping page 2: https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-2.htm
+2025-07-05 08:32:41,882 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-2.htm (attempt 1)
+2025-07-05 08:32:42,416 - INFO - ✅ Request successful: 200
+2025-07-05 08:32:42,422 - INFO - 📋 Extracted 30 listings from page
+2025-07-05 08:32:42,423 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-2.htm: 331384 chars, 30 listings
+2025-07-05 08:32:42,424 - INFO - ⏳ Waiting 6.2s before next page...
+2025-07-05 08:32:48,614 - INFO - 📄 Scraping page 3: https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-3.htm
+2025-07-05 08:32:48,614 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-3.htm (attempt 1)
+2025-07-05 08:32:48,922 - INFO - ✅ Request successful: 200
+2025-07-05 08:32:48,959 - INFO - 📋 Extracted 30 listings from page
+2025-07-05 08:32:48,959 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-3.htm: 326881 chars, 30 listings
+2025-07-05 08:32:48,960 - INFO - ⏳ Waiting 6.0s before next page...
