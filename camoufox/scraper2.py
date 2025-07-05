@@ -72,7 +72,7 @@ class HeaderManager:
             async with AsyncCamoufox(
                 headless=True,
                 humanize=True,
-                os="linux",
+                os=random.choice(["linux","macos", "windows"]),
                 block_images=True,
                 enable_cache=False,
                 window=(1920, 1080),
@@ -82,7 +82,7 @@ class HeaderManager:
 
                 # Navigate to a test page to generate realistic headers
                 await page.goto(
-                    "https://httpbin.org/headers", wait_until="domcontentloaded"
+                    "https://idealista.com", wait_until="domcontentloaded" # "https://httpbin.org/headers"
                 )
                 await page.wait_for_timeout(2000)  # Wait 2 seconds for full load
 
