@@ -12,7 +12,7 @@ from datetime import datetime
 import logging
 import os
 import camoufox
-from camoufox.pyplaywright.async_api import BrowserContext
+from patchright.async_api import BrowserContext
 
 # --- Logging and Output Setup ---
 logging.basicConfig(
