@@ -1,253 +1,50 @@
-2025-07-05 04:00:35,883 - INFO - 🚀 Starting scraper with 3 URLs
-2025-07-05 04:00:35,883 - INFO - ⚙️ Config: delay=5.0s, refresh_after=50 requests
-2025-07-05 04:00:35,883 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751680836s)
-2025-07-05 04:00:35,883 - INFO - 🚀 Launching Camoufox to generate session headers...
-2025-07-05 04:00:36,124 - ERROR - ❌ Camoufox header generation failed: Please install the geoip extra to use this feature: pip install camoufox[geoip]
-2025-07-05 04:00:36,124 - WARNING - 🔄 Using fallback headers
-2025-07-05 04:00:36,124 - INFO - ✅ Headers refreshed successfully
-2025-07-05 04:00:36,124 - INFO - 📊 Processing URL 1/3: https://httpbin.org/headers
-2025-07-05 04:00:36,124 - INFO - 🌐 Making GET request to https://httpbin.org/headers (attempt 1)
-2025-07-05 04:00:37,495 - INFO - ✅ Request successful: 200
-2025-07-05 04:00:37,495 - ERROR - ❌ Error scraping https://httpbin.org/headers: Connection closed
-2025-07-05 04:00:37,495 - INFO - ⏳ Waiting 5.2s before next request...
-2025-07-05 04:00:42,743 - INFO - 📊 Processing URL 2/3: https://httpbin.org/user-agent
-2025-07-05 04:00:42,743 - INFO - 🌐 Making GET request to https://httpbin.org/user-agent (attempt 1)
-2025-07-05 04:00:43,265 - INFO - ✅ Request successful: 200
-2025-07-05 04:00:43,265 - ERROR - ❌ Error scraping https://httpbin.org/user-agent: Connection closed
-2025-07-05 04:00:43,265 - INFO - ⏳ Waiting 5.5s before next request...
-2025-07-05 04:00:48,769 - INFO - 📊 Processing URL 3/3: https://httpbin.org/ip
-2025-07-05 04:00:48,769 - INFO - 🌐 Making GET request to https://httpbin.org/ip (attempt 1)
-2025-07-05 04:00:48,965 - INFO - ✅ Request successful: 200
-2025-07-05 04:00:48,965 - ERROR - ❌ Error scraping https://httpbin.org/ip: Connection closed
-2025-07-05 04:00:48,965 - INFO - ✅ Scraping completed! Processed 0 URLs successfully
-2025-07-05 05:34:08,376 - INFO - 🚀 Starting scraper with 3 URLs
-2025-07-05 05:34:08,376 - INFO - ⚙️ Config: delay=5.0s, refresh_after=50 requests
-2025-07-05 05:34:08,376 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751686448s)
-2025-07-05 05:34:08,376 - INFO - 🚀 Launching Camoufox to generate session headers...
-2025-07-05 05:34:12,852 - INFO - ✅ Successfully generated session headers
-2025-07-05 05:34:12,853 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0
-2025-07-05 05:34:13,221 - INFO - ✅ Headers refreshed successfully
-2025-07-05 05:34:13,221 - INFO - 📊 Processing URL 1/3: https://httpbin.org/headers
-2025-07-05 05:34:13,221 - INFO - 🌐 Making GET request to https://httpbin.org/headers (attempt 1)
-2025-07-05 05:34:13,762 - INFO - ✅ Request successful: 200
-2025-07-05 05:34:13,762 - INFO - 📄 Scraped https://httpbin.org/headers: 587 chars
-2025-07-05 05:34:13,762 - INFO - ⏳ Waiting 6.0s before next request...
-2025-07-05 05:34:19,744 - INFO - 📊 Processing URL 2/3: https://httpbin.org/user-agent
-2025-07-05 05:34:19,744 - INFO - 🌐 Making GET request to https://httpbin.org/user-agent (attempt 1)
-2025-07-05 05:34:19,986 - INFO - ✅ Request successful: 200
-2025-07-05 05:34:19,986 - INFO - 📄 Scraped https://httpbin.org/user-agent: 93 chars
-2025-07-05 05:34:19,986 - INFO - ⏳ Waiting 5.7s before next request...
-2025-07-05 05:34:25,675 - INFO - 📊 Processing URL 3/3: https://httpbin.org/ip
-2025-07-05 05:34:25,675 - INFO - 🌐 Making GET request to https://httpbin.org/ip (attempt 1)
-2025-07-05 05:34:26,025 - INFO - ✅ Request successful: 200
-2025-07-05 05:34:26,025 - INFO - 📄 Scraped https://httpbin.org/ip: 33 chars
-2025-07-05 05:34:26,025 - INFO - ✅ Scraping completed! Processed 3 URLs successfully
-2025-07-05 05:36:27,000 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 05:36:27,000 - INFO - ⚙️ Config: delay=5.0s, refresh_after=50 requests
-2025-07-05 05:36:27,000 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751686587s)
-2025-07-05 05:36:27,000 - INFO - 🚀 Launching Camoufox to generate session headers...
-2025-07-05 05:36:31,517 - INFO - ✅ Successfully generated session headers
-2025-07-05 05:36:31,517 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0
-2025-07-05 05:36:32,354 - INFO - ✅ Headers refreshed successfully
-2025-07-05 05:36:32,354 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 05:36:32,354 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/ (attempt 1)
-2025-07-05 05:36:33,169 - INFO - ✅ Request successful: 200
-2025-07-05 05:36:33,181 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/: 335158 chars
-2025-07-05 05:36:33,181 - INFO - ✅ Scraping completed! Processed 1 URLs successfully
-2025-07-05 05:41:22,952 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 05:41:22,952 - INFO - ⚙️ Config: delay=5.0s, refresh_after=50 requests
-2025-07-05 05:41:22,952 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 05:41:22,952 - INFO - 🔍 Extract listings: True
-2025-07-05 05:41:22,952 - ERROR - ❌ Critical error: name 'RentalScraper' is not defined
-2025-07-05 05:42:49,346 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 05:42:49,346 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
-2025-07-05 05:42:49,346 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 05:42:49,346 - INFO - 🔍 Extract listings: True
-2025-07-05 05:42:49,346 - ERROR - ❌ Critical error: name 'RentalScraper' is not defined
-2025-07-05 05:43:33,543 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 05:43:33,543 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
-2025-07-05 05:43:33,543 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 05:43:33,543 - INFO - 🔍 Extract listings: True
-2025-07-05 05:43:33,543 - ERROR - ❌ Critical error: 'ScraperConfig' object does not support the asynchronous context manager protocol
-2025-07-05 05:45:33,537 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 05:45:33,537 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
-2025-07-05 05:45:33,537 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 05:45:33,538 - INFO - 🔍 Extract listings: True
-2025-07-05 05:45:33,538 - ERROR - ❌ Critical error: AsyncCamoufox.__init__() takes 1 positional argument but 2 were given
-2025-07-05 05:46:28,262 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 05:46:28,262 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
-2025-07-05 05:46:28,262 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 05:46:28,262 - INFO - 🔍 Extract listings: True
-2025-07-05 05:46:28,262 - ERROR - ❌ Critical error: AsyncCamoufox.__init__() takes 1 positional argument but 2 were given
-2025-07-05 05:47:03,387 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 05:47:03,387 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
-2025-07-05 05:47:03,387 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 05:47:03,387 - INFO - 🔍 Extract listings: True
-2025-07-05 05:47:03,387 - ERROR - ❌ Critical error: AsyncCamoufox.__init__() takes 1 positional argument but 2 were given
-2025-07-05 05:48:46,637 - INFO - 🚀 Starting scraper with 3 URLs
-2025-07-05 05:48:46,637 - INFO - ⚙️ Config: delay=2.0s, refresh_after=100 requests
-2025-07-05 05:48:46,637 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751687327s)
-2025-07-05 05:48:46,637 - INFO - 🚀 Launching Camoufox to generate session headers...
-2025-07-05 05:48:59,860 - INFO - 🚀 Starting scraper with 3 URLs
-2025-07-05 05:48:59,860 - INFO - ⚙️ Config: delay=2.0s, refresh_after=100 requests
-2025-07-05 05:48:59,860 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 05:48:59,860 - INFO - 🔍 Extract listings: True
-2025-07-05 05:48:59,860 - ERROR - ❌ Critical error: AsyncCamoufox.__init__() takes 1 positional argument but 2 were given
-2025-07-05 05:52:00,997 - INFO - 🚀 Starting scraper with 3 URLs
-2025-07-05 05:52:00,997 - INFO - ⚙️ Config: delay=2.0s, refresh_after=100 requests
-2025-07-05 05:52:00,997 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 05:52:00,997 - INFO - 🔍 Extract listings: True
-2025-07-05 05:52:00,997 - ERROR - ❌ Critical error: AsyncCamoufox.__init__() takes 1 positional argument but 2 were given
-2025-07-05 05:54:15,056 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 05:54:15,056 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
-2025-07-05 05:54:15,056 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 05:54:15,056 - INFO - 🔍 Extract listings: True
-2025-07-05 05:54:15,057 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751687655s)
-2025-07-05 05:54:15,057 - INFO - 🚀 Launching Camoufox to generate session headers...
-2025-07-05 05:54:15,057 - ERROR - ❌ Camoufox header generation failed: RentalScraper.__init__() got an unexpected keyword argument 'headless'
-2025-07-05 05:54:15,057 - WARNING - 🔄 Using fallback headers
-2025-07-05 05:54:15,057 - INFO - ✅ Headers refreshed successfully
-2025-07-05 05:54:15,057 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 05:54:15,057 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 05:54:15,157 - ERROR - ❌ Critical error: 'RentalScraper' object has no attribute 'all_listings'
-2025-07-05 05:56:04,545 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 05:56:04,545 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
-2025-07-05 05:56:04,545 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 05:56:04,545 - INFO - 🔍 Extract listings: True
-2025-07-05 05:56:04,545 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751687765s)
-2025-07-05 05:56:04,545 - INFO - 🚀 Launching Camoufox to generate session headers...
-2025-07-05 05:56:09,346 - INFO - ✅ Successfully generated session headers
-2025-07-05 05:56:09,346 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0
-2025-07-05 05:56:09,732 - INFO - ✅ Headers refreshed successfully
-2025-07-05 05:56:09,732 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 05:56:09,732 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 05:56:09,833 - ERROR - ❌ Critical error: 'RentalScraper' object has no attribute 'all_listings'
-2025-07-05 05:57:50,843 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 05:57:50,843 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
-2025-07-05 05:57:50,843 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 05:57:50,843 - INFO - 🔍 Extract listings: True
-2025-07-05 05:57:50,843 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751687871s)
-2025-07-05 05:57:50,843 - INFO - 🚀 Launching Camoufox to generate session headers...
-2025-07-05 05:57:55,122 - INFO - ✅ Successfully generated session headers
-2025-07-05 05:57:55,122 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0
-2025-07-05 05:57:55,495 - INFO - ✅ Headers refreshed successfully
-2025-07-05 05:57:55,495 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 05:57:55,495 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 05:57:55,495 - INFO - 📄 Scraping page 1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 05:57:55,495 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/ (attempt 1)
-2025-07-05 05:57:56,224 - INFO - ✅ Request successful: 200
-2025-07-05 05:57:56,246 - INFO - 📋 Extracted 30 listings from page
-2025-07-05 05:57:56,247 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/: 335211 chars, 30 listings
-2025-07-05 05:57:56,247 - INFO - 🏁 No more pages found or reached duplicate URL
-2025-07-05 05:57:56,247 - INFO - ✅ Pagination complete: 1 pages, 30 total listings
-2025-07-05 05:57:56,247 - INFO - ✅ Scraping completed! Processed 1 pages, extracted 30 listings
-2025-07-05 05:57:56,247 - INFO - 💾 Results saved to full_results.json
-2025-07-05 05:57:56,248 - INFO - 🏠 Listings saved to listings.json
-2025-07-05 08:10:12,223 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 08:10:12,223 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
-2025-07-05 08:10:12,223 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 08:10:12,223 - INFO - 🔍 Extract listings: True
-2025-07-05 08:10:12,223 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751695812s)
-2025-07-05 08:10:12,223 - INFO - 🚀 Launching Camoufox to generate session headers...
-2025-07-05 08:10:16,825 - INFO - ✅ Successfully generated session headers
-2025-07-05 08:10:16,825 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0
-2025-07-05 08:10:17,326 - INFO - ✅ Headers refreshed successfully
-2025-07-05 08:10:17,326 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 08:10:17,326 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 08:10:17,326 - INFO - 📄 Scraping page 1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 08:10:17,326 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/ (attempt 1)
-2025-07-05 08:10:17,714 - INFO - ✅ Request successful: 200
-2025-07-05 08:10:17,813 - INFO - 📋 Extracted 30 listings from page
-2025-07-05 08:10:17,813 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/: 335211 chars, 30 listings
-2025-07-05 08:10:17,813 - INFO - 🏁 No more pages found or reached duplicate URL
-2025-07-05 08:10:17,813 - INFO - ✅ Pagination complete: 1 pages, 30 total listings
-2025-07-05 08:10:17,813 - INFO - ✅ Scraping completed! Processed 1 pages, extracted 30 listings
-2025-07-05 08:10:17,814 - INFO - 💾 Results saved to full_results.json
-2025-07-05 08:10:17,814 - INFO - 🏠 Listings saved to listings.json
-2025-07-05 08:11:35,262 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 08:11:35,262 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
-2025-07-05 08:11:35,262 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 08:11:35,262 - INFO - 🔍 Extract listings: True
-2025-07-05 08:11:35,262 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751695895s)
-2025-07-05 08:11:35,262 - INFO - 🚀 Launching Camoufox to generate session headers...
-2025-07-05 08:11:40,851 - INFO - ✅ Successfully generated session headers
-2025-07-05 08:11:40,851 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0
-2025-07-05 08:11:41,346 - INFO - ✅ Headers refreshed successfully
-2025-07-05 08:11:41,346 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 08:11:41,346 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 08:11:41,346 - INFO - 📄 Scraping page 1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 08:11:41,346 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/ (attempt 1)
-2025-07-05 08:11:41,794 - INFO - ✅ Request successful: 200
-2025-07-05 08:11:41,851 - INFO - 📋 Extracted 30 listings from page
-2025-07-05 08:11:41,851 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/: 335211 chars, 30 listings
-2025-07-05 08:11:41,852 - INFO - 🏁 No more pages found or reached duplicate URL
-2025-07-05 08:11:41,852 - INFO - ✅ Pagination complete: 1 pages, 30 total listings
-2025-07-05 08:11:41,852 - INFO - ✅ Scraping completed! Processed 1 pages, extracted 30 listings
-2025-07-05 08:11:41,853 - INFO - 💾 Results saved to full_results.json
-2025-07-05 08:11:41,853 - INFO - 🏠 Listings saved to listings.json
-2025-07-05 08:30:02,367 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 08:30:02,367 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
-2025-07-05 08:30:02,367 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 08:30:02,367 - INFO - 🔍 Extract listings: True
-2025-07-05 08:30:02,367 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751697002s)
-2025-07-05 08:30:02,367 - INFO - 🚀 Launching Camoufox to generate session headers...
-2025-07-05 08:30:06,416 - INFO - ✅ Successfully generated session headers
-2025-07-05 08:30:06,416 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0
-2025-07-05 08:30:06,789 - INFO - ✅ Headers refreshed successfully
-2025-07-05 08:30:06,789 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 08:30:06,789 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 08:30:06,789 - INFO - 📄 Scraping page 1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 08:30:06,789 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/ (attempt 1)
-2025-07-05 08:30:07,343 - INFO - ✅ Request successful: 200
-2025-07-05 08:30:07,434 - INFO - 📋 Extracted 30 listings from page
-2025-07-05 08:30:07,434 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/: 335105 chars, 30 listings
-2025-07-05 08:30:07,434 - INFO - 🏁 No more pages found or reached duplicate URL
-2025-07-05 08:30:07,434 - INFO - ✅ Pagination complete: 1 pages, 30 total listings
-2025-07-05 08:30:07,434 - INFO - ✅ Scraping completed! Processed 1 pages, extracted 30 listings
-2025-07-05 08:30:07,435 - INFO - 💾 Results saved to full_results.json
-2025-07-05 08:30:07,435 - INFO - 🏠 Listings saved to listings.json
-2025-07-05 08:32:30,343 - INFO - 🚀 Starting scraper with 1 URLs
-2025-07-05 08:32:30,344 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
-2025-07-05 08:32:30,344 - INFO - 📄 Pagination: max_pages=5, max_listings=150
-2025-07-05 08:32:30,344 - INFO - 🔍 Extract listings: True
-2025-07-05 08:32:30,344 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751697150s)
-2025-07-05 08:32:30,344 - INFO - 🚀 Launching Camoufox to generate session headers...
-2025-07-05 08:32:34,577 - INFO - ✅ Successfully generated session headers
-2025-07-05 08:32:34,577 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0
-2025-07-05 08:32:34,962 - INFO - ✅ Headers refreshed successfully
-2025-07-05 08:32:34,962 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 08:32:34,962 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 08:32:34,962 - INFO - 📄 Scraping page 1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
-2025-07-05 08:32:34,962 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/ (attempt 1)
-2025-07-05 08:32:35,447 - INFO - ✅ Request successful: 200
-2025-07-05 08:32:35,507 - INFO - 📋 Extracted 30 listings from page
-2025-07-05 08:32:35,507 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/: 335158 chars, 30 listings
-2025-07-05 08:32:35,508 - INFO - ⏳ Waiting 6.4s before next page...
-2025-07-05 08:32:41,882 - INFO - 📄 Scraping page 2: https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-2.htm
-2025-07-05 08:32:41,882 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-2.htm (attempt 1)
-2025-07-05 08:32:42,416 - INFO - ✅ Request successful: 200
-2025-07-05 08:32:42,422 - INFO - 📋 Extracted 30 listings from page
-2025-07-05 08:32:42,423 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-2.htm: 331384 chars, 30 listings
-2025-07-05 08:32:42,424 - INFO - ⏳ Waiting 6.2s before next page...
-2025-07-05 08:32:48,614 - INFO - 📄 Scraping page 3: https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-3.htm
-2025-07-05 08:32:48,614 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-3.htm (attempt 1)
-2025-07-05 08:32:48,922 - INFO - ✅ Request successful: 200
-2025-07-05 08:32:48,959 - INFO - 📋 Extracted 30 listings from page
-2025-07-05 08:32:48,959 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-3.htm: 326881 chars, 30 listings
-2025-07-05 08:32:48,960 - INFO - ⏳ Waiting 6.0s before next page...
-2025-07-05 08:32:54,998 - INFO - 📄 Scraping page 4: https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-4.htm
-2025-07-05 08:32:54,998 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-4.htm (attempt 1)
-2025-07-05 08:32:55,255 - INFO - ✅ Request successful: 200
-2025-07-05 08:32:55,316 - INFO - 📋 Extracted 30 listings from page
-2025-07-05 08:32:55,316 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-4.htm: 325856 chars, 30 listings
-2025-07-05 08:32:55,317 - INFO - ⏳ Waiting 5.9s before next page...
-2025-07-05 08:33:01,237 - INFO - 📄 Scraping page 5: https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-5.htm
-2025-07-05 08:33:01,237 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-5.htm (attempt 1)
-2025-07-05 08:33:01,583 - INFO - ✅ Request successful: 200
-2025-07-05 08:33:01,603 - INFO - 📋 Extracted 30 listings from page
-2025-07-05 08:33:01,603 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-5.htm: 326553 chars, 30 listings
-2025-07-05 08:33:01,604 - INFO - ⏳ Waiting 5.1s before next page...
-2025-07-05 08:33:06,755 - INFO - ✅ Pagination complete: Scraped 5 pages, 150 total listings
-2025-07-05 08:33:06,755 - INFO - ✅ Scraping completed! Processed 5 pages, extracted 150 listings
-2025-07-05 08:33:06,757 - INFO - 💾 Page data saved to full_results.json
-2025-07-05 08:33:06,758 - INFO - 🏠 Listings saved to listings.json
+2025-07-05 09:00:14,736 - INFO - 🚀 Starting scraper with 1 URLs
+2025-07-05 09:00:14,736 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
+2025-07-05 09:00:14,736 - INFO - 📄 Pagination: max_pages=5, max_listings=150
+2025-07-05 09:00:14,736 - INFO - 🔍 Extract listings: True
+2025-07-05 09:00:14,737 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751698815s)
+2025-07-05 09:00:14,737 - INFO - 🚀 Launching Camoufox to generate session headers...
+2025-07-05 09:00:19,243 - INFO - ✅ Successfully generated session headers
+2025-07-05 09:00:19,244 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:135.0) Gecko/20100101 Firefox/135.0
+2025-07-05 09:00:19,611 - INFO - ✅ Headers refreshed successfully
+2025-07-05 09:00:19,631 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
+2025-07-05 09:00:19,631 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-viviendas/segovia-segovia/
+2025-07-05 09:00:19,631 - INFO - 📄 Scraping page 1: https://www.idealista.com/alquiler-viviendas/segovia-segovia/
+2025-07-05 09:00:19,631 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/ (attempt 1)
+2025-07-05 09:00:20,205 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-viviendas/segovia-segovia/ "HTTP/2 200 OK"
+2025-07-05 09:00:20,276 - INFO - ✅ Request successful: 200
+2025-07-05 09:00:20,281 - INFO - 📋 Extracted 30 listings from page
+2025-07-05 09:00:20,281 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/: 335094 chars, 30 listings
+2025-07-05 09:00:20,282 - INFO - ⏳ Waiting 6.1s before next page...
+2025-07-05 09:00:26,393 - INFO - 📄 Scraping page 2: https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-2.htm
+2025-07-05 09:00:26,393 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-2.htm (attempt 1)
+2025-07-05 09:00:26,952 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-2.htm "HTTP/2 200 OK"
+2025-07-05 09:00:26,974 - INFO - ✅ Request successful: 200
+2025-07-05 09:00:26,979 - INFO - 📋 Extracted 30 listings from page
+2025-07-05 09:00:26,979 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-2.htm: 331631 chars, 30 listings
+2025-07-05 09:00:26,980 - INFO - ⏳ Waiting 5.9s before next page...
+2025-07-05 09:00:32,856 - INFO - 📄 Scraping page 3: https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-3.htm
+2025-07-05 09:00:32,856 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-3.htm (attempt 1)
+2025-07-05 09:00:33,232 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-3.htm "HTTP/2 200 OK"
+2025-07-05 09:00:33,399 - INFO - ✅ Request successful: 200
+2025-07-05 09:00:33,403 - INFO - 📋 Extracted 30 listings from page
+2025-07-05 09:00:33,403 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-3.htm: 327082 chars, 30 listings
+2025-07-05 09:00:33,404 - INFO - ⏳ Waiting 5.7s before next page...
+2025-07-05 09:00:39,130 - INFO - 📄 Scraping page 4: https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-4.htm
+2025-07-05 09:00:39,130 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-4.htm (attempt 1)
+2025-07-05 09:00:39,601 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-4.htm "HTTP/2 200 OK"
+2025-07-05 09:00:39,619 - INFO - ✅ Request successful: 200
+2025-07-05 09:00:39,623 - INFO - 📋 Extracted 30 listings from page
+2025-07-05 09:00:39,623 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-4.htm: 326205 chars, 30 listings
+2025-07-05 09:00:39,624 - INFO - ⏳ Waiting 5.2s before next page...
+2025-07-05 09:00:44,796 - INFO - 📄 Scraping page 5: https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-5.htm
+2025-07-05 09:00:44,797 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-5.htm (attempt 1)
+2025-07-05 09:00:45,450 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-5.htm "HTTP/2 200 OK"
+2025-07-05 09:00:45,475 - INFO - ✅ Request successful: 200
+2025-07-05 09:00:45,480 - INFO - 📋 Extracted 30 listings from page
+2025-07-05 09:00:45,480 - INFO - 📄 Scraped https://www.idealista.com/alquiler-viviendas/segovia-segovia/pagina-5.htm: 326576 chars, 30 listings
+2025-07-05 09:00:45,481 - INFO - ⏳ Waiting 6.6s before next page...
+2025-07-05 09:00:52,065 - INFO - ✅ Pagination complete: Scraped 5 pages, 150 total listings
+2025-07-05 09:00:52,065 - INFO - ✅ Scraping completed! Processed 5 pages, extracted 150 listings
+2025-07-05 09:00:52,067 - INFO - 💾 Page data saved to full_results.json
+2025-07-05 09:00:52,068 - INFO - 🏠 Listings saved to listings.json
