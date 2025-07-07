@@ -36,7 +36,7 @@ To scrape all active capitals for rooms:
 python scraper_new.py habitacion
 ```
 
-# 2. Scraping Custom URLs
+## 2. Scraping Custom URLs
 
 The current version of the scraper is not designed to accept custom, one-off URLs from the command line.
 Its logic is tightly integrated with the `DatabaseManager` to:
@@ -45,7 +45,7 @@ Maintain state (`get_scraper_status`, `update_scraper_status`) to ensure it can 
 Associate scraped listings with a capital_id from the database.
 To scrape a specific city or URL, the recommended approach is to modify the is_active flag for that city in your capitals database table. This allows you to control the scraping targets without changing the code.
 
-# 3. Configuration Parameters
+## 3. Configuration Parameters
 
 The scraper's behavior can be tweaked by modifying the parameters within the ScraperConfig class in the main script (scraper_new.py). To change these values, you must edit the file directly.
 
@@ -84,3 +84,29 @@ postgrest_url (Default: http://localhost:3000):
 ```
 
 The URL for your PostgREST database API. It's recommended to set this using the POSTGREST_URL environment variable instead of changing it in the code.
+
+## 4. Fully fledged example
+
+An example of a complex customized run.
+
+- For a tailored list of urls
+
+```bash
+python -u -m services.idealista_scraper.main \
+            --postgrest-url "http://localhost:3001" \
+            --idealista-base-url "https://www.idealista.com/alquiler-viviendas/" \
+            --scraper-type "viviendas" \
+            --delay 7 \
+            --max-pages 1
+```
+
+- A full loop over all Spain capitals
+
+```bash
+python -u -m services.idealista_scraper.main \
+            --postgrest-url "http://localhost:3001" \
+            --idealista-base-url "https://www.idealista.com/alquiler-viviendas/" \
+            --scraper-type "viviendas" \
+            --delay 7 \
+            --max-pages 1
+```

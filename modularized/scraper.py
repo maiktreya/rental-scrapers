@@ -130,10 +130,19 @@ async def main():
         help="The type of property to scrape ('viviendas' or 'habitacion').",
     )
     args = parser.parse_args()
-    config = ScraperConfig()
+    # Initialize ScraperConfig with parsed arguments
+    parser.add_argument("--delay", type=float, default=5.0, help="Delay between requests (seconds)")
+    parser.add_argument("--header-refresh-requests", type=int, default=100, help="Refresh headers after N requests")
+    parser.add_argument("--max-retries", type=int, default=3, help="Maximum retry attempts")
+    parser.add_argument("--timeout", type=int, default=30, help="Request timeout (seconds)")
+    parser.add_argument("--max-pages", type=int, default=50, help="Maximum pages to scrape per URL")
+    args = parser.parse_args()
+    # Initialize ScraperConfig with parsed arguments
+    config = ScraperConfig.from_args(args)
 
-    async with httpx.AsyncClient(http2=True, follow_redirects=True) as session:
-        db_manager = DatabaseManager(config.postgrest_url, session)
+    # Centralize HTTP client management
+    async with httpx.AsyncClient(http2=True, follow_redirects=True) as db_client: # Renamed to db_client for clarity
+        db_manager = DatabaseManager(config.postgrest_url, db_client)
 
         capitals = await db_manager.fetch_active_capitals()
         if not capitals:
@@ -157,7 +166,7 @@ async def main():
             await db_manager.update_scraper_status(args.property_type, 0)
             start_index = 0
 
-        scraper = RentalScraper(config, db_manager)
+        scraper = RentalScraper(config, db_manager) # No longer passing client
         for i in range(start_index, len(capitals)):
             capital = capitals[i]
             capital_id = capital["id"]
