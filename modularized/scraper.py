@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """
-The main orchestration module for the rental property scraper.
-This script coordinates fetching pages, managing state via a database,
-and saving data, delegating tasks to specialized modules.
+The main orchestration module with critical bug fixes.
 """
 
 import asyncio
@@ -10,14 +8,14 @@ import logging
 import argparse
 import random
 from typing import Optional
-import httpx
 import sys
-
-# Correctly import from sibling modules
+import re
+import httpx
+# Import from new config module
+from .config import ScraperConfig
 from .base_headers import HeaderManager
 from .parser import IdealistaParser
 from .database import DatabaseManager
-from .config import ScraperConfig
 
 # --- CONFIGURATION AND LOGGING ---
 logging.basicConfig(
@@ -27,20 +25,24 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+
 class RentalScraper:
-    """Main scraper class integrating all features."""
+    """Main scraper class with critical fixes."""
 
     def __init__(self, config: ScraperConfig, db_manager: DatabaseManager):
         self.config = config
         self.db_manager = db_manager
-        # --- FIX: Correctly instantiate HeaderManager ---
-        # Pass the entire config object as expected by the __init__ method.
         self.header_manager = HeaderManager(config=config)
         self.parser = IdealistaParser()
-        self.client: Optional[httpx.AsyncClient] = db_manager.session
+        # Create dedicated HTTP client for scraping
+        self.client = httpx.AsyncClient(
+            http2=True,
+            follow_redirects=True,
+            timeout=config.timeout  # Proper float timeout
+        )
 
     async def make_request(self, url: str) -> Optional[str]:
-        """Makes an HTTP request and returns the HTML content."""
+        """Makes an HTTP request with proper error propagation."""
         headers = await self.header_manager.get_headers()
         for attempt in range(self.config.max_retries):
             try:
@@ -59,27 +61,34 @@ class RentalScraper:
                     await self.header_manager.refresh_headers()
             except httpx.RequestError as e:
                 logger.error(f"❌ Request error: {e} (attempt {attempt + 1})")
+
             if attempt < self.config.max_retries - 1:
                 await asyncio.sleep(self.config.delay * (2**attempt))
-        return None
+
+        # Critical: Re-raise after max retries to avoid silent failures
+        raise Exception(f"Max retries exceeded for URL: {url}")
 
     async def scrape_target(
         self, capital_slug: str, property_type: str, capital_id: int
     ):
-        """Scrapes a single target (capital) with pagination."""
-        # --- IMPROVEMENT: Use f-string for cleaner URL formatting ---
+        """Scrapes a single target with robust URL handling."""
+        # Sanitize capital slug
+        sanitized_slug = re.sub(r'\s+', '-', capital_slug.strip()).lower()
+
         property_path = "habitaciones" if property_type == "habitacion" else "viviendas"
         base_url_template = (
-            f"https://www.idealista.com/alquiler-{property_path}/{capital_slug}/"
+            f"https://www.idealista.com/alquiler-{property_path}/{sanitized_slug}/"
         )
         current_url = base_url_template
         page_num = 1
 
         while current_url and page_num <= self.config.max_pages:
-            logger.info(
-                f"📄 Scraping page {page_num} for {capital_slug}: {current_url}"
-            )
-            content = await self.make_request(current_url)
+            try:
+                content = await self.make_request(current_url)
+            except Exception as e:
+                logger.error(f"🚨 Critical failure for {current_url}: {e}")
+                break
+
             if not content:
                 break
 
@@ -88,7 +97,7 @@ class RentalScraper:
             )
             if not listings:
                 logger.info(
-                    f"No listings found on page {page_num} for {capital_slug}. Moving to next capital."
+                    f"No listings found on page {page_num} for {sanitized_slug}. Moving to next capital."
                 )
                 break
 
@@ -105,12 +114,12 @@ class RentalScraper:
                 logger.info(f"⏳ Waiting {jitter:.2f}s before next page...")
                 await asyncio.sleep(jitter)
             else:
-                logger.info(f"🏁 No more pages found for {capital_slug}.")
+                logger.info(f"🏁 No more pages found for {sanitized_slug}.")
                 break
 
 
 async def main():
-    """Main function to set up and run the scraper."""
+    """Main function with robust capital tracking."""
     parser = argparse.ArgumentParser(
         description="Professional-grade rental property scraper."
     )
@@ -130,17 +139,20 @@ async def main():
             logger.critical("No active capitals fetched from the database. Exiting.")
             return
 
+        # Get last processed ID
         last_processed_id = await db_manager.get_scraper_status(args.property_type)
 
+        # Find position in capitals list
         start_index = 0
         if last_processed_id > 0:
-            # Use a dictionary for efficient lookup
-            capital_map = {c["id"]: i for i, c in enumerate(capitals)}
-            if last_processed_id in capital_map:
-                start_index = capital_map[last_processed_id] + 1
+            # Find the index of the last processed capital
+            for i, capital in enumerate(capitals):
+                if capital["id"] == last_processed_id:
+                    start_index = i + 1
+                    break
 
         if start_index >= len(capitals):
-            logger.info("✅ All capitals have been processed. Resetting for next run.")
+            logger.info("✅ All capitals processed. Resetting for next run.")
             await db_manager.update_scraper_status(args.property_type, 0)
             start_index = 0
 
@@ -153,9 +165,13 @@ async def main():
             logger.info(
                 f"--- Processing capital {i+1}/{len(capitals)}: {capital_slug} (ID: {capital_id}) ---"
             )
-            await scraper.scrape_target(capital_slug, args.property_type, capital_id)
-
-            await db_manager.update_scraper_status(args.property_type, capital_id)
+            try:
+                await scraper.scrape_target(capital_slug, args.property_type, capital_id)
+                await db_manager.update_scraper_status(args.property_type, capital_id)
+            except Exception as e:
+                logger.error(f"🚨 Failed to process {capital_slug}: {e}")
+                # Move to next capital on failure
+                continue
 
     logger.info("🎉 Full scraping run completed successfully!")
 

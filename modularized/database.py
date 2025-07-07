@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-A dedicated module for interacting with the project's PostgREST database API.
-Handles fetching scraping targets, saving listings, and managing run status.
+Database module with fixed key mappings.
 """
 
 import logging
@@ -14,16 +13,9 @@ logger = logging.getLogger(__name__)
 
 
 class DatabaseManager:
-    """Manages all interactions with the PostgREST API."""
+    """Manages database interactions with correct field mappings."""
 
     def __init__(self, postgrest_url: str, session: httpx.AsyncClient):
-        """
-        Initializes the DatabaseManager.
-
-        Args:
-            postgrest_url (str): The base URL of the PostgREST API.
-            session (httpx.AsyncClient): A shared httpx client session.
-        """
         if not postgrest_url:
             raise ValueError("PostgREST URL cannot be empty.")
         self.postgrest_url = postgrest_url
@@ -57,10 +49,7 @@ class DatabaseManager:
     async def save_listing(
         self, listing_data: Dict[str, Any], property_type: str, capital_id: int
     ):
-        """
-        Saves a single listing's static data and its time-series observation data separately.
-        """
-        # --- FIX: Determine endpoint based on property type ---
+        # Determine endpoint
         table_name = "listings" if property_type == "viviendas" else "rooms"
         endpoint = urljoin(self.postgrest_url, f"/{table_name}")
         headers = {
@@ -68,12 +57,12 @@ class DatabaseManager:
             "Prefer": "resolution=ignore-duplicates",
         }
 
-        # --- FIX: Build payload with correct keys matching the parser and models ---
+        # Build payload with correct keys
         static_listing_payload = {
             "url": listing_data.get("url"),
             "title": listing_data.get("title"),
             "location": listing_data.get("location"),
-            "property_type": listing_data.get("property_type"),
+            "property_type": property_type,  # Use parameter, not scraped value
             "advertiser_type": listing_data.get("advertiser_type"),
             "advertiser_name": listing_data.get("advertiser_name"),
             "capital_id": capital_id,
@@ -88,7 +77,7 @@ class DatabaseManager:
                 "available_from_date"
             )
 
-        # Remove any keys with None values to keep the payload clean
+        # Remove None values
         static_listing_payload = {
             k: v for k, v in static_listing_payload.items() if v is not None
         }
@@ -99,25 +88,19 @@ class DatabaseManager:
             )
 
             if response.status_code == 201:
-                logger.debug(
-                    f"Successfully inserted new listing: {listing_data.get('url')}"
-                )
-            # A 409 Conflict is expected and ignored due to the "Prefer" header
-            elif response.status_code != 409:
+                logger.debug(f"✅ Saved listing: {listing_data.get('url')}")
+            elif response.status_code != 409:  # Ignore duplicates
                 response.raise_for_status()
 
-            # Save the observation data regardless of whether the static data was new or a duplicate
+            # Save observation with scraped_at
             await self._save_observation(listing_data, property_type)
 
         except httpx.HTTPStatusError as e:
-            logger.error(
-                f"HTTP error saving listing {listing_data.get('url')}: {e.response.status_code} - {e.response.text}"
-            )
+            logger.error(f"❌ HTTP error saving listing: {e.response.text}")
         except httpx.RequestError as e:
-            logger.error(f"Network error saving listing {listing_data.get('url')}: {e}")
+            logger.error(f"🌐 Network error saving listing: {e}")
 
     async def _save_observation(self, listing_data: Dict[str, Any], property_type: str):
-        """Saves the time-series observation data for a listing."""
         obs_table_name = (
             "observations" if property_type == "viviendas" else "room_observations"
         )
@@ -126,7 +109,7 @@ class DatabaseManager:
         obs_payload = {
             "listing_url": listing_data.get("url"),
             "price": listing_data.get("price"),
-            "scraped_at": listing_data.get("scraped_at"),
+            "scraped_at": listing_data.get("scraped_at", datetime.now().isoformat()),
         }
 
         try:
@@ -134,15 +117,10 @@ class DatabaseManager:
                 obs_endpoint, json=obs_payload, timeout=15.0
             )
             response.raise_for_status()
-            logger.debug(
-                f"Successfully saved observation for: {obs_payload['listing_url']}"
-            )
-        except httpx.HTTPStatusError as e:
-            logger.error(
-                f"HTTP error saving observation: {e.response.status_code} - {e.response.text}"
-            )
-        except httpx.RequestError as e:
-            logger.error(f"Network error saving observation: {e}")
+            logger.debug(f"📊 Saved observation for: {obs_payload['listing_url']}")
+        except Exception as e:
+            logger.error(f"❌ Failed to save observation: {e}")
+
 
     async def get_scraper_status(self, scraper_type: str) -> int:
         """Retrieves the last processed capital ID for a given scraper type."""
