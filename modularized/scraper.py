@@ -108,15 +108,16 @@ class RentalScraper:
             if next_url and next_url != current_url:
                 current_url = next_url
                 page_num += 1
-                jitter = random.uniform(
-                    self.config.delay * 0.7, self.config.delay * 1.3
-                )
-                logger.info(f"⏳ Waiting {jitter:.2f}s before next page...")
-                await asyncio.sleep(jitter)
+                # This is the new code with the requested change
+                base_delay = self.config.delay  # e.g., 5.0 seconds
+                jitter = random.uniform(-0.5, 0.5)  # Get a random value between -0.5 and 0.5
+                randomized_delay = max(0, base_delay + jitter)  # Ensure the delay is never negative
+
+                logger.info(f"⏳ Waiting {randomized_delay:.2f}s before next page...")
+                await asyncio.sleep(randomized_delay)
             else:
                 logger.info(f"🏁 No more pages found for {sanitized_slug}.")
                 break
-
 
 async def main():
     """Main function with robust capital tracking."""
