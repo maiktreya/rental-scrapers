@@ -5,7 +5,7 @@ Parser with robust data extraction and URL handling.
 
 import logging
 from typing import Dict, Optional, List, Any
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin
 from datetime import datetime
 import re
 
