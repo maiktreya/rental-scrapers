@@ -15,6 +15,7 @@ import httpx
 import sys
 import os
 
+# Correctly import from sibling modules
 from .base_headers import HeaderManager
 from .parser import IdealistaParser
 from .database import DatabaseManager
@@ -52,20 +53,21 @@ class RentalScraper:
     def __init__(self, config: ScraperConfig, db_manager: DatabaseManager):
         self.config = config
         self.db_manager = db_manager
-        self.header_manager = HeaderManager(
-            user_agents=config.user_agents,
-            refresh_requests=config.header_refresh_requests,
-        )
+        # --- FIX: Correctly instantiate HeaderManager ---
+        # Pass the entire config object as expected by the __init__ method.
+        self.header_manager = HeaderManager(config=config)
         self.parser = IdealistaParser()
         self.client: Optional[httpx.AsyncClient] = db_manager.session
 
     async def make_request(self, url: str) -> Optional[str]:
         """Makes an HTTP request and returns the HTML content."""
-        headers = await self.header_manager.get_headers(self.config.header_target_url)
+        headers = await self.header_manager.get_headers()
         for attempt in range(self.config.max_retries):
             try:
                 logger.info(f"🌐 Making request to {url} (attempt {attempt + 1})")
-                response = await self.client.get(url, headers=headers)
+                response = await self.client.get(
+                    url, headers=headers, timeout=self.config.timeout
+                )
                 self.header_manager.increment_request_count()
                 response.raise_for_status()
                 return response.text
@@ -74,9 +76,7 @@ class RentalScraper:
                     f"⚠️ HTTP Error: {e.response.status_code} for URL {e.request.url}"
                 )
                 if e.response.status_code in [403, 429]:
-                    await self.header_manager.refresh_headers(
-                        self.config.header_target_url
-                    )
+                    await self.header_manager.refresh_headers()
             except httpx.RequestError as e:
                 logger.error(f"❌ Request error: {e} (attempt {attempt + 1})")
             if attempt < self.config.max_retries - 1:
@@ -87,10 +87,12 @@ class RentalScraper:
         self, capital_slug: str, property_type: str, capital_id: int
     ):
         """Scrapes a single target (capital) with pagination."""
-        base_url_template = "https://www.idealista.com/alquiler-{}/{}/"
-        current_url = base_url_template.format(
-            "habitacion" if property_type == "habitacion" else "viviendas", capital_slug
+        # --- IMPROVEMENT: Use f-string for cleaner URL formatting ---
+        property_path = "habitaciones" if property_type == "habitacion" else "viviendas"
+        base_url_template = (
+            f"https://www.idealista.com/alquiler-{property_path}/{capital_slug}/"
         )
+        current_url = base_url_template
         page_num = 1
 
         while current_url and page_num <= self.config.max_pages:
@@ -152,10 +154,10 @@ async def main():
 
         start_index = 0
         if last_processed_id > 0:
-            for i, capital in enumerate(capitals):
-                if capital["id"] == last_processed_id:
-                    start_index = i + 1
-                    break
+            # Use a dictionary for efficient lookup
+            capital_map = {c["id"]: i for i, c in enumerate(capitals)}
+            if last_processed_id in capital_map:
+                start_index = capital_map[last_processed_id] + 1
 
         if start_index >= len(capitals):
             logger.info("✅ All capitals have been processed. Resetting for next run.")
