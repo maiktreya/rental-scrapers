@@ -9,4 +9,4 @@ with Camoufox(os=["windows", "macos", "linux"],
               headless=False,
               screen=screen) as browser:
     page = browser.new_page()
-    page.goto("https://bot.sannysoft.com/")
+    page.goto("https://www.idealista.com/inmueble/2479213/")

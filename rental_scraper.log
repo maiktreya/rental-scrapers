@@ -467,3 +467,28 @@
 2025-07-07 04:04:53,743 - INFO - ✅ Pagination complete: Scraped 1 pages, 30 total listings
 2025-07-07 04:04:53,743 - INFO - ✅ Scraping completed! Processed 1 pages, extracted 30 listings
 2025-07-07 04:04:53,744 - INFO - 💾 Page data saved to test.json
+2025-07-07 08:14:00,871 - INFO - 🚀 Starting scraper with 1 URLs
+2025-07-07 08:14:00,877 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
+2025-07-07 08:14:00,877 - INFO - 📄 Pagination: max_pages=300, max_listings=1500
+2025-07-07 08:14:00,877 - INFO - 🔍 Extract listings: True
+2025-07-07 08:14:00,877 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751868841s)
+2025-07-07 08:14:00,877 - INFO - 🚀 Launching Camoufox to generate session headers...
+2025-07-07 08:14:05,099 - INFO - ✅ Successfully generated session headers
+2025-07-07 08:14:05,100 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0
+2025-07-07 08:14:05,545 - INFO - ✅ Headers refreshed successfully
+2025-07-07 08:14:05,566 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-habitacion/sevilla-sevilla/
+2025-07-07 08:14:05,566 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-habitacion/sevilla-sevilla/
+2025-07-07 08:14:05,566 - INFO - 📄 Scraping page 1: https://www.idealista.com/alquiler-habitacion/sevilla-sevilla/
+2025-07-07 08:14:05,566 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/sevilla-sevilla/ (attempt 1)
+2025-07-07 08:14:06,117 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/sevilla-sevilla/ "HTTP/2 200 OK"
+2025-07-07 08:14:06,234 - INFO - ✅ Request successful: 200
+2025-07-07 08:14:06,241 - INFO - 📋 Extracted 30 listings from page
+2025-07-07 08:14:06,241 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/sevilla-sevilla/: 313756 chars, 30 listings
+2025-07-07 08:14:06,242 - INFO - ⏳ Waiting 6.2s before next page...
+2025-07-07 08:14:12,471 - INFO - 📄 Scraping page 2: https://www.idealista.com/alquiler-habitacion/sevilla-sevilla/pagina-2.htm
+2025-07-07 08:14:12,471 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/sevilla-sevilla/pagina-2.htm (attempt 1)
+2025-07-07 08:14:12,825 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/sevilla-sevilla/pagina-2.htm "HTTP/2 200 OK"
+2025-07-07 08:14:12,953 - INFO - ✅ Request successful: 200
+2025-07-07 08:14:12,960 - INFO - 📋 Extracted 30 listings from page
+2025-07-07 08:14:12,960 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/sevilla-sevilla/pagina-2.htm: 307532 chars, 30 listings
+2025-07-07 08:14:12,961 - INFO - ⏳ Waiting 6.3s before next page...

@@ -47,7 +47,7 @@ class ScraperConfig:
     max_retries: int = 3
     timeout: int = 30
     max_pages: int = 50  # Maximum pages to scrape per search
-    max_listings: int = 1500  # Maximum listings to scrape
+    max_listings: int = 3000  # Maximum listings to scrape
     extract_listings: bool = True  # Whether to extract individual listings
     user_agents: List[str] = field(
         default_factory=lambda: [
