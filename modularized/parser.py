@@ -18,18 +18,27 @@ logger = logging.getLogger(__name__)
 class IdealistaParser:
     """A parser specifically designed for Idealista listing pages."""
 
-    def extract_listings_from_page(self, content: str, base_url: str, property_type: str) -> List[Dict[str, Any]]:
+    def extract_listings_from_page(
+        self, content: str, base_url: str, property_type: str
+    ) -> List[Dict[str, Any]]:
         """
         Extracts all listings from a page's HTML content.
         """
         soup = BeautifulSoup(content, "lxml")
         articles = soup.select("article.item")
-        listings = [self._parse_article(article, base_url, property_type) for article in articles]
+        listings = [
+            self._parse_article(article, base_url, property_type)
+            for article in articles
+        ]
         valid_listings = [listing for listing in listings if listing]
-        logger.info(f"📋 Extracted {len(valid_listings)} listings from page using BeautifulSoup.")
+        logger.info(
+            f"📋 Extracted {len(valid_listings)} listings from page using BeautifulSoup."
+        )
         return valid_listings
 
-    def _parse_article(self, article: Tag, base_url: str, property_type: str) -> Optional[Dict[str, Any]]:
+    def _parse_article(
+        self, article: Tag, base_url: str, property_type: str
+    ) -> Optional[Dict[str, Any]]:
         """
         Parses a single <article> tag to extract detailed listing data.
         """
@@ -37,16 +46,16 @@ class IdealistaParser:
             listing = {
                 "scraped_at": datetime.now().isoformat(),
                 "source_url": base_url,
-                "property_type": property_type
+                "property_type": property_type,
             }
 
             link_tag = article.select_one("a.item-link")
-            if not link_tag or not link_tag.has_attr('href'):
+            if not link_tag or not link_tag.has_attr("href"):
                 return None
 
-            listing["url"] = urljoin(base_url, link_tag['href'])
+            listing["url"] = urljoin(base_url, link_tag["href"])
             listing["title"] = link_tag.get_text(strip=True)
-            
+
             title_attr = link_tag.get("title", "")
             if " in " in title_attr:
                 listing["location"] = title_attr.split(" in ")[-1]
@@ -66,12 +75,16 @@ class IdealistaParser:
                 text = detail.get_text(strip=True)
                 if "m²" in text and "€/m²" not in text:
                     try:
-                        listing["size_m2"] = int(''.join(filter(str.isdigit, text)))
-                    except ValueError: pass
+                        listing["size_sqm"] = int("".join(filter(str.isdigit, text)))
+                    except ValueError:
+                        pass
                 elif "hab." in text:
                     try:
-                        listing["rooms"] = int(''.join(filter(str.isdigit, text)))
-                    except ValueError: pass
+                        listing["num_bedrooms"] = int(
+                            "".join(filter(str.isdigit, text))
+                        )
+                    except ValueError:
+                        pass
 
             # Identify provider type (company vs. individual)
             branding_element = article.select_one("picture.logo-branding")
@@ -95,6 +108,6 @@ class IdealistaParser:
         """
         soup = BeautifulSoup(content, "lxml")
         next_link = soup.select_one("a.next")
-        if next_link and next_link.has_attr('href'):
-            return urljoin(base_url, next_link['href'])
+        if next_link and next_link.has_attr("href"):
+            return urljoin(base_url, next_link["href"])
         return None

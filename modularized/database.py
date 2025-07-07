@@ -5,7 +5,7 @@ Handles fetching scraping targets, saving listings, and managing run status.
 """
 
 import logging
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
 from urllib.parse import urljoin
 import httpx
 from datetime import datetime

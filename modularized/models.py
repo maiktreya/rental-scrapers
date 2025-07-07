@@ -4,7 +4,7 @@
 Data structures (TypedDicts, Pydantic models, etc.) for the scraper.
 """
 
-from typing import Optional, Union
+from typing import Optional
 # Use typing_extensions for TypedDict for wider compatibility
 from typing_extensions import TypedDict
 
