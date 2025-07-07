@@ -92,7 +92,7 @@ An example of a complex customized run.
 - For a tailored list of urls
 
 ```bash
-python -u -m services.idealista_scraper.main \
+python -u -m modularized.scraper \
             --postgrest-url "http://localhost:3001" \
             --idealista-base-url "https://www.idealista.com/alquiler-viviendas/" \
             --scraper-type "viviendas" \
@@ -103,7 +103,7 @@ python -u -m services.idealista_scraper.main \
 - A full loop over all Spain capitals
 
 ```bash
-python -u -m services.idealista_scraper.main \
+python -u -m modularized.scraper \
             --postgrest-url "http://localhost:3001" \
             --idealista-base-url "https://www.idealista.com/alquiler-viviendas/" \
             --scraper-type "viviendas" \
