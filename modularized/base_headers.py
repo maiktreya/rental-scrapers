@@ -3,12 +3,11 @@
 import time
 import random
 import logging
-from typing import Dict, Optional, List
-from dataclasses import dataclass, field
+from typing import Dict, Optional
 from camoufox.async_api import AsyncCamoufox
 
 # --- FIX: Import the single, authoritative config class ---
-from .scraper import ScraperConfig
+from .config import ScraperConfig
 
 logger = logging.getLogger(__name__)
 
