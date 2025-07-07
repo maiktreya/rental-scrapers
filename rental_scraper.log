@@ -350,3 +350,120 @@
 2025-07-07 03:31:22,035 - INFO - ✅ Scraping completed! Processed 5 pages, extracted 132 listings
 2025-07-07 03:31:22,036 - INFO - 💾 Page data saved to full_results.json
 2025-07-07 03:31:22,037 - INFO - 🏠 Listings saved to listings.json
+2025-07-07 04:01:56,554 - INFO - 🚀 Starting scraper with 1 URLs
+2025-07-07 04:01:56,554 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
+2025-07-07 04:01:56,554 - INFO - 📄 Pagination: max_pages=5, max_listings=1500
+2025-07-07 04:01:56,555 - INFO - 🔍 Extract listings: True
+2025-07-07 04:01:56,555 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751853717s)
+2025-07-07 04:01:56,555 - INFO - 🚀 Launching Camoufox to generate session headers...
+2025-07-07 04:02:00,722 - INFO - ✅ Successfully generated session headers
+2025-07-07 04:02:00,722 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:135.0) Gecko/20100101 Firefox/135.0
+2025-07-07 04:02:01,234 - INFO - ✅ Headers refreshed successfully
+2025-07-07 04:02:01,260 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-habitacion/segovia-segovia/
+2025-07-07 04:02:01,260 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-habitacion/segovia-segovia/
+2025-07-07 04:02:01,260 - INFO - 📄 Scraping page 1: https://www.idealista.com/alquiler-habitacion/segovia-segovia/
+2025-07-07 04:02:01,260 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/segovia-segovia/ (attempt 1)
+2025-07-07 04:02:01,706 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/segovia-segovia/ "HTTP/2 200 OK"
+2025-07-07 04:02:01,755 - INFO - ✅ Request successful: 200
+2025-07-07 04:02:01,762 - INFO - 📋 Extracted 30 listings from page
+2025-07-07 04:02:01,762 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/segovia-segovia/: 314436 chars, 30 listings
+2025-07-07 04:02:01,763 - INFO - ⏳ Waiting 6.5s before next page...
+2025-07-07 04:02:08,250 - INFO - 📄 Scraping page 2: https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-2.htm
+2025-07-07 04:02:08,250 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-2.htm (attempt 1)
+2025-07-07 04:02:08,511 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-2.htm "HTTP/2 200 OK"
+2025-07-07 04:02:08,554 - INFO - ✅ Request successful: 200
+2025-07-07 04:02:08,559 - INFO - 📋 Extracted 30 listings from page
+2025-07-07 04:02:08,559 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-2.htm: 311460 chars, 30 listings
+2025-07-07 04:02:08,560 - INFO - ⏳ Waiting 5.1s before next page...
+2025-07-07 04:02:13,676 - INFO - 📄 Scraping page 3: https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-3.htm
+2025-07-07 04:02:13,676 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-3.htm (attempt 1)
+2025-07-07 04:02:13,949 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-3.htm "HTTP/2 200 OK"
+2025-07-07 04:02:14,005 - INFO - ✅ Request successful: 200
+2025-07-07 04:02:14,010 - INFO - 📋 Extracted 30 listings from page
+2025-07-07 04:02:14,010 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-3.htm: 309091 chars, 30 listings
+2025-07-07 04:02:14,011 - INFO - ⏳ Waiting 6.2s before next page...
+2025-07-07 04:02:20,212 - INFO - 📄 Scraping page 4: https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-4.htm
+2025-07-07 04:02:20,212 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-4.htm (attempt 1)
+2025-07-07 04:02:20,472 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-4.htm "HTTP/2 200 OK"
+2025-07-07 04:02:20,528 - INFO - ✅ Request successful: 200
+2025-07-07 04:02:20,533 - INFO - 📋 Extracted 30 listings from page
+2025-07-07 04:02:20,533 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-4.htm: 303569 chars, 30 listings
+2025-07-07 04:02:20,534 - INFO - ⏳ Waiting 6.9s before next page...
+2025-07-07 04:02:27,460 - INFO - 📄 Scraping page 5: https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-5.htm
+2025-07-07 04:02:27,460 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-5.htm (attempt 1)
+2025-07-07 04:02:27,675 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-5.htm "HTTP/2 200 OK"
+2025-07-07 04:02:27,711 - INFO - ✅ Request successful: 200
+2025-07-07 04:02:27,713 - INFO - 📋 Extracted 12 listings from page
+2025-07-07 04:02:27,713 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-5.htm: 217269 chars, 12 listings
+2025-07-07 04:02:27,714 - INFO - 🏁 No more pages found or reached duplicate URL
+2025-07-07 04:02:27,714 - INFO - ✅ Pagination complete: Scraped 4 pages, 132 total listings
+2025-07-07 04:02:27,714 - INFO - ✅ Scraping completed! Processed 5 pages, extracted 132 listings
+2025-07-07 04:03:24,608 - INFO - 🚀 Starting scraper with 1 URLs
+2025-07-07 04:03:24,608 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
+2025-07-07 04:03:24,608 - INFO - 📄 Pagination: max_pages=5, max_listings=1500
+2025-07-07 04:03:24,608 - INFO - 🔍 Extract listings: True
+2025-07-07 04:03:24,608 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751853805s)
+2025-07-07 04:03:24,608 - INFO - 🚀 Launching Camoufox to generate session headers...
+2025-07-07 04:03:28,756 - INFO - ✅ Successfully generated session headers
+2025-07-07 04:03:28,756 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:135.0) Gecko/20100101 Firefox/135.0
+2025-07-07 04:03:29,999 - INFO - ✅ Headers refreshed successfully
+2025-07-07 04:03:30,021 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-habitacion/segovia-segovia/
+2025-07-07 04:03:30,021 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-habitacion/segovia-segovia/
+2025-07-07 04:03:30,021 - INFO - 📄 Scraping page 1: https://www.idealista.com/alquiler-habitacion/segovia-segovia/
+2025-07-07 04:03:30,021 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/segovia-segovia/ (attempt 1)
+2025-07-07 04:03:30,488 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/segovia-segovia/ "HTTP/2 200 OK"
+2025-07-07 04:03:30,534 - INFO - ✅ Request successful: 200
+2025-07-07 04:03:30,540 - INFO - 📋 Extracted 30 listings from page
+2025-07-07 04:03:30,540 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/segovia-segovia/: 314386 chars, 30 listings
+2025-07-07 04:03:30,542 - INFO - ⏳ Waiting 6.6s before next page...
+2025-07-07 04:03:37,161 - INFO - 📄 Scraping page 2: https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-2.htm
+2025-07-07 04:03:37,161 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-2.htm (attempt 1)
+2025-07-07 04:03:37,422 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-2.htm "HTTP/2 200 OK"
+2025-07-07 04:03:37,469 - INFO - ✅ Request successful: 200
+2025-07-07 04:03:37,474 - INFO - 📋 Extracted 30 listings from page
+2025-07-07 04:03:37,474 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-2.htm: 311463 chars, 30 listings
+2025-07-07 04:03:37,476 - INFO - ⏳ Waiting 5.4s before next page...
+2025-07-07 04:03:42,836 - INFO - 📄 Scraping page 3: https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-3.htm
+2025-07-07 04:03:42,836 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-3.htm (attempt 1)
+2025-07-07 04:03:43,099 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-3.htm "HTTP/2 200 OK"
+2025-07-07 04:03:43,151 - INFO - ✅ Request successful: 200
+2025-07-07 04:03:43,156 - INFO - 📋 Extracted 30 listings from page
+2025-07-07 04:03:43,156 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-3.htm: 309429 chars, 30 listings
+2025-07-07 04:03:43,158 - INFO - ⏳ Waiting 5.0s before next page...
+2025-07-07 04:03:48,207 - INFO - 📄 Scraping page 4: https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-4.htm
+2025-07-07 04:03:48,207 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-4.htm (attempt 1)
+2025-07-07 04:03:48,611 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-4.htm "HTTP/2 200 OK"
+2025-07-07 04:03:48,656 - INFO - ✅ Request successful: 200
+2025-07-07 04:03:48,669 - INFO - 📋 Extracted 30 listings from page
+2025-07-07 04:03:48,669 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-4.htm: 304580 chars, 30 listings
+2025-07-07 04:03:48,671 - INFO - ⏳ Waiting 6.4s before next page...
+2025-07-07 04:03:55,085 - INFO - 📄 Scraping page 5: https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-5.htm
+2025-07-07 04:03:55,085 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-5.htm (attempt 1)
+2025-07-07 04:03:55,373 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-5.htm "HTTP/2 200 OK"
+2025-07-07 04:03:55,400 - INFO - ✅ Request successful: 200
+2025-07-07 04:03:55,402 - INFO - 📋 Extracted 12 listings from page
+2025-07-07 04:03:55,402 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/segovia-segovia/pagina-5.htm: 217272 chars, 12 listings
+2025-07-07 04:03:55,403 - INFO - 🏁 No more pages found or reached duplicate URL
+2025-07-07 04:03:55,403 - INFO - ✅ Pagination complete: Scraped 4 pages, 132 total listings
+2025-07-07 04:03:55,403 - INFO - ✅ Scraping completed! Processed 5 pages, extracted 132 listings
+2025-07-07 04:04:42,969 - INFO - 🚀 Starting scraper with 1 URLs
+2025-07-07 04:04:42,969 - INFO - ⚙️ Config: delay=5.0s, refresh_after=100 requests
+2025-07-07 04:04:42,969 - INFO - 📄 Pagination: max_pages=1, max_listings=1500
+2025-07-07 04:04:42,969 - INFO - 🔍 Extract listings: True
+2025-07-07 04:04:42,969 - INFO - 🔄 Refreshing headers (requests: 0, time since last: 1751853883s)
+2025-07-07 04:04:42,969 - INFO - 🚀 Launching Camoufox to generate session headers...
+2025-07-07 04:04:47,008 - INFO - ✅ Successfully generated session headers
+2025-07-07 04:04:47,009 - INFO - 📋 Generated User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0
+2025-07-07 04:04:47,459 - INFO - ✅ Headers refreshed successfully
+2025-07-07 04:04:47,481 - INFO - 📊 Processing URL 1/1: https://www.idealista.com/alquiler-habitacion/segovia-segovia/
+2025-07-07 04:04:47,481 - INFO - 🔄 Starting pagination scrape from https://www.idealista.com/alquiler-habitacion/segovia-segovia/
+2025-07-07 04:04:47,481 - INFO - 📄 Scraping page 1: https://www.idealista.com/alquiler-habitacion/segovia-segovia/
+2025-07-07 04:04:47,481 - INFO - 🌐 Making GET request to https://www.idealista.com/alquiler-habitacion/segovia-segovia/ (attempt 1)
+2025-07-07 04:04:47,941 - INFO - HTTP Request: GET https://www.idealista.com/alquiler-habitacion/segovia-segovia/ "HTTP/2 200 OK"
+2025-07-07 04:04:48,009 - INFO - ✅ Request successful: 200
+2025-07-07 04:04:48,015 - INFO - 📋 Extracted 30 listings from page
+2025-07-07 04:04:48,015 - INFO - 📄 Scraped https://www.idealista.com/alquiler-habitacion/segovia-segovia/: 314383 chars, 30 listings
+2025-07-07 04:04:48,016 - INFO - ⏳ Waiting 5.7s before next page...
+2025-07-07 04:04:53,743 - INFO - ✅ Pagination complete: Scraped 1 pages, 30 total listings
+2025-07-07 04:04:53,743 - INFO - ✅ Scraping completed! Processed 1 pages, extracted 30 listings
+2025-07-07 04:04:53,744 - INFO - 💾 Page data saved to test.json
