@@ -81,6 +81,8 @@ class HeaderManager:
             ) as browser:
                 page = await browser.new_page()
                 await page.goto("https://idealista.com", wait_until="domcontentloaded")
+                # https://www.idealista.com/alquiler-habitacion/segovia-segovia/
+                #
                 await page.wait_for_timeout(2000)
                 headers = await page.evaluate(
                     """
