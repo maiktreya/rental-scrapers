@@ -2,14 +2,17 @@
 """
 Parser with robust data extraction and URL handling.
 """
+
 import logging
 from typing import Dict, Optional, List, Any
 from urllib.parse import urljoin
 from datetime import datetime
 import re
+
 from bs4 import BeautifulSoup, Tag
 
 logger = logging.getLogger(__name__)
+
 
 class IdealistaParser:
     """Parser with critical fixes for data extraction."""
@@ -32,72 +35,67 @@ class IdealistaParser:
     ) -> Optional[Dict[str, Any]]:
         try:
             listing = {
-                "scraped_at": datetime.now().isoformat(),
+                "scraped_at": datetime.now().isoformat(),  # Ensure timestamp exists
                 "source_url": base_url,
                 "property_type": property_type,
             }
+
             # Robust URL handling
             link_tag = article.select_one("a.item-link")
             if not link_tag or not link_tag.has_attr("href"):
-                logger.warning("No valid link tag found in article")
                 return None
+
             href = link_tag["href"].strip()
+            # Handle protocol-relative URLs
             if href.startswith("//"):
                 listing["url"] = "https:" + href
+            # Handle absolute paths
             elif href.startswith("/"):
                 listing["url"] = urljoin("https://www.idealista.com", href)
+            # Handle full URLs
             else:
                 listing["url"] = href
+
             # Extract title
             listing["title"] = link_tag.get_text(strip=True) or ""
-            # Extract location from title (Spanish: "en")
-            if " en " in listing["title"]:
-                listing["location"] = listing["title"].split(" en ", 1)[-1]
+
+            # Extract location from title attribute
+            title_attr = link_tag.get("title", "")
+            if " in " in title_attr:
+                listing["location"] = title_attr.split(" in ")[-1]
             else:
                 listing["location"] = ""
+
             # Robust price parsing
             price_tag = article.select_one("span.item-price")
             if price_tag:
-                price_text = price_tag.get_text(strip=True).replace("€/mes", "").strip()
-                clean_price = re.sub(r"[^\d]", "", price_text)
+                price_text = price_tag.get_text(strip=True)
+                # Handle "€1.200" format
+                clean_price = re.sub(r"[^\d,]", "", price_text).replace(",", "")
                 try:
                     listing["price"] = int(clean_price) if clean_price else None
                 except ValueError:
                     listing["price"] = None
-                    logger.warning(f"Failed to parse price: {price_text}")
-            # Bedroom detection (look for "hab.")
-            bedroom_tag = None
-            for detail in article.select("span.item-detail"):
-                detail_text = detail.get_text(strip=True)
-                if "hab." in detail_text:
-                    bedroom_tag = detail
-                    break
+
+            # Robust bedroom detection
+            bedroom_tag = article.select_one("span.item-detail:has(span.icon-bedroom)")
             if bedroom_tag:
                 try:
                     bedroom_text = bedroom_tag.get_text(strip=True)
-                    listing["num_bedrooms"] = int(re.search(r'\d+', bedroom_text).group())
-                except (AttributeError, ValueError):
+                    listing["num_bedrooms"] = int(''.join(filter(str.isdigit, bedroom_text)))
+                except (ValueError, TypeError):
                     listing["num_bedrooms"] = None
-                    logger.warning(f"Failed to parse bedrooms: {bedroom_text}")
-            else:
-                listing["num_bedrooms"] = None
-            # Size detection (look for "m²" or "m2")
-            size_tag = None
-            for detail in article.select("span.item-detail"):
-                detail_text = detail.get_text(strip=True)
-                if "m²" in detail_text or "m2" in detail_text:
-                    size_tag = detail
-                    break
+
+            # Size detection
+            size_tag = article.select_one("span.item-detail:has(span.icon-meter)")
             if size_tag:
-                size_text = size_tag.get_text(strip=True)
-                clean_size = re.sub(r"[^\d]", "", size_text)
                 try:
+                    size_text = size_tag.get_text(strip=True)
+                    clean_size = re.sub(r"[^\d,]", "", size_text).replace(",", "")
                     listing["size_sqm"] = int(clean_size) if clean_size else None
                 except ValueError:
                     listing["size_sqm"] = None
-                    logger.warning(f"Failed to parse size: {size_text}")
-            else:
-                listing["size_sqm"] = None
+
             # Advertiser info
             branding_element = article.select_one("picture.logo-branding")
             if branding_element:
@@ -107,6 +105,7 @@ class IdealistaParser:
             else:
                 listing["advertiser_type"] = "individual"
                 listing["advertiser_name"] = ""
+
             return listing
         except Exception as e:
             logger.error(f"❌ Parsing error: {e}")
@@ -114,6 +113,7 @@ class IdealistaParser:
 
     def find_next_page_url(self, content: str, base_url: str) -> Optional[str]:
         soup = BeautifulSoup(content, "lxml")
+        # Handle both anchor and list item pagination
         next_link = soup.select_one('a[rel="next"], li.next > a')
         if next_link and next_link.has_attr("href"):
             return urljoin(base_url, next_link["href"])

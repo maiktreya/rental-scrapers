@@ -46,13 +46,13 @@ class HeaderManager:
         try:
             logger.info("🚀 Launching Camoufox to generate real session headers...")
             async with AsyncCamoufox(
-                headless=False,
+                headless=True,
                 humanize=True,
                 os=random.choice(["linux", "macos", "windows"]),
                 enable_cache=False,
                 persistent_context=True,
                 user_data_dir="usr-data-dir",
-                window=(1366, 768),
+                # window=(1366, 768),
             ) as browser:
                 page = await browser.new_page()
                 headers_capture = {}

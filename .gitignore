@@ -6,3 +6,10 @@ out/*
 datadome-bp/*
 USER_DATA_DIR
 chrome_session
+modularized/__pycache__/__init__.cpython-312.pyc
+modularized/__pycache__/base_headers.cpython-312.pyc
+modularized/__pycache__/config.cpython-312.pyc
+modularized/__pycache__/database.cpython-312.pyc
+modularized/__pycache__/parser.cpython-312.pyc
+modularized/__pycache__/scraper.cpython-312.pyc
+modularized/__pycache__/test_parser.cpython-312.pyc

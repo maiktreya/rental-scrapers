@@ -831,3 +831,19 @@
 2025-07-07 08:19:40,758 - INFO - ✅ Pagination complete: Scraped 50 pages, 1500 total listings
 2025-07-07 08:19:40,758 - INFO - ✅ Scraping completed! Processed 50 pages, extracted 1500 listings
 2025-07-07 08:19:40,777 - INFO - 💾 Page data saved to test.json
+2025-07-09 21:36:22,132 - modularized.database - INFO - Fetching active capitals from: http://localhost:3001/capitals
+2025-07-09 21:36:22,177 - httpx - INFO - HTTP Request: GET http://localhost:3001/capitals?is_active=eq.true&select=id%2Cidealista_slug "HTTP/1.1 200 OK"
+2025-07-09 21:36:22,178 - modularized.database - INFO - Successfully fetched 112 active capitals.
+2025-07-09 21:36:22,181 - httpx - INFO - HTTP Request: GET http://localhost:3001/scraper_status?scraper_type=eq.habitacion&select=last_processed_capital_id "HTTP/1.1 200 OK"
+2025-07-09 21:36:22,182 - modularized.database - INFO - Resuming habitacion scrape from capital_id: 1
+2025-07-09 21:36:22,207 - __main__ - INFO - --- Processing capital 1/112: albacete-albacete (ID: 1) ---
+2025-07-09 21:36:22,207 - modularized.base_headers - INFO - 🔄 Refreshing headers...
+2025-07-09 21:36:22,207 - modularized.base_headers - INFO - 🚀 Launching Camoufox to generate real session headers...
+2025-07-09 21:36:33,260 - modularized.base_headers - INFO - ✅ Captured real browser headers
+2025-07-09 21:36:33,260 - modularized.base_headers - INFO - 🍪 Injected cookies: userUUID=6a6e891a-d075-4afb-93bc-ac1dfc9583d2; SESSION=43d96ceac90fd93d~db9c289f...
+2025-07-09 21:36:33,861 - __main__ - INFO - 🌐 Making request to https://www.idealista.com/alquiler-habitaciones/albacete-albacete/ (attempt 1)
+2025-07-09 21:36:33,902 - __main__ - ERROR - ❌ Request error: <StreamReset stream_id:1, error_code:1, remote_reset:True> (attempt 1)
+2025-07-09 21:36:38,907 - __main__ - INFO - 🌐 Making request to https://www.idealista.com/alquiler-habitaciones/albacete-albacete/ (attempt 2)
+2025-07-09 21:36:38,940 - __main__ - ERROR - ❌ Request error: <StreamReset stream_id:1, error_code:1, remote_reset:True> (attempt 2)
+2025-07-09 21:36:44,792 - __main__ - INFO - 
+🛑 Scraper interrupted by user.
