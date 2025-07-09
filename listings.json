@@ -1,6 +1,6 @@
 [
   {
-    "scraped_at": "2025-07-09T22:29:38.791553",
+    "scraped_at": "2025-07-09T23:49:53.299425",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/108681367/",
@@ -10,10 +10,12 @@
     "num_bedrooms": 2,
     "size_sqm": 84,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "Se alquila encantador piso con amplia terraza, situado a tan solo 2 minutos caminando de la estación de metro Puerta de Toledo, en una ubicación inmejorable que combina la comodidad del transporte público con el privilegio de vivir en una de las zonas más vibrantes de la ciudad. Esta vivienda ofrece todo lo que necesit",
+    "flat_floor_number": "Planta 1ª interior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.792670",
+    "scraped_at": "2025-07-09T23:49:53.301124",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/106501975/",
@@ -23,10 +25,12 @@
     "num_bedrooms": 2,
     "size_sqm": 80,
     "advertiser_type": "company",
-    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U."
+    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U.",
+    "description": "Este apartamento totalmente amueblado y listo para entrar a vivir está disponible desde el 18-07-2025\nLlega y empieza a vivir desde el primer día en Madrid con este sofisticado Apartamento Blueground de dos dormitorios. Le encantará volver a casa a esta casa cuidadosamente amueblada, bellamente diseñada y totalmente e",
+    "flat_floor_number": "Planta 2ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.793380",
+    "scraped_at": "2025-07-09T23:49:53.302239",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/101852794/",
@@ -36,10 +40,12 @@
     "num_bedrooms": 2,
     "size_sqm": 82,
     "advertiser_type": "company",
-    "advertiser_name": "Emmanuel Integra"
+    "advertiser_name": "Emmanuel Integra",
+    "description": "Inmobiliaria Emmanuel Ofrece!\nOfrecemos este precioso piso en la Calle San Vicente Ferrer. Sin amueblar, con materiales de primera calidad en un edificio rehabilitado íntegramente por nuestro equipo.\nEstá en Barrio Malasaña y cuenta con dos dormitorio, dos cuartos de baño, salón-comedor y cocina completamente equipad",
+    "flat_floor_number": "Planta 2ª exterior sin ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.794036",
+    "scraped_at": "2025-07-09T23:49:53.303295",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/103706065/",
@@ -49,10 +55,12 @@
     "num_bedrooms": 1,
     "size_sqm": 51,
     "advertiser_type": "company",
-    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U."
+    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U.",
+    "description": "Este apartamento totalmente amueblado y listo para entrar a vivir está disponible desde el 20-07-2025\nDescubre lo mejor de Madrid, con este apartamento de un dormitorio en Malasaña. con vistas a la ciudad. Será fácil llegar y empezar a disfrutar en este con gusto amueblado apartamento con su cocina totalmente equipada",
+    "flat_floor_number": "Planta 4ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.794684",
+    "scraped_at": "2025-07-09T23:49:53.304340",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/108681286/",
@@ -62,10 +70,12 @@
     "num_bedrooms": 3,
     "size_sqm": 132,
     "advertiser_type": "company",
-    "advertiser_name": "Engel & Völkers Madrid"
+    "advertiser_name": "Engel & Völkers Madrid",
+    "description": "Ático con espectacular terraza y 3 dormitorios en Chamberí\nEngel & Völkers presenta este luminoso ático exterior, situado en la séptima planta de una finca clásica de 1960, con fachada renovada y bien conservada. Un piso que combina amplitud, confort y una distribución muy funcional.\nCon orientación oeste y vistas des",
+    "flat_floor_number": "Planta 7ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.795299",
+    "scraped_at": "2025-07-09T23:49:53.305346",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/102219583/",
@@ -75,10 +85,12 @@
     "num_bedrooms": 2,
     "size_sqm": 50,
     "advertiser_type": "company",
-    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U."
+    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U.",
+    "description": "Este apartamento totalmente amueblado y listo para entrar a vivir está disponible desde el 19-07-2025\nLlega y empieza a vivir desde el primer día en Madrid con este cómodo Apartamento Blueground de dos dormitorios. Le encantará volver a casa a esta casa cuidadosamente amueblada, bellamente diseñada y totalmente equipa",
+    "flat_floor_number": "Planta 4ª interior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.795937",
+    "scraped_at": "2025-07-09T23:49:53.306384",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/108681267/",
@@ -88,10 +100,12 @@
     "num_bedrooms": 5,
     "size_sqm": 104,
     "advertiser_type": "company",
-    "advertiser_name": "Novahome"
+    "advertiser_name": "Novahome",
+    "description": "Novahome presenta estupendo piso en alquiler en el centro de Madrid.\nIDEAL PARA COMPARTIR, ESTUDIANTES.\nCORTA ESTANCIA.\nCuenta con amplio salón con cocina americana, cinco dormitorios (tres con balcón y los otros dos con ventana) todos con armario empotrados y un baño completo.\nPiso en buen estado.\nSe alquila amuebla",
+    "flat_floor_number": "Planta 2ª exterior sin ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.796568",
+    "scraped_at": "2025-07-09T23:49:53.307437",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/98346431/",
@@ -101,10 +115,12 @@
     "num_bedrooms": 2,
     "size_sqm": 79,
     "advertiser_type": "company",
-    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U."
+    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U.",
+    "description": "Este apartamento totalmente amueblado y listo para entrar a vivir está disponible desde el 20-07-2025\nLlega y empieza a vivir desde el primer día en Madrid con este espacioso Apartamento Blueground de dos dormitorios. Le encantará volver a casa a esta casa cuidadosamente amueblada, bellamente diseñada y totalmente equ",
+    "flat_floor_number": "Planta 3ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.797186",
+    "scraped_at": "2025-07-09T23:49:53.308467",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/108681239/",
@@ -114,10 +130,12 @@
     "num_bedrooms": 2,
     "size_sqm": 100,
     "advertiser_type": "company",
-    "advertiser_name": "Engel & Völkers Madrid"
+    "advertiser_name": "Engel & Völkers Madrid",
+    "description": "Luminoso piso de 2 Dormitorios y 2 Baños para estudiantes en el Barrio de Salamanca.\nEngel&Völkers presenta este LUMINOSO piso de reciente reforma integral con TERRAZA en el Barrio de Salamanca. La vivienda ubicada en la tranquila calle de Núñez de Balboa, se localiza en una 4ta planta.\nLa vivienda se distribuye en h",
+    "flat_floor_number": "Planta 4ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.797819",
+    "scraped_at": "2025-07-09T23:49:53.309516",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/26468615/",
@@ -127,10 +145,12 @@
     "num_bedrooms": 5,
     "size_sqm": 165,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "Es un piso ideal para una familia numerosa o para estudiantes de universidades cercanas pues tiene 5 habitaciones y tres cuartos de baño.\nSe incluye en el precio una póliza de Seguro de Hogar, que incluye entre otras coberturas la Responsabilidad Civil de los inquilinos frente, por ejemplo, a posibles daños causados a",
+    "flat_floor_number": "Planta 4ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.798454",
+    "scraped_at": "2025-07-09T23:49:53.310530",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/104752781/",
@@ -140,23 +160,28 @@
     "num_bedrooms": 2,
     "size_sqm": 102,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "¡Descubre este espectacular piso en alquiler en la emblemática Calle Recoletos! Este inmueble, completamente reformado destaca por sus altas calidades y su diseño en chaflán que aporta un toque único. Con una orientación sur, disfrutarás de luz natural durante todo el día. Con 102 m² construidos y 100 m² útiles, el esp",
+    "flat_floor_number": "Planta 2ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.799073",
+    "scraped_at": "2025-07-09T23:49:53.311554",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/108001227/",
     "title": "Piso en calle de Felipe Campos, El Viso, Madrid",
     "location": "calle de Felipe Campos, El Viso, Madrid",
     "price": 1520,
+    "pricedown_price": 1620,
     "num_bedrooms": 1,
     "size_sqm": 46,
     "advertiser_type": "company",
-    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U."
+    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U.",
+    "description": "Este apartamento totalmente amueblado y listo para entrar a vivir está disponible desde el 17-07-2025\nDescubre lo mejor de Madrid, con este apartamento de un dormitorio en El Viso. Será fácil llegar y empezar a disfrutar en este amueblado apartamento con su cocina totalmente equipada, salón y nuestro soporte continuo.",
+    "flat_floor_number": "Planta 1ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.799734",
+    "scraped_at": "2025-07-09T23:49:53.312595",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/108681167/",
@@ -166,10 +191,12 @@
     "num_bedrooms": 3,
     "size_sqm": 65,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "Se alquila vivienda recién reformada de 65m², distribuida en 3 dormitorios, amplio salón, baño y cocina amueblada y equipada con electrodomésticos.\nPor la zona encontramos pequeños y grandes servicios y comercios, farmacias, colegios, supermercados y el Centro de Salud a pocos metros. La parada de metro Villaverde Bajo",
+    "flat_floor_number": "Planta 1ª exterior sin ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.800362",
+    "scraped_at": "2025-07-09T23:49:53.313619",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/106717949/",
@@ -179,10 +206,11 @@
     "num_bedrooms": null,
     "size_sqm": 27,
     "advertiser_type": "company",
-    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U."
+    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U.",
+    "description": "Este apartamento totalmente amueblado y listo para entrar a vivir está disponible desde el 17-07-2025\nLlega y empieza a vivir desde el primer día en Madrid con este encantador studio Blueground. Le encantará volver a casa a esta casa cuidadosamente amueblada, bellamente diseñada y totalmente equipada Pacífico con impr"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.800969",
+    "scraped_at": "2025-07-09T23:49:53.314722",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/108681113/",
@@ -192,10 +220,12 @@
     "num_bedrooms": 1,
     "size_sqm": 64,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "Fantástico piso todo equipado y amueblado. Tiene una habitacion doble y 1 baño. Dispone de calefacción y aire acondicionado. Finca con ascensor y conserje.\nMuy bien comunicado y muy bien ubicado. Muchas opciones de transporte (varias líneas de metro y autobús), variedad de supermercados en la zona.\nFantastic fully equi",
+    "flat_floor_number": "Planta 4ª interior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.801605",
+    "scraped_at": "2025-07-09T23:49:53.315961",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/105326341/",
@@ -205,10 +235,12 @@
     "num_bedrooms": 2,
     "size_sqm": 31,
     "advertiser_type": "company",
-    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U."
+    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U.",
+    "description": "Este apartamento totalmente amueblado y listo para entrar a vivir está disponible desde el 17-07-2025\nSiéntete como en casa dondequiera que elijas vivir con Blueground. Te encantará este cómodo Malasaña amueblado apartamento de dos dormitorios con su moderna decoración, cocina totalmente equipada, y alegre salón. con",
+    "flat_floor_number": "Bajo interior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.802256",
+    "scraped_at": "2025-07-09T23:49:53.317556",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/107993275/",
@@ -218,10 +250,12 @@
     "num_bedrooms": 1,
     "size_sqm": 60,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "Ref. MD-3003 EMBASSY PROPERTIES presenta una vivienda completamente amueblada, disponible para entrada inmediata.\nDistribución de la vivienda:\n- Hall de entrada, equipado con armario empotrado para almacenamiento de prenda extarior o demás enseres.\n- Gran salón / Comedor /, recibe mucha luminosidad a través de sus g",
+    "flat_floor_number": "Planta 1ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.802905",
+    "scraped_at": "2025-07-09T23:49:53.318654",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/98161781/",
@@ -231,10 +265,12 @@
     "num_bedrooms": 2,
     "size_sqm": 71,
     "advertiser_type": "company",
-    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U."
+    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U.",
+    "description": "Este apartamento totalmente amueblado y listo para entrar a vivir está disponible desde el 17-07-2025\nSiéntete como en casa dondequiera que elijas vivir con Blueground. Te encantará este cómodo Ibiza amueblado apartamento de dos dormitorios con su moderna decoración, cocina totalmente equipada, y espacioso salón. con",
+    "flat_floor_number": "Planta 1ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.803533",
+    "scraped_at": "2025-07-09T23:49:53.319734",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/108681117/",
@@ -244,10 +280,12 @@
     "num_bedrooms": 2,
     "size_sqm": 67,
     "advertiser_type": "company",
-    "advertiser_name": "31 Real Servicios Inmobiliarios"
+    "advertiser_name": "31 Real Servicios Inmobiliarios",
+    "description": "Piso en planta baja con patio privativo en Calle Felipe Mora, Valdeacederas (Madrid)\n31Real Servicios Inmobiliarios alquila en exclusiva este acogedor piso de 67 m² construidos, ubicado en planta baja de un edificio moderno construido en 2004, en una calle tranquila del barrio de Valdeacederas, distrito de Tetuán.\nLa",
+    "flat_floor_number": "Bajo exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.804149",
+    "scraped_at": "2025-07-09T23:49:53.320776",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/105727318/",
@@ -257,10 +295,12 @@
     "num_bedrooms": 2,
     "size_sqm": 73,
     "advertiser_type": "company",
-    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U."
+    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U.",
+    "description": "Este apartamento totalmente amueblado y listo para entrar a vivir está disponible desde el 13-07-2025\nDescubre lo mejor de Madrid, con este apartamento de dos dormitorios en Malasaña. con balcón con vistas a la ciudad. Será fácil llegar y empezar a disfrutar en este contemporáneo amueblado apartamento con su cocina to",
+    "flat_floor_number": "Planta 2ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.804786",
+    "scraped_at": "2025-07-09T23:49:53.321843",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/108680953/",
@@ -270,10 +310,12 @@
     "num_bedrooms": 1,
     "size_sqm": 42,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "PONIBLE PISO RECIÉN REFORMADO\n**ENTRADA INMEDIATA**\nAcogedor apartamento con salón comedor y cocina independiente.\nDormitorio tiene cama de 1,35 cm, tipo canapé para mayor almacenamiento, gran armario, ropa de cama y baño en suite con plato de ducha.\nCocina con todos sus electrodomésticos, MICROONDAS, FRIGORÍFICO,",
+    "flat_floor_number": "Bajo interior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.805451",
+    "scraped_at": "2025-07-09T23:49:53.322941",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/106248840/",
@@ -283,10 +325,12 @@
     "num_bedrooms": 1,
     "size_sqm": 43,
     "advertiser_type": "company",
-    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U."
+    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U.",
+    "description": "Este apartamento totalmente amueblado y listo para entrar a vivir está disponible desde el 12-07-2025\nDescubre lo mejor de Madrid, con este apartamento de un dormitorio en Valdefuentes. con vistas a la ciudad. Será fácil llegar y empezar a disfrutar en este con gusto amueblado apartamento con su cocina totalmente equi",
+    "flat_floor_number": "Planta 5ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.806103",
+    "scraped_at": "2025-07-09T23:49:53.324041",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/87727446/",
@@ -296,10 +340,12 @@
     "num_bedrooms": 2,
     "size_sqm": 80,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "Vivienda a estrenar en plena calle Mendez Alvaro a 5 min. caminando de la estacion de Atocha y 5 min. caminando de la estacion Mendez Alvaro. La vivienda esta comprendida en una urbanización con increíbles áreas comunes como gimnasio, lounge bar, piscina, parque infantil. Ademas dispone de portero y servicio deposito d",
+    "flat_floor_number": "Planta 4ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.806751",
+    "scraped_at": "2025-07-09T23:49:53.325112",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/104140634/",
@@ -309,10 +355,12 @@
     "num_bedrooms": 1,
     "size_sqm": 45,
     "advertiser_type": "company",
-    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U."
+    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U.",
+    "description": "Este apartamento totalmente amueblado y listo para entrar a vivir está disponible desde el 12-07-2025\nSiéntete como en casa dondequiera que elijas vivir con Blueground. Te encantará este encantador Imperial amueblado apartamento de un dormitorio con su moderna decoración, cocina totalmente equipada, y luminoso salón.",
+    "flat_floor_number": "Planta 7ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.807381",
+    "scraped_at": "2025-07-09T23:49:53.326193",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/108680893/",
@@ -322,10 +370,12 @@
     "num_bedrooms": 1,
     "size_sqm": 62,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "Descubre este encantador piso, ubicado en el corazón del vibrante barrio de Chamberí. Con una superficie de 62 m², este espacio ofrece un amplio salón que se integra perfectamente con una moderna cocina americana, equipada con todo lo necesario para que te sientas como en casa desde el primer día. La habitación indepen",
+    "flat_floor_number": "Planta 2ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.808013",
+    "scraped_at": "2025-07-09T23:49:53.327222",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/106942583/",
@@ -335,10 +385,12 @@
     "num_bedrooms": 1,
     "size_sqm": 53,
     "advertiser_type": "company",
-    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U."
+    "advertiser_name": "BLUEGROUND ESPAÑA S.L.U.",
+    "description": "Este apartamento totalmente amueblado y listo para entrar a vivir está disponible desde el 05-07-2025\nLlega y empieza a vivir desde el primer día en Madrid con este sofisticado Apartamento Blueground de un dormitorio. Le encantará volver a casa a esta casa cuidadosamente amueblada, bellamente diseñada y totalmente equ",
+    "flat_floor_number": "Planta 8ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.808647",
+    "scraped_at": "2025-07-09T23:49:53.328305",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/105468521/",
@@ -348,10 +400,12 @@
     "num_bedrooms": 1,
     "size_sqm": 55,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "PARTICULAR ALQUILA 1 DORMITORIO\nC/ Sor Angela de la Cruz 24, apartamento vacío de 1 dormitorio, salón, cocina independiente y baño completo.\nArmario empotrado en dormitorio\nCalefacción central con medidores de consumo y agua caliente central.\nSuelos de tarima y ventanas de climalit en aluminio blanco.\nConserje de lunes",
+    "flat_floor_number": "Planta 7ª interior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.809293",
+    "scraped_at": "2025-07-09T23:49:53.329381",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/101990714/",
@@ -361,10 +415,12 @@
     "num_bedrooms": 2,
     "size_sqm": 101,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "** DISPONIBLE A PARTIR DEL 1 DE JULIO**\nExcelente piso en alquiler en la calle Hermosilla, en el barrio Salamanca zona Goya.\nDisponible con opción de alquiler de corta y media estancia.\nEl inmueble cuenta con 2 dormitorios, 2 baños y un balcón con vistas a una calle arbolada.\nTiene una superficie construida de uno",
+    "flat_floor_number": "Planta 2ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.809928",
+    "scraped_at": "2025-07-09T23:49:53.330402",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/105642000/",
@@ -374,10 +430,12 @@
     "num_bedrooms": 2,
     "size_sqm": 110,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "DISPONIBLE 1 de agosto.\nLoft con 3 alturas diáfanas.\nAmplios ventanales en fachada.\nIluminación cenital con 4 VELUX.\nLuminoso patio de luces de uso privado.\nPlanta baja con cocina comedor estar.\nPlanta 1a con amplio dormitorio suite con baño completo.\nPlanta 2a dormitorio estudio con baño completo\nMuy luminoso.\nClima",
+    "flat_floor_number": "Planta 1ª exterior con ascensor"
   },
   {
-    "scraped_at": "2025-07-09T22:29:38.810458",
+    "scraped_at": "2025-07-09T23:49:53.331289",
     "source_url": "https://www.idealista.com",
     "property_type": "alquiler",
     "url": "https://www.idealista.com/inmueble/108494714/",
@@ -387,6 +445,8 @@
     "num_bedrooms": 1,
     "size_sqm": 65,
     "advertiser_type": "individual",
-    "advertiser_name": ""
+    "advertiser_name": "",
+    "description": "Moderno apartamento en alquiler en el corazón del barrio de Las Letras\nSe alquila elegante y luminoso apartamento ubicado en una tranquila calle del céntrico barrio de Las Letras, a escasos metros de la emblemática Plaza de Santa Ana y a solo 5 minutos a pie de la Puerta del Sol.\nLa vivienda forma parte de un edificio",
+    "flat_floor_number": "Planta 2ª exterior con ascensor"
   }
 ]
